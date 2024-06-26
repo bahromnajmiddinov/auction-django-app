@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<!-- detail section -->
+<section class="section-center">
+    <section class="detail-section">
+        <div class="auction-detail-column">
+            <div class="detail-section-images">
+                <div class="main-imgs">
+                    <img id="{{ auction.id }}" class="main-img main-img-active" src="{{ auction.get_main_image }}" alt="">
+                    {% for auction_image in auction.image_fields.all %}
+                    <img id="{{ auction_image.id }}" class="main-img" src="{{ auction_image.image.url }}" alt="">
+                    {% endfor %}
+                </div>
+                {% if auction.image_fields.all %}
+                <div class="thumbs">
+                    <img data-image-id={{ auction.id}} class="thumb" src="{{ auction.get_main_image }}" alt="">
+                    {% for auction_image in auction.image_fields.all %}
+                    <img data-image-id={{ auction_image.id}} class="thumb" src="{{ auction_image.image.url }}" alt="">
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="detail-section-info">
+                <div class="auction-price">${{ auction.get_current_price }}</div>
+                <div class="description auction-description">
+                    <h2 class="title">Description</h2>
+                    <p class="description-text auction-description-text">
+                        {{ auction.description|safe }}
+                    </p>
+                </div>
+                <div class="additional-fields">
+                    <div class="additional-field">
+                        <img src="{{ auction.get_main_image }}" alt="" class="additional-field-icon">
+                        <div class="additional-field-info">
+                            <h3 class="additional-field-title">auction.additional_fields.title</h3>
+                            <p class="additional-field-description">auction.additional_fields.description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="auction-side-column">
+            <div class="auction-btns">
+                <button class="btn">Save</button>
+                <button class="btn">Share</button>
+                <a href="{% url 'auction-bid' auction.slug %}" class="btn bid-btn">Bid Now</a>
+            </div>
+            <div class="auction-contact">
+                <h2 class="title">Contact Us</h2>
+                <form action="" class="contact-form">
+                    <input type="email" placeholder="Email" class="email">
+                    <button type="submit" class="btn auction-btn">Contact</button>
+                </form>
+            </div>
+            <div class="agents">
+
+            </div>
+        </div>
+    </section>
+</section>
+<!-- end of detail section -->
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/tabs.js' %}"></script>
+{% endblock script %}

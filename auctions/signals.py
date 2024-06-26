@@ -1,0 +1,1 @@
+# TODO: create signal when user create new auction it create new link for private and public types

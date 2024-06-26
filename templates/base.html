@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- header section -->
+    <header class="header">
+        <div class="logo">
+            <span>Auction</span>
+        </div>
+        <nav class="navbar">
+            <ul class="navbar-links">
+                <li class="navbar-link">
+                    <a href="">Profile</a>
+                </li>
+                <li class="navbar-link">
+                    <a href="">Saved</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- end of header section -->
+    {% block header %}{% endblock header %}
+    {% block content %}{% endblock content %}
+
+    <footer class="footer"></footer>
+
+    {% block script %}{% endblock script %}
+</body>
+</html>
