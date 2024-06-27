@@ -12,7 +12,7 @@
             </div>
             <div class="auction-info">
                 <h3 class="auction-title">{{ auction.title }}</h3>
-                <p class="auction-description">{{ auction.description|safe }}</p>
+                <p class="auction-description">{{ auction.summary }}</p>
             </div>
             <div class="auction-footer">
                 <span class="auction-price">${{ auction.get_current_price }}</span>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="show-time">
-                <span class="auction-show-time">Show Time: {{ auction.start_time }}</span>
+                <span class="auction-show-time">Start Time: {{ auction.get_start_time }}</span>
             </div>
         </article> 
         {% endfor %}

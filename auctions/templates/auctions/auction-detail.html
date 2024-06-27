@@ -26,6 +26,7 @@
                 {% endif %}
             </div>
             <div class="detail-section-info">
+                <div class="additional-field">{{ auction.get_start_time }}</div>
                 <div class="auction-price">${{ auction.get_current_price }}</div>
                 <div class="description auction-description">
                     <h2 class="title">Description</h2>
@@ -46,19 +47,28 @@
         </div>
         <div class="auction-side-column">
             <div class="auction-btns">
-                <button class="btn">Save</button>
-                <button class="btn">Share</button>
+                <a href="{% url 'add-to-card' auction.slug %}" class="btn">Save</a>
+                <a href="{% url 'auction-like' auction.slug %}" class="btn">Like</a>
                 <a href="{% url 'auction-bid' auction.slug %}" class="btn bid-btn">Bid Now</a>
             </div>
             <div class="auction-contact">
                 <h2 class="title">Contact Us</h2>
-                <form action="" class="contact-form">
-                    <input type="email" placeholder="Email" class="email">
+                <form action="mailto:{{ auction.email }}" method="POST" enctype="text/plain" class="contact-form">
+                    <input type="email" placeholder="Email" class="email" required>
                     <button type="submit" class="btn auction-btn">Contact</button>
                 </form>
             </div>
+            <button class="btn remaind-btn">Remaid ME</button>
             <div class="agents">
-
+                {% for agent in auction.permissions.all %}
+                    <div class="agent">
+                        <img src="" alt="" class="agent-avatar">
+                        <div class="agent-info">
+                            <h4 class="agent-name">{{ agent.get_full_name }}</h4>
+                            <p class="agent-email">{{ agent.email }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </section>

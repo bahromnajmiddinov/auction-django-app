@@ -3,9 +3,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 
-from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission
+import json
+from django_celery_beat.models import PeriodicTask, CrontabSchedule
+
+from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData
 from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm
 from accounts.models import CustomUser
+
+
+def _time_scheduler(date_obj, schedule_name, auction_id):
+    year = date_obj.year
+    month = date_obj.month
+    day = date_obj.day
+    hour = date_obj.hour
+    minute = date_obj.minute 
+    
+    schedule, created = CrontabSchedule.get_or_create(year=year, month=month, day=day, hour=hour, minute=minute)
+    task = PeriodicTask.objects.create(crontab=schedule, name=schedule_name, task='tasks.time_end', args=json.dumps((auction_id,)))
 
 
 def auctions(request):
@@ -20,7 +34,7 @@ def auctions(request):
 
 def auction(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug)
-    
+    auction_detail.user_watchers.add(request.user)
     context = {
         'auction': auction_detail
     }
@@ -56,7 +70,7 @@ def auction_create(request):
         video_formset = VideoFieldFormset(request.POST, request.FILES)
         additional_formset = AdditionalFieldFormset(request.POST, request.FILES)
         
-        if all(auction_form.is_valid(), image_fomset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()):
+        if all(auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()):
             new_auction = auction_form.save(commit=False)
             new_auction.owner = request.user
             new_auction.save()
@@ -81,7 +95,13 @@ def auction_create(request):
                 new_additional_form = additional_form.save(commit=False)
                 new_additional_form.auction = new_auction
                 new_additional_form.save()
-                
+            
+            if new_auction.start_time:
+                pass
+            
+            if new_auction.end_time:
+                pass
+            
             return redirect('auction', new_auction.slug)
         
     context = {
@@ -102,9 +122,27 @@ def auction_delete(request):
     pass    
 
 
-def auction_like(request):
-    pass    
+def auction_like(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
+    
+    if request.user not in auction.user_like.all():
+        auction.user_like.add(request.user)
+    else:
+        auction.user_like.remove(request.user)
+    
+    return redirect('auction', slug)
 
 
 def auction_view(request):
-    pass    
+    pass
+
+
+def add_remainder(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
+    if request.user not in auction.participants:
+        auction.participants.add(request.user)
+    else:
+        auction.participants.remove(request.user)
+        
+    return redirect('auction', slug)
+    

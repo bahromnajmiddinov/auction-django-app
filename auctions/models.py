@@ -1,14 +1,15 @@
 # TODO: unique links for auctions that user can create and schedule
 # TODO: link requests, that auction owner can accept for private and OC type of auctions
 # TODO: Add Tag model
-# TODO: Add summary for auctions
 # TODO: Add alt for images and videos
 # TODO: Add date time fields to additional fields
 
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 import uuid
+import datetime
 from django_ckeditor_5.fields import CKEditor5Field
 
 from accounts.models import CustomUser
@@ -51,8 +52,9 @@ class Auction(models.Model):
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='auctions')
     main_image = models.ImageField(upload_to=auction_image_path)
     type = models.CharField(max_length=2, choices=AUCTION_TYPE_CHOICES, default='PB')
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=60)
     slug = models.SlugField()
+    summary = models.CharField(max_length=200)
     description = CKEditor5Field('Text', config_name='default')
     starter_price = models.PositiveIntegerField(default=0)
     auction_price = models.PositiveIntegerField(default=0)
@@ -85,6 +87,26 @@ class Auction(models.Model):
     @property
     def get_main_image(self):
         return self.main_image.url
+    
+    @property
+    def get_start_time(self):
+        now = timezone.now()
+        if self.start_time is None or self.start_time >= now:
+            return True
+        elif self.start_time < now:
+            return False
+    
+    @property
+    def get_end_time(self):
+        now = timezone.now()
+        if self.end_time is None or self.end_time >= now:
+            return True
+        elif self.end_time < now:
+            return False
+    
+    @property
+    def get_time_now(self):
+        return timezone.now()
     
 
 class ParticipantData(models.Model):

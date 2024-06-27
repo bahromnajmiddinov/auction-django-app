@@ -1,25 +1,40 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}{% endblock title %}
 
 {% block content %}
 <!-- detail section -->
 <section class="section-center">
     <section class="auction-page">
+        {% if auction.get_start_time or auction.get_end_time %}
         <div class="timer">
-            <h2 class="title">Auction End after</h2>
+            {% if auction.get_start_time %}
+            <h2 class="title">Auction Start After</h2>
             <div class="timer-clock">
-                12:20:34
+                00:00:00
             </div>
+            {% elif auction.get_end_time %}
+            <h2 class="title">Auction End After</h2>
+            <div class="timer-clock">
+                00:00:00
+            </div>
+            {% endif %}
         </div>
+        {% endif %}
         <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
-        <form class="">
+        <form id="price-form">
             <label for="price-input">$</label>
             <input id="price-input" type="number" placeholder="enter the price" name="price">
             <button type="submit"></button>
         </form>
         <div class="boxes">
-            <div class="prices-box">
+            <ul class="tab-headers">
+                <li class="active" data-content-id="1">Last Bids</li>
+                <li data-content-id="2">Chat</li>
+            </ul>
+            <div class="prices-box tab-content active" id="1">
                 <div class="price-last">
                     <p>
                         <a href="#">Jimmy</a> invite 120$
@@ -137,7 +152,7 @@
                 </div>
             </div>
 
-            <div class="chat-box">
+            <div class="chat-box tab-content" id="2">
                 <ol class="chat">
                     <li class="other">
                         <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
@@ -258,23 +273,45 @@
 
 {% block script %}
 <script>
-    const countdownDate = new Date('{{ auction.end_time|date:"F j, Y H:i:s" }}').getTime();
-    '{{ auction.end_time|date:"F j, Y H:i:s" }}'
-    const countdown = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
+    const countdownDate = new Date('{{ auction.start_time|date:"F j, Y H:i:s" }}').getTime();
+    const countdownDateEnd = new Date('{{ auction.end_time|date:"F j, Y H:i:s" }}').getTime();
+    
+    {% if auction.get_start_time %}
+    let type = "startTime";
+    {% elif auction.get_end_time %}
+    let type = "endTime";
+    {% endif %}
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let now = new Date('{{ auction.get_time_now|date:"F j, Y H:i:s" }}').getTime();
+    
+    function timer (countdownDate, countdownDateEnd, now, type) {
 
-        document.querySelectorAll('.timer-clock')[0].innerHTML = `${days}:${hours}:${minutes}:${seconds}`;
+        const countdown = setInterval(() => {
+            const distance = countdownDate - now;
+            const distanceEnd = countdownDateEnd - now;
 
-        if (distance < 0) {
-            clearInterval(x);
-            document.querySelectorAll('.timer-clock')[0].innerHTML = "AUCTION ENDED";
-        }
-    }, 1000);
+            now += 1000;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.querySelectorAll('.timer-clock')[0].innerHTML = `${days}:${hours}:${minutes}:${seconds}`;
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                if (type === "startTime") {
+                    document.querySelectorAll('.timer-clock')[0].innerHTML = "AUCTION STARTED";
+                    document.querySelector('#price-form').classList.add('active');
+                    timer(countdownDateEnd, countdownDateEnd=0, now, type="endTime"); 
+                } else if (type === "endTime") {
+                    document.querySelectorAll('.timer-clock')[0].innerHTML = "AUCTION ENDED";
+                    document.querySelector('#price-form').classList.remove('active');
+                }
+            }
+        }, 1000)
+    };
+
+    timer(countdownDate, countdownDateEnd, now, type);
 </script>
+<script src="{% static 'js/tabs.js' %}"></script>
 {% endblock script %}

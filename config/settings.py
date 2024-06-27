@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'accounts',
     'auctions',
     'dashboard',
+    'card',
+    'labeler',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

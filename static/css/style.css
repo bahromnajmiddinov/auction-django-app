@@ -211,7 +211,7 @@ form {
 }
 
 .auction-info {
-    align-self: flex-start;
+    padding: 0 1rem;
 }
 
 .auction .img-container {
@@ -261,14 +261,20 @@ form {
     z-index: 0;
     border-bottom-right-radius: .5rem;
     border-bottom-left-radius: .5rem;
-    background-color: #fff;
+    background-color: hsl(0, 0%, 100%);
     width: 100%;
     padding: .75rem;
 }
 
 .auction:hover .show-time {
     opacity: 1;
-    bottom: -1.85rem;
+    bottom: -1.95rem;
+    background-color: hsl(357, 86%, 64%);
+    color: hsl(0, 0%, 100%);
+}
+
+.auction-show-time {
+    padding-top: .4rem;
 }
 
 .auction:hover .auction-link-text {
@@ -282,10 +288,11 @@ form {
     display: grid;
     grid-template-columns: 2fr 1fr;
     margin-top: 2rem;
+    gap: 1rem;
 }
 
 .detail-section-images {
-    margin-right: 1rem;
+    
 }
 
 .auction-side-column {
@@ -344,6 +351,11 @@ form {
     margin: 2rem 0;
 }
 
+.contact-form {
+    min-height: fit-content;
+    border: transparent;
+}
+
 .email {
     margin: 1rem 0;
     width: 100%;
@@ -363,6 +375,13 @@ form {
     grid-area: btn3;
 }
 
+.remaind-btn {
+    border: 1px solid hsl(197, 41%, 17%);
+    color: hsl(197, 41%, 17%);
+    background-color: transparent;
+    width: 100%;
+}
+
 .additional-field {
     background-color: hsl(160, 7%, 76%);
     border-radius: .5rem;
@@ -376,6 +395,16 @@ form {
     width: 50px;
     object-fit: cover;
     margin-right: 1rem;
+}
+
+@media screen and (max-width: 666px) {
+    .detail-section {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-section-images {
+        margin-right: 0;
+    }
 }
 
 /* end of auction section */
@@ -396,6 +425,8 @@ form {
 .boxes {
     display: flex;
     margin-bottom: 4rem;
+    flex-direction: column;
+    align-items: center;
 }
 
 .auction-page-price {
@@ -417,6 +448,7 @@ form {
 
 .auction-page form {
     border: none;
+    min-height: fit-content;
 }
 
 #price-input {
@@ -432,8 +464,8 @@ form {
 
 .prices-box {
     background-color: hsl(160, 7%, 76%);
-    width: 50%;
-    max-height: 30rem;
+    width: 70%;
+    max-height: 40rem;
     overflow-y: scroll;
     border: 2px solid hsl(197, 41%, 17%);
     border-radius: .5rem;
@@ -453,7 +485,7 @@ form {
 }
 
 .chat-box {
-    width: 50%;
+    width: 70%;
 }
 
 .chat {
@@ -461,7 +493,7 @@ form {
     margin: 0;
     background-color: hsl(160, 7%, 76%);
     margin-bottom: 10px;
-    max-height: 30rem;
+    max-height: 40rem;
     overflow: auto;
     border: 2px solid hsl(197, 41%, 17%);
     border-radius: .5rem;
