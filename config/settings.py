@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
     'django_cleanup.apps.CleanupConfig',
     'django_ckeditor_5',
     'django_celery_results',
@@ -51,6 +55,7 @@ INSTALLED_APPS = [
     'dashboard',
     'card',
     'labeler',
+    'payments',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -63,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -97,6 +103,11 @@ DATABASES = {
     }
 }
 
+CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -116,6 +127,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -250,3 +265,18 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 # CELEARY BEAT 
 CELERY_BEAT_SCHEDULAR = 'django_celery_beat.schedulars:DatabaseSchedular'
+
+# DJANGO ALLAUTH
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
+
+# PAYMENTS
+STRIPE_PUBLIC_KEY = ''
+STRIPE_SECRET_KEY = ''

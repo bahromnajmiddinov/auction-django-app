@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.auctions, name='auctions'),
     path('auction/<slug:slug>', views.auction, name='auction'),
+    path('auction/private/<slug:slug>', views.auction_private, name='auction-private'),
     path('auction/<slug:slug>/bid/', views.bid, name='auction-bid'),
     
     path('auction/create/', views.auction_create, name='auction-create'),

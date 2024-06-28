@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
+from django.http import Http404
 
 import json
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
@@ -33,8 +34,22 @@ def auctions(request):
 
 
 def auction(request, slug):
+    auction_detail = get_object_or_404(Auction, slug=slug, type='PB')
+    if request.user not in auction_detail.all():
+        auction_detail.user_watchers.add(request.user)
+        
+    context = {
+        'auction': auction_detail
+    }
+    
+    return render(request, 'auctions/auction-detail.html', context)
+
+
+def auction_private(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug)
-    auction_detail.user_watchers.add(request.user)
+    if not request.user in auction_detail.user_watchers.all():
+        return Http404()
+    
     context = {
         'auction': auction_detail
     }

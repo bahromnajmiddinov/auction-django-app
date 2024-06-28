@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from .models import CustomUser
 
 
-def user_detail(request):
-    pass
-
+def user_detail(request, username=None):
+    user = request.user
+    if username:
+        user = get_object_or_404(CustomUser, username=username)
+    
+    return render(request, 'accounts/user-detail.html', {'user': user})
 
 def user_balance(request):
     pass

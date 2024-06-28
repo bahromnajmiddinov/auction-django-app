@@ -1,17 +1,13 @@
-# TODO: unique links for auctions that user can create and schedule
 # TODO: link requests, that auction owner can accept for private and OC type of auctions
-# TODO: Add Tag model
-# TODO: Add alt for images and videos
-# TODO: Add date time fields to additional fields
 
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
 import uuid
-import datetime
 from django_ckeditor_5.fields import CKEditor5Field
 
+from labeler.models import Category, Tag
 from accounts.models import CustomUser
 from .validators import validate_video_file_extension
 
@@ -60,13 +56,16 @@ class Auction(models.Model):
     auction_price = models.PositiveIntegerField(default=0)
     participants = models.ManyToManyField(CustomUser, through='ParticipantData', related_name='participanted_auctions')
     user_watchers = models.ManyToManyField(CustomUser, through='Watchers', related_name='watched_auctions')
-    user_like = models.ManyToManyField(CustomUser, through='Like', related_name='liked_auctions')
+    user_likes = models.ManyToManyField(CustomUser, through='Like', related_name='liked_auctions')
     
     active = models.BooleanField(default=False)
     start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    categories = models.ManyToManyField(Category, related_name='auction_categories')
+    tags = models.ManyToManyField(Tag, related_name='auction_tags')
     
     permissions = models.ManyToManyField(CustomUser, through='AuctionUserPermission')
     
@@ -110,24 +109,37 @@ class Auction(models.Model):
     
 
 class ParticipantData(models.Model):
+    '''
+    Auction participants Through Table
+    '''
     participant = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    price = models.PositiveIntegerField(default=0)
+
+
+class Watchers(models.Model):
+    '''
+    Auction user_watchers Through Table
+    '''
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
 
-class Watchers(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
-    bid = models.PositiveIntegerField()
-
-
 class Like(models.Model):
+    '''
+    Auction user_likes Through Table
+    '''
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
 
 class AuctionUserPermission(models.Model):
+    '''
+    Auction User Permissions Through Table
+    '''
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
@@ -138,27 +150,63 @@ class AuctionUserPermission(models.Model):
 
 
 class ImageField(models.Model):
+    '''
+    Auction Additional Image Field
+    '''
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     image = models.ImageField(upload_to=auction_additional_image_path)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='image_fields')
+    
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class VideoField(models.Model):
+    '''
+    Auction Video Field
+    '''
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     video = models.FileField(upload_to=auction_additional_video_path, validators=[validate_video_file_extension])
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='video_fields')
+    
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class AdditionalField(models.Model):
+    '''
+    Auction Additional Field
+    '''
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='additional_fields')
     icon = models.ImageField(upload_to=additional_field_icon_path)
     title = models.CharField(max_length=30)
     description = CKEditor5Field('Text', config_name='default')
+    
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+
+class Message(models.Model):
+    '''
+    Auction Message model
+    '''
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True, related_name='messages')
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='messages')
+    text = models.CharField(max_length=250)
+    
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class Comment(models.Model):
+    '''
+    Auction Comment Model
+    '''
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True, related_name='auction_comments')
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='comments')
+    text = models.CharField(max_length=300)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f'{self.text} {self.auction}'

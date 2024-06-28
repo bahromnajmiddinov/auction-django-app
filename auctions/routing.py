@@ -4,5 +4,5 @@ from . import consumers
 
 
 ASGI_urlpatterns = [
-    path('websocket/auction-bid/<slug:slug', consumers.AuctionBidConsumer),
+    path('websocket/auction-bid/<slug>', consumers.AuctionBidConsumer.as_asgi()),
 ]

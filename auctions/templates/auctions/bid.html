@@ -263,7 +263,8 @@
                       </div>
                     </li>
                 </ol>
-                <input class="textarea" type="text" placeholder="Type here!"/><div class="emojis"></div>
+                <input class="textarea" type="text" placeholder="Type here!"/>
+                <button class="chat-btn" type="button">Submit</button>
             </div>
         </div>
     </section>
@@ -273,22 +274,21 @@
 
 {% block script %}
 <script>
-    const countdownDate = new Date('{{ auction.start_time|date:"F j, Y H:i:s" }}').getTime();
-    const countdownDateEnd = new Date('{{ auction.end_time|date:"F j, Y H:i:s" }}').getTime();
-    
+    let countdownDate = new Date('{{ auction.start_time|date:"F j, Y H:i:s" }}').getTime();
+    let countdownDateEnd = new Date('{{ auction.end_time|date:"F j, Y H:i:s" }}').getTime();
+    let type = null;
+
     {% if auction.get_start_time %}
-    let type = "startTime";
+    type = "startTime";
     {% elif auction.get_end_time %}
-    let type = "endTime";
+    type = "endTime";
     {% endif %}
 
     let now = new Date('{{ auction.get_time_now|date:"F j, Y H:i:s" }}').getTime();
     
     function timer (countdownDate, countdownDateEnd, now, type) {
-
         const countdown = setInterval(() => {
             const distance = countdownDate - now;
-            const distanceEnd = countdownDateEnd - now;
 
             now += 1000;
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -302,6 +302,7 @@
                 if (type === "startTime") {
                     document.querySelectorAll('.timer-clock')[0].innerHTML = "AUCTION STARTED";
                     document.querySelector('#price-form').classList.add('active');
+                    document.querySelector('.timer .title').innerHTML = "Auction End After";
                     timer(countdownDateEnd, countdownDateEnd=0, now, type="endTime"); 
                 } else if (type === "endTime") {
                     document.querySelectorAll('.timer-clock')[0].innerHTML = "AUCTION ENDED";
@@ -312,6 +313,20 @@
     };
 
     timer(countdownDate, countdownDateEnd, now, type);
+</script>
+<script>
+    const wb = new WebSocket(`ws://127.0.0.1:8000/websocket/auction-bid/{{ auction.slug }}`);
+    const chatBtn = document.querySelector('.chat-btn');
+
+    chatBtn.addEventListener('click', () => {
+        const message = document.querySelector('.textarea');
+        wb.send(JSON.stringify({ "type": "message", "message": message.value }));
+        message.value = '';
+    });
+
+    wb.onmessage = (event) => {
+        console.log(event);
+    };
 </script>
 <script src="{% static 'js/tabs.js' %}"></script>
 {% endblock script %}
