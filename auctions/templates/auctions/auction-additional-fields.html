@@ -4,24 +4,22 @@
 
 {% block content %}
 <!-- Auction Additional Fields Section -->
-<section class="section-center">
-    <section class="auction-additional-fields">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h2 class="form-header">Additional Fields</h2>
-            <div class="form-body">
-                {% for field in auction_form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                </div>
-                {% endfor %}
+<section class="auction-additional-fields">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="form-header">Additional Fields</h2>
+        <div class="form-body">
+            {% for field in auction_form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
             </div>
-            <div class="form-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </section>
+            {% endfor %}
+        </div>
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 </section>
 <!-- End Of Auction Additional Fields Section-->
 {% endblock content %}

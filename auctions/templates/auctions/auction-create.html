@@ -10,101 +10,99 @@
 
 {% block content %}
 <!-- Auction Create Section -->
-<section class="section-center">
-    <section class="auction-create">
-        
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h2 class="form-header">Create Auction</h2>
-            <ul class="tab-headers">
-                <li class="active" data-content-id="1">Auction Form</li>
-                <li data-content-id="2">Image Fields</li>
-                <li data-content-id="3">Video Fields</li>
-                <li data-content-id="4">Additional Fields</li>
-            </ul>
+<section class="auction-create">
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="form-header">Create Auction</h2>
+        <ul class="tab-headers">
+            <li class="active" data-content-id="1">Auction Form</li>
+            <li data-content-id="2">Image Fields</li>
+            <li data-content-id="3">Video Fields</li>
+            <li data-content-id="4">Additional Fields</li>
+        </ul>
 
-            <div class="form-body">
-                <div class="tab-content active" id="1">
-                    {% for field in auction_form %}
-                    <div class="form-control">
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {{ field.errors }}
+        <div class="form-body">
+            <div class="tab-content active" id="1">
+                {% for field in auction_form %}
+                <div class="form-control">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn">Save</button>
+            </div>
+
+            <div class="tab-content" id="2">
+                <div class="additional-fields">
+                    {% for image_form in image_formset %}
+                    <div class="additional-field">
+                        <div class="form-control">
+                            {{ image_form.image.label_tag }}
+                            {{ image_form.image }}
+                            {{ image_form.image.errors }}
+                        </div>
+                        <div class="form-control delete-checkbox">
+                            {{ image_form.DELETE.label_tag }}
+                            {{ image_form.DELETE }}
+                            {{ image_form.DELETE.errors }}
+                        </div>
                     </div>
                     {% endfor %}
-                    <button type="submit" class="btn">Save</button>
                 </div>
+                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
 
-                <div class="tab-content" id="2">
-                    <div class="additional-fields">
-                        {% for image_form in image_formset %}
-                        <div class="additional-field">
-                            <div class="form-control">
-                                {{ image_form.image.label_tag }}
-                                {{ image_form.image }}
-                                {{ image_form.image.errors }}
-                            </div>
-                            <div class="form-control delete-checkbox">
-                                {{ image_form.DELETE.label_tag }}
-                                {{ image_form.DELETE }}
-                                {{ image_form.DELETE.errors }}
-                            </div>
-                        </div>
-                        {% endfor %}
+                <!-- hidden form -->
+                <div id="empty-image-form" class="hidden">
+                    <div class="form-control">
+                        {{ image_formset.empty_form.image.label_tag }}
+                        {{ image_formset.empty_form.image }}
+                        {{ image_formset.empty_form.image.errors }}
                     </div>
-                    <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
-
-                    <!-- hidden form -->
-                    <div id="empty-image-form" class="hidden">
-                        <div class="form-control">
-                            {{ image_formset.empty_form.image.label_tag }}
-                            {{ image_formset.empty_form.image }}
-                            {{ image_formset.empty_form.image.errors }}
-                        </div>
-                        <button type="button" class="btn btn-remove">Remove</button>
-                    </div>
+                    <button type="button" class="btn btn-remove">Remove</button>
                 </div>
-
-                <div class="tab-content" id="3">
-                    <div class="additional-fields">
-                        {% for video_form in video_formset %}
-                        <div class="additional-field">
-                            <div class="form-control">
-                                {{ video_form.video.label_tag }}
-                                {{ video_form.video }}
-                                {{ video_form.video.errors }}
-                            </div>
-                            <div class="form-control delete-checkbox">
-                                {{ video_form.DELETE.label_tag }}
-                                {{ video_form.DELETE }}
-                                {{ video_form.DELETE.errors }}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
-                </div>
-
-                <div class="tab-content" id="4">
-                    <div class="additional-fields">
-                        {% for additional_form in additional_formset %}
-                        <div class="additional-field">
-                            {% for field in additional_form %}
-                            <div class="form-control">
-                                {{ field.label_tag }}
-                                {{ field }}
-                                {{ field.errors }}
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
-                </div>
-            
             </div>
-        </form>
-    </section>
+
+            <div class="tab-content" id="3">
+                <div class="additional-fields">
+                    {% for video_form in video_formset %}
+                    <div class="additional-field">
+                        <div class="form-control">
+                            {{ video_form.video.label_tag }}
+                            {{ video_form.video }}
+                            {{ video_form.video.errors }}
+                        </div>
+                        <div class="form-control delete-checkbox">
+                            {{ video_form.DELETE.label_tag }}
+                            {{ video_form.DELETE }}
+                            {{ video_form.DELETE.errors }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
+            </div>
+
+            <div class="tab-content" id="4">
+                <div class="additional-fields">
+                    {% for additional_form in additional_formset %}
+                    <div class="additional-field">
+                        {% for field in additional_form %}
+                        <div class="form-control">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
+            </div>
+        
+        </div>
+    </form>
 </section>
 <!-- Auction Create Section end -->
 {% endblock content %}

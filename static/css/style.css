@@ -2,6 +2,13 @@
 
 :root {
     --default-font: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --primary-main-color: hsl(0, 0%, 15%);
+}
+
+@media screen and (max-width: 666px) {
+    :root {
+        font-size: 0.625rem;
+    }
 }
 
 *,
@@ -23,7 +30,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(197, 41%, 17%);
+  background-color: var(--primary-main-color);
   border-radius: .5rem;
 }
 
@@ -32,6 +39,7 @@ body {
     font-family: "Ubuntu", sans-serif;
     font-weight: 400;
     font-style: normal;
+    background-color: hsl(0, 0%, 95%);
 }
 
 img {
@@ -54,10 +62,11 @@ li:first-child {
 
 .btn {
     padding: 12px 24px;
+    margin: 5px;
     font-size: 1rem;
     border: none;
     border-radius: 4px;
-    background-color: hsl(197, 41%, 17%);
+    background-color: var(--primary-main-color);
     color: #fff;
     text-transform: uppercase;
     transition: background-color 0.2s ease-in-out;
@@ -68,21 +77,59 @@ li:first-child {
 
 .btn:hover {
     background-color: #ccc;
-    color: hsl(197, 41%, 17%);
+    color: var(--primary-main-color);
+}
+
+.btn-group {
+    display: flex;
+}
+
+.btn-group .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 666px) {
+    .btn-group {
+        flex-wrap: wrap;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
 }
 
 .title {
     text-transform: uppercase;
-    color: hsl(197, 41%, 17%);
+    color: var(--primary-main-color);
 }
 
 .section-center {
     max-width: 1170px;
     margin: 0 auto;
+    margin-top: 100px;
+}
+
+.small {
+    font-size: .75rem;
+    font-weight: bold;
+}
+
+.danger {
+    color: red;
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standard syntax */
 }
 
 form {
     margin: 0 auto;
+    margin-top: 2rem;
     min-height: 25rem;
     max-width: 40rem;
     border: 1px solid #ccc;
@@ -92,7 +139,7 @@ form {
 }
 
 .form-header {
-    background-color: hsl(197, 41%, 17%);
+    background-color: var(--primary-main-color);
     padding: 16px;
     text-align: center;
     margin: 0;
@@ -158,38 +205,12 @@ form {
 }
 
 /* header */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
-    background-color: hsl(197, 41%, 17%);
-}
 
-.header .logo {
-    color: hsl(357, 86%, 64%);
-    font-weight: bold;
-    font-size: xx-large;
-    font-family: var(--default-font);
-}
-.navbar-links {
-    display: flex;
-    align-items: center;
-}
-.navbar-link {
-    margin: 0 1rem;
-}
-.navbar-link::marker {
-    color: hsl(357, 86%, 64%);
-}
-.navbar-link a {
-    color: hsl(94, 30%, 95%);
-}
 /* end of header */
 
 /* section auctions */
 .auctions-section {
-    background-color: hsl(160, 7%, 76%);
+    /* background-color: hsl(160, 7%, 76%); */
     min-height: calc(100vh - 10.5rem);
     padding: 2rem;
     display: grid;
@@ -234,7 +255,7 @@ form {
     border-bottom-right-radius: 0.5rem;
     justify-content: space-between;
     align-items: center;
-    background-color: hsl(197, 41%, 17%);
+    background-color: var(--primary-main-color);
     z-index: 1;
 }
 
@@ -328,12 +349,12 @@ form {
 .thumb {
     height: 5rem;
     object-fit: cover;
-    border: 1px solid hsl(197, 41%, 17%);
+    border: 1px solid var(--primary-main-color);
     border-radius: .5rem;
 }
 
 .auction-description {
-    margin-bottom: 3rem;
+    margin: 1rem 0 !important;
 }
 
 .auction-btns {
@@ -364,7 +385,7 @@ form {
 
 .auction-btn {
     color: hsl(0, 0%, 100%);
-    background-color: hsl(197, 41%, 17%);
+    background-color: var(--primary-main-color);
     border: transparent;
     width: 100%;
 }
@@ -375,9 +396,9 @@ form {
     grid-area: btn3;
 }
 
-.remaind-btn {
-    border: 1px solid hsl(197, 41%, 17%);
-    color: hsl(197, 41%, 17%);
+.remind-btn {
+    border: 1px solid var(--primary-main-color);
+    color: var(--primary-main-color);
     background-color: transparent;
     width: 100%;
 }
@@ -459,7 +480,7 @@ form {
 }
 
 #price-input:focus {
-    outline-color: hsl(197, 41%, 17%);
+    outline-color: var(--primary-main-color);
 }
 
 .prices-box {
@@ -467,7 +488,7 @@ form {
     width: 70%;
     max-height: 40rem;
     overflow-y: scroll;
-    border: 2px solid hsl(197, 41%, 17%);
+    border: 2px solid var(--primary-main-color);
     border-radius: .5rem;
 }
 
@@ -476,7 +497,7 @@ form {
 }
 
 .price-last p {
-    color: hsl(197, 41%, 17%);
+    color: var(--primary-main-color);
     font-size: larger;
 }
 
@@ -495,7 +516,7 @@ form {
     margin-bottom: 10px;
     max-height: 40rem;
     overflow: auto;
-    border: 2px solid hsl(197, 41%, 17%);
+    border: 2px solid var(--primary-main-color);
     border-radius: .5rem;
 }
 .chat li {
@@ -629,7 +650,7 @@ form {
 
 .msg time {
     font-size: 0.7rem;
-    color: hsl(197, 41%, 17%);
+    color: var(--primary-main-color);
     margin-top: 3px;
     float: right;
     cursor: default;
@@ -655,7 +676,7 @@ input.textarea {
     width: 100%;
     height: 50px;
     z-index: 99;
-    background: hsl(197, 41%, 17%);
+    background: var(--primary-main-color);
     border: none;
     outline: none;
     padding-left: 55px;
@@ -688,3 +709,52 @@ input.textarea {
     border-bottom: 1px solid hsl(160, 7%, 76%);
 }
 /* end of auction create section */
+
+/* user detail section */
+.user-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.user-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Ensure the avatar is round */
+    object-fit: cover; /* Maintain aspect ratio */
+    border: 2px solid #fff; /* Optional: add a border around the avatar */
+}
+
+.user-info {
+    text-align: center;
+}
+
+.user-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.user-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.contact-status {
+    font-weight: bold;
+    color: green !important;
+    font-size: 0.9rem !important;
+}
+
+.description {
+    text-align: left;
+    margin: 2rem auto;
+    width: fit-content;
+}
+/* end of user detail seciton */

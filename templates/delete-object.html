@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="title form-header">
+        <h2>Are you sure you want to delete this {{ obj }}?</h2>
+        <span class="small danger">This action cannot be undone.</span>
+    </div>
+    <div class="form-body">
+        <div class="form-control">
+            <label for="id_delete_obj_input">Enter this text: <span class="danger unselectable">I agree to delete this {{ obj }} and take full responsibility for this action.</span></label>
+            <input type="text" id="id_delete_obj_input" name="check_text">
+        </div>
+        <button class="btn" type="submit">CONTINUE</button>
+        <a href="{% url 'user-detail' %}" class="btn">CANCEL</a>
+    </div>
+</form>
+{% endblock content %}

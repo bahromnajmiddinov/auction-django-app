@@ -210,3 +210,10 @@ class Comment(models.Model):
     
     def __str__(self):
         return f'{self.text} {self.auction}'
+
+
+class LocationData(models.Model):
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='users_locations')
+    country = models.CharField(max_length=56)
+    city = models.CharField(max_length=85)
+    ip_address = models.CharField(max_length=30)

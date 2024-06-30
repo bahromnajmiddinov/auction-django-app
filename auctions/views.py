@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404
+from django.http import Http404, JsonResponse
 
 import json
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
+from django_filters.views import FilterView
 
-from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData
+from .utils import get_client_ip, code_to_country_name
+from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData
 from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm
 from accounts.models import CustomUser
+from .filters import AuctionFilter
 
 
 def _time_scheduler(date_obj, schedule_name, auction_id):
@@ -24,7 +27,7 @@ def _time_scheduler(date_obj, schedule_name, auction_id):
 
 
 def auctions(request):
-    all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__in=CustomUser.objects.filter(contact__user=request.user)) & Q(type='OC')))
+    all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__in=CustomUser.objects.filter(contacts__user=request.user)) & Q(type='OC')))
     
     context = {
         'all_auctions': all_auctions,
@@ -35,7 +38,14 @@ def auctions(request):
 
 def auction(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug, type='PB')
-    if request.user not in auction_detail.all():
+    
+    client_ip = get_client_ip(request)
+    client_country = client_ip.country
+    client_city = client_ip.city
+    ip_address = client_ip.ip
+    LocationData.objects.get_or_create(auction=auction_detail, country=code_to_country_name(clien_country), city=client_city, ip_address=ip_address)
+    
+    if request.user not in auction_detail.participants.all():
         auction_detail.user_watchers.add(request.user)
         
     context = {
@@ -47,6 +57,13 @@ def auction(request, slug):
 
 def auction_private(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug)
+    
+    client_ip = get_client_ip(request)
+    client_country = client_ip.country
+    client_city = client_ip.city
+    ip_address = client_ip.ip
+    LocationData.objects.get_or_create(auction=auction_detail, country=code_to_country_name(clien_country), city=client_city, ip_address=ip_address)
+    
     if not request.user in auction_detail.user_watchers.all():
         return Http404()
     
@@ -137,27 +154,34 @@ def auction_delete(request):
     pass    
 
 
-def auction_like(request, slug):
+def auction_like(request, slug, user_id):
     auction = get_object_or_404(Auction, slug=slug)
-    
-    if request.user not in auction.user_like.all():
-        auction.user_like.add(request.user)
+    user = get_object_or_404(CustomUser, pk=user_id)
+    data = {'liked': None}
+    if user not in auction.user_likes.all():
+        auction.user_likes.add(user)
+        data['liked'] = True
     else:
-        auction.user_like.remove(request.user)
+        auction.user_likes.remove(user)
+        data['liked'] = False
     
-    return redirect('auction', slug)
+    return JsonResponse(data)
 
 
 def auction_view(request):
     pass
 
 
-def add_remainder(request, slug):
+def remind_me(request, slug, user_id):
+    user = get_object_or_404(CustomUser, pk=user_id)
     auction = get_object_or_404(Auction, slug=slug)
-    if request.user not in auction.participants:
-        auction.participants.add(request.user)
+    data = {'reminder': None}
+    if user not in auction.participants.all():
+        auction.participants.add(user)
+        data['reminder'] = True
     else:
-        auction.participants.remove(request.user)
+        auction.participants.remove(user)
+        data['reminder'] = False
         
-    return redirect('auction', slug)
+    return JsonResponse(data)
     

@@ -4,10 +4,36 @@
 
 {% block content %}
 <!-- user detail section -->
-<section class="section-center">
-    <section class="user-detail">
-        
-    </section>
+<section class="user-detail">
+    <div class="user-avatar">
+        <img src="{{ user.get_avatar_url }}" alt="Avatar">
+    </div>
+    <div class="user-info">
+        {% if user_contact %}
+        <h2>{{ user_contact.first_name }} {{ user.last_name }}</h2>
+        {% else %}
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        {% endif %}
+        <p>Email: {{ user.email }}</p>
+        {% if user in request.user.contacts.all %}
+        <p class="contact-status">Saved as contact</p>
+        {% endif %}
+        <div class="description">
+            {{ user.description|safe }}
+        </div>
+        <div class="btn-group">
+            {% if request.user == user %}
+            <a href="{% url 'user-update' %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'user-contacts' %}" class="btn btn-primary">Contacts</a>
+            <a href="{% url 'user-delete' %}" class="btn btn-secondary">Delete Account</a>
+            {% endif %}
+            {% if not user_contact %}
+            <a class="btn" href="{% url 'user-save-contact' user.username %}">Save As A contact</a>
+            {% else %}
+            <a class="btn" href="{% url 'user-update-contact' user.username %}">Edit Contact</a>
+            {% endif %}
+        </div>
+    </div>
 </section>
 <!-- end of user detail section -->
 {% endblock content %}

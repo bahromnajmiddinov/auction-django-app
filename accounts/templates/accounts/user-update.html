@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+
+{% block content %}
+<section class="user-update">
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        Please correct the error below.
+    </div>
+    {% endif %}
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="form-header">Update User Details</h2>
+        <div class="form-body">
+            {% for field in form %}
+            <div class="form-control">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            <a href="{% url 'user-detail' user.id %}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+
+
+    {% if user.is_superuser %}
+    {% comment %} <a href="{% url 'user-list' %}" class="btn btn-light">View All Users</a> {% endcomment %}
+    {% endif %}
+
+    {% comment %} <a href="{% url 'password-change' %}" class="btn btn-light">Change Password</a> {% endcomment %}
+
+    {% comment %} <a href="{% url 'user-delete' user.id %}" class="btn btn-danger">Delete User</a> {% endcomment %}
+
+    {% comment %} <a href="{% url 'user-activate' user.id %}" class="btn btn-success">Activate User</a> {% endcomment %}
+</section>
+{% endblock content %}

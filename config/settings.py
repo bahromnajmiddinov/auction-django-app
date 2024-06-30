@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    
+    'corsheaders',
     'django_cleanup.apps.CleanupConfig',
     'django_ckeditor_5',
     'django_celery_results',
@@ -63,6 +63,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -158,6 +159,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',  # Frontend origin
+]
+
 # CKEDITOR 5 CONFIGURATIONS
 customColorPalette = [
     {
@@ -252,6 +258,15 @@ CKEDITOR_5_CONFIGS = {
 # JAZZMIN CONFIGURATIONS
 JAZZMIN_UI_TWEAKS = {
     "theme": "darkly",
+}
+
+JAZZMIN_SETTINGS = {
+    "site_title": "OnAuc Admin",
+    "site_header": "OnAuc",
+    "site_brand": "OnAuc",
+    'site_logo': 'images/logo/white-logo.svg',
+    "login_logo": 'images/logo/logo.svg',
+    "login_logo_dark": 'images/logo/white-logo.svg',
 }
 
 # CELERY SETTINGS

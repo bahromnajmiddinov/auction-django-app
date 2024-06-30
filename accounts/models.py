@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.templatetags.static import static
 
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -25,9 +26,14 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return f'{self.username} | {self.type}'
+    
+    @property
+    def get_avatar_url(self):
+        return self.avatar.url if self.avatar else static('images/users/default-avatar.svg')
 
 
 class Contact(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='contacts')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users_that_saved_me')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

@@ -3,194 +3,30 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<section class="section-center">
-    <section class="auctions-section">
-        {% for auction in all_auctions %}
-        <article class="auction">
-            <div class="img-container">
-                <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">{{ auction.title }}</h3>
-                <p class="auction-description">{{ auction.summary }}</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">${{ auction.get_current_price }}</span>
-                <a class="auction-link" href="{{ auction.get_absolute_url }}"><span class="auction-link-text">More</span> <span class="auction-pointer">>>></span></a>
-            </div>
+<h1 class="title" style="margin: 0 auto; width: fit-content;">Auctions</h1>
+{% comment %} <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Apply Filter</button>
+</form> {% endcomment %}
+<section class="auctions-section">
+    {% for auction in all_auctions %}
+    <article class="auction">
+        <div class="img-container">
+            <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
+        </div>
+        <div class="auction-info">
+            <h3 class="auction-title">{{ auction.title }}</h3>
+            <p class="auction-description">{{ auction.summary }}</p>
+        </div>
+        <div class="auction-footer">
+            <span class="auction-price">${{ auction.get_current_price }}</span>
+            <a class="auction-link" href="{{ auction.get_absolute_url }}"><span class="auction-link-text">More</span> <span class="auction-pointer">>>></span></a>
+        </div>
 
-            <div class="show-time">
-                <span class="auction-show-time">Start Time: {{ auction.get_start_time }}</span>
-            </div>
-        </article> 
-        {% endfor %}
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-        
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-
-        <article class="auction">
-            <div class="img-container">
-                <img src="https://cdn.pixabay.com/photo/2023/08/15/15/48/swan-8192196_1280.jpg" alt="">
-            </div>
-            <div class="auction-info">
-                <h3 class="auction-title">Auction 1</h3>
-                <p class="auction-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-            </div>
-            <div class="auction-footer">
-                <span class="auction-price">$100</span>
-                <a class="auction-link" href="http://">More >>></a>
-            </div>
-        </article>
-    </section>
+        <div class="show-time">
+            <span class="auction-show-time">Participants: {{ auction.participants.count }}</span>
+        </div>
+    </article> 
+    {% endfor %}
 </section>
 {% endblock content %}

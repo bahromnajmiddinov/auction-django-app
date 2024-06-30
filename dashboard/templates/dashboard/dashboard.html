@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock style %}
+
+{% block content %}
+<section class="dashboard">
+    <div class="all-numbers">
+        <h1 class="title">All Numbers</h1>
+        <div class="number-box">
+            <p>Total Auctions</p>
+            <span>{{  all_numbers.total_auctions }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Users</p>
+            <span>{{ all_numbers.total_users }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Likes</p>
+            <span>{{ all_numbers.total_likes }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Won Auctions</p>
+            <span>{{ total_won_auctions }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Bids</p>
+            <span>{{ total_bids }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Views</p>
+            <span>{{ all_numbers.total_views }}</span>
+        </div>
+    </div>
+
+    <div class="dashboard-list">
+        <h1 class="title">Your Auctions</h1>
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Participants</th>
+                <th>Price</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Likes</th>
+                <th>Views</th>
+            </tr>
+            {% for auction in auctions %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
+                </td>
+                <td>
+                    <a href="">{{ auction.title }}</a>
+                </td>
+                <td>
+                    <p>{{ auction.participants.count }}</p>
+                </td>
+                <td>
+                    <p>${{ auction.get_current_price }}</p>
+                </td>
+                <td>{{ auction.start_time }}</td>
+                <td>{{ auction.end_time }}</td>
+                <td>{{ auction.user_likes.count }}</td>
+                <td>{{ auction.user_watchers.count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h1 class="title">Auctions that you have permissions</h1>
+    </div>
+</section>
+{% endblock content %}

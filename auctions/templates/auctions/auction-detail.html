@@ -6,76 +6,144 @@
 
 {% block content %}
 <!-- detail section -->
-<section class="section-center">
-    <section class="detail-section">
-        <div class="auction-detail-column">
-            <div class="detail-section-images">
-                <div class="main-imgs">
-                    <img id="{{ auction.id }}" class="main-img main-img-active" src="{{ auction.get_main_image }}" alt="">
-                    {% for auction_image in auction.image_fields.all %}
-                    <img id="{{ auction_image.id }}" class="main-img" src="{{ auction_image.image.url }}" alt="">
-                    {% endfor %}
-                </div>
-                {% if auction.image_fields.all %}
-                <div class="thumbs">
-                    <img data-image-id={{ auction.id}} class="thumb" src="{{ auction.get_main_image }}" alt="">
-                    {% for auction_image in auction.image_fields.all %}
-                    <img data-image-id={{ auction_image.id}} class="thumb" src="{{ auction_image.image.url }}" alt="">
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
-            <div class="detail-section-info">
-                <div class="additional-field">{{ auction.get_start_time }}</div>
-                <div class="auction-price">${{ auction.get_current_price }}</div>
-                <div class="description auction-description">
-                    <h2 class="title">Description</h2>
-                    <p class="description-text auction-description-text">
-                        {{ auction.description|safe }}
-                    </p>
-                </div>
-                <div class="additional-fields">
-                    <div class="additional-field">
-                        <img src="{{ auction.get_main_image }}" alt="" class="additional-field-icon">
-                        <div class="additional-field-info">
-                            <h3 class="additional-field-title">auction.additional_fields.title</h3>
-                            <p class="additional-field-description">auction.additional_fields.description</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="auction-side-column">
-            <div class="auction-btns">
-                <a href="{% url 'add-to-card' auction.slug %}" class="btn">Save</a>
-                <a href="{% url 'auction-like' auction.slug %}" class="btn">Like</a>
-                <a href="{% url 'auction-bid' auction.slug %}" class="btn bid-btn">Bid Now</a>
-            </div>
-            <div class="auction-contact">
-                <h2 class="title">Contact Us</h2>
-                <form action="mailto:{{ auction.email }}" method="POST" enctype="text/plain" class="contact-form">
-                    <input type="email" placeholder="Email" class="email" required>
-                    <button type="submit" class="btn auction-btn">Contact</button>
-                </form>
-            </div>
-            <button class="btn remaind-btn">Remaid ME</button>
-            <div class="agents">
-                {% for agent in auction.permissions.all %}
-                    <div class="agent">
-                        <img src="" alt="" class="agent-avatar">
-                        <div class="agent-info">
-                            <h4 class="agent-name">{{ agent.get_full_name }}</h4>
-                            <p class="agent-email">{{ agent.email }}</p>
-                        </div>
-                    </div>
+<section class="detail-section">
+    <div class="auction-detail-column">
+        <div class="detail-section-images">
+            <div class="main-imgs">
+                <img id="{{ auction.id }}" class="main-img main-img-active" src="{{ auction.get_main_image }}" alt="">
+                {% for auction_image in auction.image_fields.all %}
+                <img id="{{ auction_image.id }}" class="main-img" src="{{ auction_image.image.url }}" alt="">
                 {% endfor %}
             </div>
+            {% if auction.image_fields.all %}
+            <div class="thumbs">
+                <img data-image-id={{ auction.id}} class="thumb" src="{{ auction.get_main_image }}" alt="">
+                {% for auction_image in auction.image_fields.all %}
+                <img data-image-id={{ auction_image.id}} class="thumb" src="{{ auction_image.image.url }}" alt="">
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
-    </section>
+        <div class="detail-section-info">
+            <div class="additional-field">{{ auction.get_start_time }}</div>
+            <div class="auction-price">${{ auction.get_current_price }}</div>
+            <div class="description auction-description">
+                <h2 class="title">Description</h2>
+                <p class="description-text auction-description-text">
+                    {{ auction.description|safe }}
+                </p>
+            </div>
+            <div class="additional-fields">
+                <div class="additional-field">
+                    <img src="{{ auction.get_main_image }}" alt="" class="additional-field-icon">
+                    <div class="additional-field-info">
+                        <h3 class="additional-field-title">auction.additional_fields.title</h3>
+                        <p class="additional-field-description">auction.additional_fields.description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="auction-side-column">
+        <div class="auction-btns">
+            <button type="button" class="btn save-btn">Save</button>
+            <button type="button" class="btn like-btn">Like</button>
+            <a href="{% url 'auction-bid' auction.slug %}" type="button" class="btn bid-btn">Bid Now</a>
+        </div>
+        <div class="auction-contact">
+            <h2 class="title">Contact Us</h2>
+            <form action="mailto:{{ auction.email }}" method="POST" enctype="text/plain" class="contact-form">
+                <input type="email" placeholder="Email" class="email" required>
+                <button type="submit" class="btn auction-btn">Contact</button>
+            </form>
+        </div>
+        <button type="button" class="btn remind-btn">Remind ME</button>
+        <div class="agents">
+            {% for agent in auction.permissions.all %}
+                <div class="agent">
+                    <img src="" alt="" class="agent-avatar">
+                    <div class="agent-info">
+                        <h4 class="agent-name">{{ agent.get_full_name }}</h4>
+                        <p class="agent-email">{{ agent.email }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="auction-comments">
+        <h2 class="title">Comments</h2>
+    </div>
 </section>
 <!-- end of detail section -->
 {% endblock content %}
 
 {% block script %}
 <script src="{% static 'js/tabs.js' %}"></script>
+<script>
+    const remindBtn = document.querySelector('.remind-btn');
+    const likeBtn = document.querySelector('.like-btn');
+    const saveBtn = document.querySelector('.save-btn');
+
+    remindBtn.addEventListener('click', function() {
+        fetch('http://localhost:8000/auctions/auction/{{ auction.slug }}/remind-me/{{ request.user.id }}')
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(function(data) {
+            if (data.reminder === true) {
+                alert('Reminder sent successfully');
+                remindBtn.innerHTML = 'added';
+            } else {
+                alert('Reminder cancelled');
+                remindBtn.innerHTML = 'Remind Me';
+            }
+        })
+        .catch(function(error) {
+            console.error('Fetch request failed', error);
+        });
+    });
+
+    likeBtn.addEventListener('click', function() {
+        fetch('http://localhost:8000/auctions/auction/{{ auction.slug }}/like/{{ request.user.id }}')
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(function(data) {
+            if (data.liked === true) {
+                likeBtn.innerHTML = 'Liked';
+            } else {
+                likeBtn.innerHTML = 'Like';
+            }
+        })
+        .catch(function(error) {
+            console.error('Fetch request failed', error);
+        });
+    });
+
+    saveBtn.addEventListener('click', function() {
+        fetch('http://localhost:8000/card/{{ auction.slug }}/add/{{ request.user.id }}')
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(function(data) {
+            if (data.success === true) {
+                saveBtn.innerHTML = 'Saved';
+            } else {
+                saveBtn.innerHTML = ' Save';
+            }
+        })
+        .catch(function(error) {
+            console.error('Fetch request failed', error);
+        });
+    });
+</script>
 {% endblock script %}

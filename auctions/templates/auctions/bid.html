@@ -6,268 +6,266 @@
 
 {% block content %}
 <!-- detail section -->
-<section class="section-center">
-    <section class="auction-page">
-        {% if auction.get_start_time or auction.get_end_time %}
-        <div class="timer">
-            {% if auction.get_start_time %}
-            <h2 class="title">Auction Start After</h2>
-            <div class="timer-clock">
-                00:00:00
-            </div>
-            {% elif auction.get_end_time %}
-            <h2 class="title">Auction End After</h2>
-            <div class="timer-clock">
-                00:00:00
-            </div>
-            {% endif %}
+<section class="auction-page">
+    {% if auction.get_start_time or auction.get_end_time %}
+    <div class="timer">
+        {% if auction.get_start_time %}
+        <h2 class="title">Auction Start After</h2>
+        <div class="timer-clock">
+            00:00:00
+        </div>
+        {% elif auction.get_end_time %}
+        <h2 class="title">Auction End After</h2>
+        <div class="timer-clock">
+            00:00:00
         </div>
         {% endif %}
-        <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
-        <form id="price-form">
-            <label for="price-input">$</label>
-            <input id="price-input" type="number" placeholder="enter the price" name="price">
-            <button type="submit"></button>
-        </form>
-        <div class="boxes">
-            <ul class="tab-headers">
-                <li class="active" data-content-id="1">Last Bids</li>
-                <li data-content-id="2">Chat</li>
-            </ul>
-            <div class="prices-box tab-content active" id="1">
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
-                <div class="price-last">
-                    <p>
-                        <a href="#">Jimmy</a> invite 120$
-                    </p>
-                </div>
+    </div>
+    {% endif %}
+    <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
+    <form id="price-form">
+        <label for="price-input">$</label>
+        <input id="price-input" type="number" placeholder="enter the price" name="price">
+        <button type="submit"></button>
+    </form>
+    <div class="boxes">
+        <ul class="tab-headers">
+            <li class="active" data-content-id="1">Last Bids</li>
+            <li data-content-id="2">Chat</li>
+        </ul>
+        <div class="prices-box tab-content active" id="1">
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
             </div>
-
-            <div class="chat-box tab-content" id="2">
-                <ol class="chat">
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Hola!</p>
-                        <p>Te vienes a cenar al centro? <emoji class="pizza"/></p>
-                        <time>20:17</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Puff...</p>
-                        <p>Aún estoy haciendo el contexto de Góngora... <emoji class="books"/></p>
-                        <p>Mejor otro día</p>
-                        <time>20:18</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Qué contexto de Góngora? <emoji class="suffocated"/></p>
-                        <time>20:18</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>El que mandó Marialu</p>
-                        <p>Es para mañana...</p>
-                        <time>20:18</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p><emoji class="scream"/></p>
-                        <p>Pásamelo! <emoji class="please"/></p>
-                        <time>20:18</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <img src="https://i.imgur.com/QAROObc.jpg" draggable="false"/>
-                        <time>20:19</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Gracias! <emoji class="hearth_blue"/></p>
-                        <time>20:20</time>
-                      </div>
-                    </li>
-                        <div class="day">Hoy</div>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Te apetece jugar a Minecraft?</p>
-                        <time>18:03</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Venga va, hace ya mucho que no juego...</p>
-                        <time>18:07</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Ehh, me crashea el Launcher... <emoji class="cryalot"/></p>
-                        <time>18:08</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p><emoji class="lmao"/></p>
-                        <time>18:08</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Es broma</p>
-                        <p>Ataque Moai!</p>
-                        <p><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span></p>
-                        <time>18:09</time>
-                      </div>
-                    </li>
-                    <li class="other">
-                        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                      <div class="msg">
-                          <p>Copón</p>
-                        <p><emoji class="funny"/></p>
-                        <time>18:08</time>
-                      </div>
-                    </li>
-                    <li class="self">
-                        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                      <div class="msg">
-                        <p>Hey there's a new update about this chat UI with more responsive elements! Check it now:</p>
-                        <p><a href="https://codepen.io/Varo/pen/YPmwpQ" target="parent">Chat UI 2.0</a></p>
-                        <time>18:09</time>
-                      </div>
-                    </li>
-                </ol>
-                <input class="textarea" type="text" placeholder="Type here!"/>
-                <button class="chat-btn" type="button">Submit</button>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
+            </div>
+            <div class="price-last">
+                <p>
+                    <a href="#">Jimmy</a> invite 120$
+                </p>
             </div>
         </div>
-    </section>
+
+        <div class="chat-box tab-content" id="2">
+            <ol class="chat">
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro? <emoji class="pizza"/></p>
+                    <time>20:17</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora... <emoji class="books"/></p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Qué contexto de Góngora? <emoji class="suffocated"/></p>
+                    <time>20:18</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>El que mandó Marialu</p>
+                    <p>Es para mañana...</p>
+                    <time>20:18</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p><emoji class="scream"/></p>
+                    <p>Pásamelo! <emoji class="please"/></p>
+                    <time>20:18</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <img src="https://i.imgur.com/QAROObc.jpg" draggable="false"/>
+                    <time>20:19</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Gracias! <emoji class="hearth_blue"/></p>
+                    <time>20:20</time>
+                    </div>
+                </li>
+                    <div class="day">Hoy</div>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Te apetece jugar a Minecraft?</p>
+                    <time>18:03</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Venga va, hace ya mucho que no juego...</p>
+                    <time>18:07</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Ehh, me crashea el Launcher... <emoji class="cryalot"/></p>
+                    <time>18:08</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p><emoji class="lmao"/></p>
+                    <time>18:08</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Es broma</p>
+                    <p>Ataque Moai!</p>
+                    <p><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span></p>
+                    <time>18:09</time>
+                    </div>
+                </li>
+                <li class="other">
+                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                    <div class="msg">
+                        <p>Copón</p>
+                    <p><emoji class="funny"/></p>
+                    <time>18:08</time>
+                    </div>
+                </li>
+                <li class="self">
+                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+                    <div class="msg">
+                    <p>Hey there's a new update about this chat UI with more responsive elements! Check it now:</p>
+                    <p><a href="https://codepen.io/Varo/pen/YPmwpQ" target="parent">Chat UI 2.0</a></p>
+                    <time>18:09</time>
+                    </div>
+                </li>
+            </ol>
+            <input class="textarea" type="text" placeholder="Type here!"/>
+            <button class="chat-btn" type="button">Submit</button>
+        </div>
+    </div>
 </section>
 <!-- end of detail section -->
 {% endblock content %}

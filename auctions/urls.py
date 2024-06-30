@@ -13,6 +13,7 @@ urlpatterns = [
     path('auction/<slug:slug>/update/', views.auction_update, name='auction-update'),
     path('auction/<slug:slug>/delete/', views.auction_delete, name='auction-delete'),
     
-    path('auction/<slug:slug>/like/', views.auction_like, name='auction-like'),
+    path('auction/<slug:slug>/like/<user_id>', views.auction_like, name='auction-like'),
     path('auction/<slug:slug>/view/', views.auction_view, name='auction-view'),
+    path('auction/<slug:slug>/remind-me/<user_id>', views.remind_me, name='remind-me'),
 ]
