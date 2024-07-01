@@ -45,6 +45,7 @@ def dashboard_auction_detail(request, slug):
     }
     
     context = {
+        'auction': auction,
         'user_counts_by_country': user_counts_by_country,
         'all_numbers': all_numbers,
     }

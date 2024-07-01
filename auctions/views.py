@@ -141,7 +141,7 @@ def auction_create(request):
     context = {
         'auction_form': auction_form,
         'image_formset': image_formset,
-        'video_formset': additional_formset,
+        'video_formset': video_formset,
         'additional_formset': additional_formset,
     }
     

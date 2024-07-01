@@ -37,7 +37,9 @@
             <span>{{ all_numbers.total_views }}</span>
         </div>
     </div>
-
+    <div class="btn-group" style="margin-bottom: 2rem;">
+        <a href="{% url 'auction-create' %}" class="btn">New Auction</a>
+    </div>
     <div class="dashboard-list">
         <h1 class="title">Your Auctions</h1>
         <table class="user-auctions">

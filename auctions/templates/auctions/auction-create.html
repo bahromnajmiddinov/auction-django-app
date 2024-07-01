@@ -67,7 +67,7 @@
             <div class="tab-content" id="3">
                 <div class="additional-fields">
                     {% for video_form in video_formset %}
-                    <div class="additional-field">
+                    <div class="additional-video-field">
                         <div class="form-control">
                             {{ video_form.video.label_tag }}
                             {{ video_form.video }}
@@ -81,13 +81,23 @@
                     </div>
                     {% endfor %}
                 </div>
-                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
+                <button type="button" class='btn' id="add-video-field">+ Add Another Field</button>
+
+                <!-- hidden form -->
+                <div id="empty-video-form" class="hidden">
+                    <div class="form-control">
+                        {{ video_formset.empty_form.video.label_tag }}
+                        {{ video_formset.empty_form.video }}
+                        {{ video_formset.empty_form.video.errors }}
+                    </div>
+                    <button type="button" class="btn btn-video-remove">Remove</button>
+                </div>
             </div>
 
             <div class="tab-content" id="4">
                 <div class="additional-fields">
                     {% for additional_form in additional_formset %}
-                    <div class="additional-field">
+                    <div class="additional-additional-field">
                         {% for field in additional_form %}
                         <div class="form-control">
                             {{ field.label_tag }}
@@ -98,9 +108,20 @@
                     </div>
                     {% endfor %}
                 </div>
-                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
+                <button type="button" class='btn' id="add-additional-field">+ Add Another Field</button>
             </div>
-        
+            
+            <!-- hidden form -->
+            <div id="empty-additional-form" class="hidden">
+                {% for form in additional_formset.empty_form %}
+                <div class="form-control">
+                    {{ form.label_tag }}
+                    {{ form }}
+                    {{ form.errors }}
+                </div>
+                {% endfor %}
+                <button type="button" class="btn btn-additional-remove">Remove</button>
+            </div>
         </div>
     </form>
 </section>
@@ -123,10 +144,10 @@
 
         AdditionalFields.append(emptyImageForm);
 
-        removeField();
+        removeImageField();
     });
 
-    function removeField() {
+    function removeImageField() {
         let allAdditionalFieldBtns = document.querySelectorAll('.btn-remove');
         allAdditionalFieldBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -137,7 +158,71 @@
                     const regexAfterRemove = new RegExp(`${index+1}`, 'g');
                     AdditionalFields.children[index].innerHTML = AdditionalFields.children[index].innerHTML.replace(regexAfterRemove, index);
                 }
-                removeField();
+                removeImageField();
+            });
+        });
+    };
+</script>
+<script>
+    const AddVideoField = document.querySelector('#add-video-field');
+    const AdditionalFieldsFirst = document.querySelectorAll('.additional-fields')[1];
+
+    AddVideoField.addEventListener('click', () => {
+        const AdditionalFieldsCount = document.querySelectorAll('.additional-video-field').length;
+        const emptyVideoForm = document.querySelector('#empty-video-form').cloneNode(true);
+        emptyVideoForm.setAttribute('class', 'additional-video-field');
+        emptyVideoForm.setAttribute('id', '');
+        emptyVideoForm.innerHTML = emptyVideoForm.innerHTML.replace(regex, AdditionalFieldsCount)
+
+        AdditionalFieldsFirst.append(emptyVideoForm);
+
+        removeVideoField();
+    });
+
+    function removeVideoField() {
+        let allAdditionalFieldBtns = document.querySelectorAll('.btn-video-remove');
+        allAdditionalFieldBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const field = btn.parentElement;
+                AdditionalFieldsFirst.removeChild(field);
+
+                for (let index = 0; index < AdditionalFieldsFirst.children.length; index++) {
+                    const regexAfterRemove = new RegExp(`${index+1}`, 'g');
+                    AdditionalFieldsFirst.children[index].innerHTML = AdditionalFieldsFirst.children[index].innerHTML.replace(regexAfterRemove, index);
+                }
+                removeVideoField();
+            });
+        });
+    };
+</script>
+<script>
+    const AddAdditionalField = document.querySelector('#add-additional-field');
+    const AdditionalFieldsSecond = document.querySelectorAll('.additional-fields')[2];
+
+    AddAdditionalField.addEventListener('click', () => {
+        const AdditionalFieldsCount = document.querySelectorAll('.additional-additional-field').length;
+        const emptyAdditionalForm = document.querySelector('#empty-additional-form').cloneNode(true);
+        emptyAdditionalForm.setAttribute('class', 'additional-additional-field');
+        emptyAdditionalForm.setAttribute('id', '');
+        emptyAdditionalForm.innerHTML = emptyAdditionalForm.innerHTML.replace(regex, AdditionalFieldsCount)
+
+        AdditionalFieldsSecond.append(emptyAdditionalForm);
+
+        removeAdditionalField();
+    });
+
+    function removeAdditionalField() {
+        let allAdditionalFieldBtns = document.querySelectorAll('.btn-additional-remove');
+        allAdditionalFieldBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const field = btn.parentElement;
+                AdditionalFieldsSecond.removeChild(field);
+
+                for (let index = 0; index < AdditionalFieldsSecond.children.length; index++) {
+                    const regexAfterRemove = new RegExp(`${index+1}`, 'g');
+                    AdditionalFieldsSecond.children[index].innerHTML = AdditionalFieldsSecond.children[index].innerHTML.replace(regexAfterRemove, index);
+                }
+                removeAdditionalField();
             });
         });
     };
