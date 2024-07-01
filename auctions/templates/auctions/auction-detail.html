@@ -58,20 +58,40 @@
             </form>
         </div>
         <button type="button" class="btn remind-btn">Remind ME</button>
+        <h2 class="title" style="margin-top: 2rem;">Agents</h2>
         <div class="agents">
             {% for agent in auction.permissions.all %}
                 <div class="agent">
-                    <img src="" alt="" class="agent-avatar">
-                    <div class="agent-info">
+                    <img src="{{ agent.get_avatar_url }}" alt="agent avatar image" class="agent-avatar">
+                    <a class="agent-info" href="{% url 'user-detail' agent.username %}">
                         <h4 class="agent-name">{{ agent.get_full_name }}</h4>
                         <p class="agent-email">{{ agent.email }}</p>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
     </div>
     <div class="auction-comments">
         <h2 class="title">Comments</h2>
+        <div class="comment-box">
+            {% for comment in auction.comments.all %}
+            <div class="comment">
+                <div class="comment-info">
+                    <h4 class="comment-author">
+                        <a href="{% url 'user-detail' comment.user.username %}">
+                            {{ comment.user.get_full_name }}
+                        </a>
+                    </h4>
+                    <p class="comment-date">{{ comment.created }}</p>
+                </div>
+                <p class="comment-text">{{ comment.text }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="comment-form">
+            <input type="text" placeholder="Your comment" class="comment-input">
+            <button type="button" class="btn comment-btn">Submit</button>
+        </div> 
     </div>
 </section>
 <!-- end of detail section -->
@@ -139,6 +159,42 @@
                 saveBtn.innerHTML = 'Saved';
             } else {
                 saveBtn.innerHTML = ' Save';
+            }
+        })
+        .catch(function(error) {
+            console.error('Fetch request failed', error);
+        });
+    });
+</script>
+<script>
+    const commentBtn = document.querySelector('.comment-btn');
+    
+    commentBtn.addEventListener('click', () => {
+        const commentBox = document.querySelector('.comment-box');
+        const commentInput = document.querySelector('.comment-input');
+        const commentText = commentInput.value.trim();
+
+        fetch(`http://localhost:8000/auctions/auction/{{ auction.slug }}/comment/add/{{ request.user.id }}?text=${ commentText }`)
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(function(data) {
+            if (data.added === true) {
+                commentBox.insertAdjacentHTML('beforeend', `<div class="comment">
+                <div class="comment-info">
+                    <h4 class="comment-author">
+                        <a href="{% url 'user-detail' request.user.username %}">
+                            {{ request.user.get_full_name }}
+                        </a>
+                    </h4>
+                    <p class="comment-date">Now</p>
+                </div>
+                <p class="comment-text">${ commentText }</p>
+            </div>`);
+                commentInput.value = '';
             }
         })
         .catch(function(error) {

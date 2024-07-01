@@ -9,7 +9,7 @@ from django_celery_beat.models import PeriodicTask, CrontabSchedule
 from django_filters.views import FilterView
 
 from .utils import get_client_ip, code_to_country_name
-from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData
+from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData, Comment
 from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm
 from accounts.models import CustomUser
 from .filters import AuctionFilter
@@ -40,10 +40,11 @@ def auction(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug, type='PB')
     
     client_ip = get_client_ip(request)
-    client_country = client_ip.country
-    client_city = client_ip.city
-    ip_address = client_ip.ip
-    LocationData.objects.get_or_create(auction=auction_detail, country=code_to_country_name(clien_country), city=client_city, ip_address=ip_address)
+    if client_ip.country is not None:
+        client_country = client_ip.country
+        client_city = client_ip.city
+        ip_address = client_ip.ip
+        LocationData.objects.get_or_create(auction=auction_detail, country=client_country, city=client_city, ip_address=ip_address)
     
     if request.user not in auction_detail.participants.all():
         auction_detail.user_watchers.add(request.user)
@@ -59,10 +60,11 @@ def auction_private(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug)
     
     client_ip = get_client_ip(request)
-    client_country = client_ip.country
-    client_city = client_ip.city
-    ip_address = client_ip.ip
-    LocationData.objects.get_or_create(auction=auction_detail, country=code_to_country_name(clien_country), city=client_city, ip_address=ip_address)
+    if client_ip.country is not None:
+        client_country = client_ip.country
+        client_city = client_ip.city
+        ip_address = client_ip.ip
+        LocationData.objects.get_or_create(auction=auction_detail, country=client_country, city=client_city, ip_address=ip_address)
     
     if not request.user in auction_detail.user_watchers.all():
         return Http404()
@@ -183,5 +185,15 @@ def remind_me(request, slug, user_id):
         auction.participants.remove(user)
         data['reminder'] = False
         
+    return JsonResponse(data)
+
+
+def add_comment(request, slug, user_id):
+    user = get_object_or_404(CustomUser, pk=user_id)
+    auction = get_object_or_404(Auction, slug=slug)
+    text = request.GET.get('text')
+    data = {'added': True}
+    new_comment = Comment.objects.create(user=user, auction=auction, text=text)
+    
     return JsonResponse(data)
     

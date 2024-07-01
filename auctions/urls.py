@@ -16,4 +16,6 @@ urlpatterns = [
     path('auction/<slug:slug>/like/<user_id>', views.auction_like, name='auction-like'),
     path('auction/<slug:slug>/view/', views.auction_view, name='auction-view'),
     path('auction/<slug:slug>/remind-me/<user_id>', views.remind_me, name='remind-me'),
+    
+    path('auction/<slug:slug>/comment/add/<user_id>', views.add_comment, name='auction-comment-add'),
 ]

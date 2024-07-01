@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock style %}
+
+{% block header %}
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.7.2/dist/svgMap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/svgMap@v2.7.2/dist/svgMap.min.css" rel="stylesheet">
+{% endblock header %}
+
+{% block content %}
+<section class="dashboard">
+    <h1 class="Title">User Distribution by Country</h1>
+    <div class="map" id="svgMap">
+    </div>
+    <div class="all-numbers">
+        <h1 class="title">All Numbers</h1>
+        <div class="number-box">
+            <p>Total Auctions</p>
+            <span>{{  all_numbers.total_auctions }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Users</p>
+            <span>{{ all_numbers.total_users }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Likes</p>
+            <span>{{ all_numbers.total_likes }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Won Auctions</p>
+            <span>{{ total_won_auctions }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Bids</p>
+            <span>{{ total_bids }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Views</p>
+            <span>{{ all_numbers.total_views }}</span>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block script %}
+<script>
+    new svgMap({
+        targetElementID: 'svgMap',
+        data: {
+            data: {
+            views: {
+                name: 'Views',
+                format: '{0} views',
+                thousandSeparator: ',',
+                thresholdMax: 50000,
+                thresholdMin: 1000
+                },
+            },
+            applyData: 'views',
+            values: {
+                {% for count_data in user_counts_by_country %}
+                {{ count_data.country }}: {views: {{ count_data.user_count }},},
+                {% endfor %}
+            }
+        }
+        });
+</script>
+{% endblock script %}

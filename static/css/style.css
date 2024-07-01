@@ -52,6 +52,11 @@ li:first-child {
     list-style: none;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .hidden {
     display: none;
 }
@@ -426,6 +431,42 @@ form {
     .detail-section-images {
         margin-right: 0;
     }
+}
+
+.agents {
+    margin-top: 1rem;
+}
+
+.agent {
+    display: flex;
+    gap: .5rem;
+}
+
+.agent-avatar {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.comment-box {
+    min-height: 3rem;
+    border: 1px solid var(--primary-main-color);
+    padding: 2rem;
+}
+
+.comment {
+    border-bottom: 1px solid var(--primary-main-color);
+    margin-bottom: .5rem;
+}
+
+.comment-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-input {
+    padding: 12px 24px;
+    width: 70%;
 }
 
 /* end of auction section */
