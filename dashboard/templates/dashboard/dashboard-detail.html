@@ -22,24 +22,12 @@
     <div class="all-numbers">
         <h1 class="title">All Numbers</h1>
         <div class="number-box">
-            <p>Total Auctions</p>
-            <span>{{  all_numbers.total_auctions }}</span>
-        </div>
-        <div class="number-box">
             <p>Total Users</p>
             <span>{{ all_numbers.total_users }}</span>
         </div>
         <div class="number-box">
             <p>Total Likes</p>
             <span>{{ all_numbers.total_likes }}</span>
-        </div>
-        <div class="number-box">
-            <p>Total Won Auctions</p>
-            <span>{{ total_won_auctions }}</span>
-        </div>
-        <div class="number-box">
-            <p>Total Bids</p>
-            <span>{{ total_bids }}</span>
         </div>
         <div class="number-box">
             <p>Total Views</p>
@@ -49,10 +37,9 @@
 
     <div class="btn-group">
         <a href="{% url 'dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
-        <a href="" class="btn btn-secondary">Download CSV</a>
         <a href="{% url 'auction-update' auction.slug %}" class="btn btn-secondary">Edit Auction</a>
-        <a href="" class="btn btn-secondary">Delete Auction</a>
-        <a href="" class="btn btn-danger">Delete User Distribution</a>
+        <a href="{% url 'auction-delete' auction.slug %}" class="btn btn-secondary">Delete Auction</a>
+        <a href="{% url 'auction-admins' auction.slug %}" class="btn btn-danger">Admins</a>
     </div>
 </section>
 {% endblock content %}

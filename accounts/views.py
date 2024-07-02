@@ -1,4 +1,3 @@
-#TODO: fix that I can save myself as a contact
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import CustomUser, Contact
@@ -54,6 +53,9 @@ def user_contacts(request):
 def user_save_contact(request, other_username):
     contact = get_object_or_404(CustomUser, username=other_username)
     contact_errors = {}
+    
+    if request.user == contact:
+        return redirect('user-detail', request.user.username)
     
     if request.method == 'POST':
         first_name = request.POST.get('contact_first_name').strip()

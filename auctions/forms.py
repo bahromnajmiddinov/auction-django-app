@@ -36,11 +36,11 @@ class ImageFieldForm(forms.ModelForm):
 class VideoFieldForm(forms.ModelForm):
     class Meta:
         model = VideoField
-        exclude = ()
+        exclude = ('id',)
 
 
 class AdditionalFieldForm(forms.ModelForm):
     class Meta:
         model = AdditionalField
-        exclude = ()
+        exclude = ['id']
 

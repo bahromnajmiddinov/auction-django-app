@@ -59,7 +59,7 @@
                     <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
                 </td>
                 <td>
-                    <a href="">{{ auction.title }}</a>
+                    <a href="{% url 'dashboard-auction-detail' auction.slug %}">{{ auction.title }}</a>
                 </td>
                 <td>
                     <p>{{ auction.participants.count }}</p>

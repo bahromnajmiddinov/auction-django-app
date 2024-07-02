@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<!-- user detail section -->
+<section class="user-detail">
+    {% for auction_admin in auction_admins %}
+    <div class="single-user" style="display: flex; flex-direction: row; border-bottom: 1px solid black; margin-bottom: .5rem;">
+        <div class="user-avatar">
+            <img src="{{ auction_admin.get_avatar_url }}" alt="Avatar">
+        </div>
+        <div class="user-info" style="margin-left: 20px; text-align: left;">
+            <h2>{{ auction_admin.first_name }} {{ auction_admin.last_name }}</h2>
+            <p>Email: {{ auction_admin.email }}</p>
+            <div class="btn-group">
+                <a href="{% url 'auction-admin' auction.slug auction_admin.username %}" class="btn btn-primary">Edit Admin Permissions</a>
+                <a href="{% url 'auction-admin-delete' auction.slug auction_admin.username %}" class="btn">Delete Admin</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+<!-- end of user detail section -->
+{% endblock content %}

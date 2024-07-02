@@ -27,9 +27,9 @@
             <a href="{% url 'user-contacts' %}" class="btn btn-primary">Contacts</a>
             <a href="{% url 'user-delete' %}" class="btn btn-secondary">Delete Account</a>
             {% endif %}
-            {% if not user_contact %}
+            {% if not user_contact and request.user != user %}
             <a class="btn" href="{% url 'user-save-contact' user.username %}">Save As A contact</a>
-            {% else %}
+            {% elif user_contact %}
             <a class="btn" href="{% url 'user-update-contact' user.username %}">Edit Contact</a>
             {% endif %}
         </div>

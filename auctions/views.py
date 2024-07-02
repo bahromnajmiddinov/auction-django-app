@@ -50,9 +50,9 @@ def auction(request, slug):
         auction_detail.user_watchers.add(request.user)
         
     context = {
-        'auction': auction_detail
+        'auction': auction_detail,
     }
-    
+        
     return render(request, 'auctions/auction-detail.html', context)
 
 
@@ -78,9 +78,13 @@ def auction_private(request, slug):
 
 def bid(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug)
+    auction_message = auction_detail.messages.all()
+    bids = auction_detail.participantdata_set.all()
     
     context = {
-        'auction': auction_detail
+        'auction': auction_detail,
+        'auction_message': auction_message,
+        'bids': bids,
     }
     
     return render(request, 'auctions/bid.html', context)
@@ -95,7 +99,7 @@ def auction_create(request):
     VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0, fields=('video',))
     video_formset = VideoFieldFormset()
     
-    AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0)
+    AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=1)
     additional_formset = AdditionalFieldFormset()
     
     if request.method == 'POST':
@@ -103,8 +107,8 @@ def auction_create(request):
         image_formset = ImageFieldFormset(request.POST, request.FILES)
         video_formset = VideoFieldFormset(request.POST, request.FILES)
         additional_formset = AdditionalFieldFormset(request.POST, request.FILES)
-        
-        if all(auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()):
+        print([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()])
+        if all([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()]):
             new_auction = auction_form.save(commit=False)
             new_auction.owner = request.user
             new_auction.save()
@@ -145,15 +149,64 @@ def auction_create(request):
         'additional_formset': additional_formset,
     }
     
-    return render(request, 'auctions/auction-create.html', context)
+    return render(request, 'auctions/auction-create-update.html', context)
 
 
-def auction_update(request):
-    pass
+def auction_update(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
+    can_user_edit = get_object_or_404(AuctionUserPermission, user=request.user, auction=auction).can_edit
+    if can_user_edit:
+        auction_form = AuctionForm(instance=auction)
+        ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0, fields=('image',))
+        image_formset = ImageFieldFormset(instance=auction)
+        
+        VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0, fields=('video',))
+        video_formset = VideoFieldFormset(instance=auction)
+        
+        AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0)
+        additional_formset = AdditionalFieldFormset(instance=auction)
+        
+        if request.method == 'POST':
+            auction_form = AuctionForm(request.POST, request.FILES, instance=auction)
+            image_formset = ImageFieldFormset(request.POST, request.FILES, queryset=auction)
+            video_formset = VideoFieldFormset(request.POST, request.FILES, queryset=auction)
+            additional_formset = AdditionalFieldFormset(request.POST, request.FILES, queryset=auction)
+            
+            if all([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()]):
+                auction_form.save()
+                for image_form in image_formset:
+                    image_form.save()
+                
+                for video_form in video_formset:
+                    video_form.save()
+                
+                for additional_form in additional_formset:
+                    additional_form.save()
+                
+                return redirect('auction', auction.slug)
+            
+        context = {
+            'auction_form': auction_form,
+            'image_formset': image_formset,
+            'video_formset': video_formset,
+            'additional_formset': additional_formset,
+            'auction': auction,
+        }
+        
+        return render(request, 'auctions/auction-create-update.html', context)
 
 
-def auction_delete(request):
-    pass    
+def auction_delete(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
+    can_user_delete = get_object_or_404(AuctionUserPermission, user=request.user, auction=auction).can_delete
+    if can_user_delete:
+        
+        if request.method == 'POST':
+            if request.GET.get('id_delete_obj_input') == f'I agree to delete this { auction.title } and take full responsibility for this action.':
+                auction.delete()
+                return redirect('auctions')
+        
+        return render(request, 'delete-object.html', {'obj': auction.title})
 
 
 def auction_like(request, slug, user_id):
@@ -168,10 +221,6 @@ def auction_like(request, slug, user_id):
         data['liked'] = False
     
     return JsonResponse(data)
-
-
-def auction_view(request):
-    pass
 
 
 def remind_me(request, slug, user_id):
@@ -196,4 +245,19 @@ def add_comment(request, slug, user_id):
     new_comment = Comment.objects.create(user=user, auction=auction, text=text)
     
     return JsonResponse(data)
+
+
+def auction_admins(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
     
+    auction_admins = auction.permissions.all()
+    
+    return render(request, 'auctions/auction-admins.html', {'auction_admins': auction_admins, 'auction': auction})
+
+
+def auction_admin(request):
+    pass
+
+
+def auction_admin_delete(request):
+    pass

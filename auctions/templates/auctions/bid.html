@@ -23,244 +23,40 @@
     </div>
     {% endif %}
     <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
-    <form id="price-form">
+    <div id="price-form">
         <label for="price-input">$</label>
         <input id="price-input" type="number" placeholder="enter the price" name="price">
-        <button type="submit"></button>
-    </form>
+    </div>
     <div class="boxes">
         <ul class="tab-headers">
             <li class="active" data-content-id="1">Last Bids</li>
             <li data-content-id="2">Chat</li>
         </ul>
         <div class="prices-box tab-content active" id="1">
+            {% for bid in bids %}
             <div class="price-last">
                 <p>
-                    <a href="#">Jimmy</a> invite 120$
+                    <a href="#">{{ bid.participant.first_name }}</a> invite ${{ bid.price }}
                 </p>
             </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
-            <div class="price-last">
-                <p>
-                    <a href="#">Jimmy</a> invite 120$
-                </p>
-            </div>
+            {% endfor %}
         </div>
 
         <div class="chat-box tab-content" id="2">
             <ol class="chat">
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Hola!</p>
-                    <p>Te vienes a cenar al centro? <emoji class="pizza"/></p>
-                    <time>20:17</time>
-                    </div>
-                </li>
+                {% for message in auction_message %}
+                {% if request.user == message.user %}
                 <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Puff...</p>
-                    <p>Aún estoy haciendo el contexto de Góngora... <emoji class="books"/></p>
-                    <p>Mejor otro día</p>
-                    <time>20:18</time>
-                    </div>
-                </li>
+                {% else %}
                 <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+                {% endif %}
+                    <div class="avatar"><img src="{{ message.user.get_avatar_url }}" draggable="false"/></div>
                     <div class="msg">
-                    <p>Qué contexto de Góngora? <emoji class="suffocated"/></p>
-                    <time>20:18</time>
+                    <p>{{ message.text }}</p>
+                    <time>{{ message.created|time }}</time>
                     </div>
                 </li>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>El que mandó Marialu</p>
-                    <p>Es para mañana...</p>
-                    <time>20:18</time>
-                    </div>
-                </li>
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p><emoji class="scream"/></p>
-                    <p>Pásamelo! <emoji class="please"/></p>
-                    <time>20:18</time>
-                    </div>
-                </li>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <img src="https://i.imgur.com/QAROObc.jpg" draggable="false"/>
-                    <time>20:19</time>
-                    </div>
-                </li>
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Gracias! <emoji class="hearth_blue"/></p>
-                    <time>20:20</time>
-                    </div>
-                </li>
-                    <div class="day">Hoy</div>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Te apetece jugar a Minecraft?</p>
-                    <time>18:03</time>
-                    </div>
-                </li>
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Venga va, hace ya mucho que no juego...</p>
-                    <time>18:07</time>
-                    </div>
-                </li>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Ehh, me crashea el Launcher... <emoji class="cryalot"/></p>
-                    <time>18:08</time>
-                    </div>
-                </li>
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p><emoji class="lmao"/></p>
-                    <time>18:08</time>
-                    </div>
-                </li>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Es broma</p>
-                    <p>Ataque Moai!</p>
-                    <p><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span><span><emoji class="moai"/></span></p>
-                    <time>18:09</time>
-                    </div>
-                </li>
-                <li class="other">
-                    <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-                    <div class="msg">
-                        <p>Copón</p>
-                    <p><emoji class="funny"/></p>
-                    <time>18:08</time>
-                    </div>
-                </li>
-                <li class="self">
-                    <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-                    <div class="msg">
-                    <p>Hey there's a new update about this chat UI with more responsive elements! Check it now:</p>
-                    <p><a href="https://codepen.io/Varo/pen/YPmwpQ" target="parent">Chat UI 2.0</a></p>
-                    <time>18:09</time>
-                    </div>
-                </li>
+                {% endfor %}
             </ol>
             <input class="textarea" type="text" placeholder="Type here!"/>
             <button class="chat-btn" type="button">Submit</button>
@@ -315,6 +111,7 @@
 <script>
     const wb = new WebSocket(`ws://127.0.0.1:8000/websocket/auction-bid/{{ auction.slug }}`);
     const chatBtn = document.querySelector('.chat-btn');
+    const bidInput = document.querySelector('#price-input');
 
     chatBtn.addEventListener('click', () => {
         const message = document.querySelector('.textarea');
@@ -322,8 +119,37 @@
         message.value = '';
     });
 
+    bidInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const price = bidInput.value;
+            if (price) {
+                wb.send(JSON.stringify({ "type": "bid", "price": price }));
+                bidInput.value = '';
+            }
+        }
+    });
+
     wb.onmessage = (event) => {
-        console.log(event);
+        const json_data = JSON.parse(event.data);
+        const type = json_data.type;
+        if (type === 'message') {
+            const message = json_data.message;
+            const chat = document.querySelector('.chat');
+            chat.insertAdjacentHTML('beforeend', message);
+
+            const newMessage = chat.lastElementChild;
+            newMessage.scrollIntoView({ behavior: "smooth" });
+        } else if (type === 'bid') {
+            const bid = json_data.last_bid;
+            const changeAuctionPrice = json_data.change_auction_price;
+            const priceBox = document.querySelector('.prices-box');
+            priceBox.insertAdjacentHTML('beforeend', bid)
+
+            if (changeAuctionPrice) {
+                const auctionPrice = document.querySelector('.price');
+                auctionPrice.innerText = `$${json_data.price}`;
+            }
+        }
     };
 </script>
 <script src="{% static 'js/tabs.js' %}"></script>

@@ -25,7 +25,8 @@
             {% endif %}
         </div>
         <div class="detail-section-info">
-            <div class="additional-field">{{ auction.get_start_time }}</div>
+            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>Start Time:</span> {{ auction.start_time }}</div>
+            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>End Time:</span> {{ auction.end_time }}</div>
             <div class="auction-price">${{ auction.get_current_price }}</div>
             <div class="description auction-description">
                 <h2 class="title">Description</h2>

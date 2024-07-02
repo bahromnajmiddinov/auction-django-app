@@ -5,11 +5,11 @@
     --primary-main-color: hsl(0, 0%, 15%);
 }
 
-@media screen and (max-width: 666px) {
+/* @media screen and (max-width: 666px) {
     :root {
         font-size: 0.625rem;
     }
-}
+} */
 
 *,
 *::after,
@@ -317,12 +317,14 @@ form {
     gap: 1rem;
 }
 
-.detail-section-images {
-    
-}
-
 .auction-side-column {
     max-width: 20rem;
+}
+
+@media screen and (max-width: 666px) {
+    .auction-side-column {
+        max-width: 100%;
+    }
 }
 
 .main-imgs {
@@ -511,6 +513,7 @@ form {
 .auction-page form {
     border: none;
     min-height: fit-content;
+    box-shadow: none;
 }
 
 #price-input {
@@ -527,14 +530,10 @@ form {
 .prices-box {
     background-color: hsl(160, 7%, 76%);
     width: 70%;
-    max-height: 40rem;
+    height: 40rem;
     overflow-y: scroll;
     border: 2px solid var(--primary-main-color);
     border-radius: .5rem;
-}
-
-.price-last {
-    
 }
 
 .price-last p {
@@ -555,7 +554,7 @@ form {
     margin: 0;
     background-color: hsl(160, 7%, 76%);
     margin-bottom: 10px;
-    max-height: 40rem;
+    height: 40rem;
     overflow: auto;
     border: 2px solid var(--primary-main-color);
     border-radius: .5rem;

@@ -1,0 +1,11 @@
+{% if message.user == maybe_sender %}
+<li class="self">
+{% else %}
+<li class="other">
+{% endif %}
+    <div class="avatar"><img src="{{ message.user.get_avatar_url }}" draggable="false"/></div>
+    <div class="msg">
+    <p>{{ message.text }}</p>
+    <time>{{ message.created|time }}</time>
+    </div>
+</li>
