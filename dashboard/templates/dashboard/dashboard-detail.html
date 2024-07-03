@@ -40,6 +40,9 @@
         <a href="{% url 'auction-update' auction.slug %}" class="btn btn-secondary">Edit Auction</a>
         <a href="{% url 'auction-delete' auction.slug %}" class="btn btn-secondary">Delete Auction</a>
         <a href="{% url 'auction-admins' auction.slug %}" class="btn btn-danger">Admins</a>
+        {% if auction.type != 'PB' %}
+        <a href="{% url 'private-links' auction.slug %}" class="btn">Private Links</a>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

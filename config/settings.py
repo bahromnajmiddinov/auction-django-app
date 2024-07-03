@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'card',
     'labeler',
     'payments',
+    'link_generator',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

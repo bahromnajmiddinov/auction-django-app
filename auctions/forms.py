@@ -3,7 +3,7 @@ from django.forms import formset_factory
 
 from django_ckeditor_5.widgets import CKEditor5Widget
 
-from .models import Auction, ImageField, VideoField, AdditionalField
+from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission
 
 
 class AuctionForm(forms.ModelForm):
@@ -42,5 +42,10 @@ class VideoFieldForm(forms.ModelForm):
 class AdditionalFieldForm(forms.ModelForm):
     class Meta:
         model = AdditionalField
-        exclude = ['id']
+        exclude = ['id']   
 
+
+class AuctionUserPermissionForm(forms.ModelForm):
+    class Meta:
+        model = AuctionUserPermission
+        fields = ('can_edit', 'can_delete', 'can_add_admin',)

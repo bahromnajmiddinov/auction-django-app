@@ -5,12 +5,12 @@ import shortuuid
 
 
 class Link(models.Model):
-    path = models.CharField(default=shortuuid.uuid, editable=False, unique=True)
+    path = models.CharField(max_length=24, default=shortuuid.uuid, editable=False, unique=True)
     limit_by_time = models.DateTimeField(blank=True, null=True)
-    limit_by_users = models.PositiveIntegerField(blank=True, null=True)
-    users = models.ManyToManyField('accounts.CustomUser', blank=True, null=True)
+    limit_by_clicks = models.PositiveIntegerField(blank=True, null=True)
+    users = models.ManyToManyField('accounts.CustomUser')
     auction = models.ForeignKey('auctions.Auction', on_delete=models.CASCADE)
-    clicks = models.PositiveIntegerField(default=0)
+    clicks = models.PositiveIntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

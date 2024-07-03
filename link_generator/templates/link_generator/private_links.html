@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<div class="links-section">
+    <ul>
+        {% for link in all_private_links %}
+        <li style="display: flex; justify-content: space-between;">
+            <a href={% url 'private-link' link.path %}>{{ link.path }}</a>
+            <a href="{% url 'delete-link' link.id %}" class="btn">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'generate-link' auction.slug %}" style="margin-top: 2rem; display: inline-block;" class="btn">Add link</a>
+</div>
+{% endblock content %}

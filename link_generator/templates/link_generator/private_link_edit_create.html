@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+<div class="private-link-form">
+    <form method="POST">
+        {% csrf_token %}
+        <h2 class="form-header">Private Link</h2>
+        <div class="form-body">
+
+            {% for field in link_form %}
+            <div class="form-control">
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

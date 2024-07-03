@@ -1,3 +1,5 @@
+#TODO: add pagination
+#TODO: after auction end users cannot add new prices
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
 from django.db.models import Q
@@ -10,7 +12,7 @@ from django_filters.views import FilterView
 
 from .utils import get_client_ip, code_to_country_name
 from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData, Comment
-from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm
+from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm, AuctionUserPermissionForm
 from accounts.models import CustomUser
 from .filters import AuctionFilter
 
@@ -255,9 +257,34 @@ def auction_admins(request, slug):
     return render(request, 'auctions/auction-admins.html', {'auction_admins': auction_admins, 'auction': auction})
 
 
-def auction_admin(request):
-    pass
+def auction_admin(request, slug, username):
+    auction = get_object_or_404(Auction, slug=slug)
+    admin = get_object_or_404(CustomUser, username=username)
+    
+    auction_admin = get_object_or_404(auction.permissions, username=username)
+    admin_permissions = auction.auctionuserpermission_set.get(user=admin)
+    
+    permission_form = AuctionUserPermissionForm(instance=admin_permissions)
+    
+    if request.method == 'POST':
+        permission_form = AuctionUserPermissionForm(request.POST, instance=admin_permissions)
+        if permission_form.is_valid() and admin_permissions.can_add_admin and auction_admin != auction.owner:
+            permission_form.save()
+    
+    context = {
+        'auction_admin': auction_admin,
+        'permission_form': permission_form,
+    }
+    
+    return render(request, 'auctions/auction-admin.html', context)
 
 
-def auction_admin_delete(request):
-    pass
+def auction_admin_delete(request, slug, username):
+    auction = get_object_or_404(Auction, slug=slug)
+    admin = get_object_or_404(CustomUser, username=username)
+    
+    auction_admin = get_object_or_404(auction.permissions, username=username)
+    if admin != auction.owner:
+        permission_form = AuctionUserPermissionForm(instance=admin_permissions).delete()
+    
+    return redirect('auction-admins', auction.slug)
