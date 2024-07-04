@@ -20,19 +20,25 @@ def private_links(request, slug):
 
 def private_link(request, path):
     link = get_object_or_404(Link, path=path)
-    if link.is_expired():
+    if not link.is_expired():
         return HttpResponse('Link expired', status=404)
     
-    link.auction.user_watchers.add(request.User)
+    link.auction.user_watchers.add(request.user)
     
-    if request.user not in link.users:
+    if request.user not in link.users.all():
         link.users.add(request.user)
     
-    return redirect('auction', link.auction.slug)
+    return redirect('auction-private', link.auction.slug)
 
 
 def private_link_delete(request, link_id):
-    pass
+    link = get_object_or_404(Link, id=link_id)
+    
+    if request.user in link.auction.permissions.all():
+        link.delete()
+        return redirect('private-links', link.auction.slug)
+    
+    return redirect('auctions')
 
 
 def private_link_generate(request, slug):

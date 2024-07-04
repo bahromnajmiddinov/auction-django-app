@@ -17,7 +17,7 @@ class Link(models.Model):
         return f'Link {self.path} for auction {self.auction.id}'
     
     def is_expired(self):
-        if self.limit_by_users >= self.users.count() or self.limit_by_time >= timezone.now():
+        if self.limit_by_clicks >= self.users.count() or self.limit_by_time >= timezone.now():
             return True
         return False
     
