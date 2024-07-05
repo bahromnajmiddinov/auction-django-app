@@ -279,12 +279,34 @@ def auction_admin(request, slug, username):
     return render(request, 'auctions/auction-admin.html', context)
 
 
+def auction_admin_add(request, slug, username):
+    auction = get_object_or_404(Auction, slug=slug)
+    new_admin = get_object_or_404(CustomUser, username=username)
+    
+    if new_admin in auction.permissions.all():
+        return redirect('auction-admins', auction.slug)
+    
+    permission_form = AuctionUserPermissionForm()
+    
+    if request.method == 'POST':
+        permission_form = AuctionUserPermissionForm(request.POST)
+        if permission_form.is_valid():
+            permission = permission_form.save(commit=False)
+            permission.user = new_admin
+            permission.auction = auction
+            permission.save()
+            
+            return redirect('auction-admins', auction.slug)
+    
+    return render(request, 'auctions/auction-admin.html', {'permission_form': permission_form})
+
+
 def auction_admin_delete(request, slug, username):
     auction = get_object_or_404(Auction, slug=slug)
     admin = get_object_or_404(CustomUser, username=username)
     
     auction_admin = get_object_or_404(auction.permissions, username=username)
     if admin != auction.owner:
-        permission_form = AuctionUserPermissionForm(instance=admin_permissions).delete()
+        AuctionUserPermission.get(user=auction_admin, auction=auction).delete()
     
     return redirect('auction-admins', auction.slug)
