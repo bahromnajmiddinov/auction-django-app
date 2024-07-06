@@ -286,6 +286,15 @@ def auction_admin_add(request, slug, username):
     if new_admin in auction.permissions.all():
         return redirect('auction-admins', auction.slug)
     
+    try:
+        can_add_admin = auction.auctionuserpermission_set.get(user=request.user).can_add_admin
+        
+        if not can_add_admin:
+            return redirect('auctions')
+        
+    except AuctionUserPermission.DoesNotExist:
+        return redirect('auctions')
+    
     permission_form = AuctionUserPermissionForm()
     
     if request.method == 'POST':
