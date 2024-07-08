@@ -61,7 +61,7 @@
                         {{ image_formset.empty_form.image }}
                         {{ image_formset.empty_form.image.errors }}
                     </div>
-                    <button type="button" class="btn btn-remove">Remove</button>
+                    <button type="button" class="btn btn-image-remove">Remove</button>
                 </div>
             </div>
 
@@ -134,112 +134,60 @@
 {% block script %}
 <script src="{% static 'js/tabs.js' %}"></script>
 <script>
-    const AddImageField = document.querySelector('#add-image-field');
-    const AdditionalFields = document.querySelectorAll('.additional-fields')[0];
-    const regex = new RegExp('__prefix__', 'g');
+    function setupFormsetHandlers(formsetPrefix, addButtonId, additionalFieldsIndex) {
+        const AddFieldButton = document.querySelector(`#${addButtonId}`);
+        const AdditionalFields = document.querySelectorAll('.additional-fields')[additionalFieldsIndex];
+        const emptyFormTemplate = document.querySelector(`#empty-${formsetPrefix}-form`);
+        const regex = new RegExp('prefix', 'g');
 
-    AddImageField.addEventListener('click', () => {
-        const AdditionalFieldsCount = document.querySelectorAll('.additional-field').length;
-        const emptyImageForm = document.querySelector('#empty-image-form').cloneNode(true);
-        emptyImageForm.setAttribute('class', 'additional-field');
-        emptyImageForm.setAttribute('id', '');
-        emptyImageForm.innerHTML = emptyImageForm.innerHTML.replace(regex, AdditionalFieldsCount)
+        AddFieldButton.addEventListener('click', () => {
+            const AdditionalFieldsCount = document.querySelectorAll(`.additional-${formsetPrefix}-field`).length;
+            const emptyForm = emptyFormTemplate.cloneNode(true);
+            emptyForm.setAttribute('class', `additional-${formsetPrefix}-field`);
+            emptyForm.setAttribute('id', '');
+            emptyForm.innerHTML = emptyForm.innerHTML.replace(regex, AdditionalFieldsCount);
 
-        AdditionalFields.append(emptyImageForm);
+            AdditionalFields.append(emptyForm);
 
-        removeImageField();
-    });
+            removeFieldHandlers(formsetPrefix, AdditionalFields);
+        });
+    }
 
-    function removeImageField() {
-        let allAdditionalFieldBtns = document.querySelectorAll('.btn-remove');
+    function removeFieldHandlers(formsetPrefix, AdditionalFields) {
+        const allAdditionalFieldBtns = AdditionalFields.querySelectorAll(`.btn-${formsetPrefix}-remove`);
+        
         allAdditionalFieldBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const field = btn.parentElement;
                 AdditionalFields.removeChild(field);
 
-                for (let index = 0; index < AdditionalFields.children.length; index++) {
-                    const regexAfterRemove = new RegExp(`${index+1}`, 'g');
-                    AdditionalFields.children[index].innerHTML = AdditionalFields.children[index].innerHTML.replace(regexAfterRemove, index);
-                }
-                removeImageField();
+                // Adjust indexes after removing
+                const forms = AdditionalFields.querySelectorAll(`.additional-${formsetPrefix}-field`);
+                forms.forEach((form, index) => {
+                    const regexAfterRemove = new RegExp(`${index + 1}`, 'g');
+                    form.innerHTML = form.innerHTML.replace(regexAfterRemove, index);
+                });
+
+                removeFieldHandlers(formsetPrefix, AdditionalFields);
             });
         });
-    };
-</script>
-<script>
-    const AddVideoField = document.querySelector('#add-video-field');
-    const AdditionalFieldsFirst = document.querySelectorAll('.additional-fields')[1];
+    }
 
-    AddVideoField.addEventListener('click', () => {
-        const AdditionalFieldsCount = document.querySelectorAll('.additional-video-field').length;
-        const emptyVideoForm = document.querySelector('#empty-video-form').cloneNode(true);
-        emptyVideoForm.setAttribute('class', 'additional-video-field');
-        emptyVideoForm.setAttribute('id', '');
-        emptyVideoForm.innerHTML = emptyVideoForm.innerHTML.replace(regex, AdditionalFieldsCount)
-
-        AdditionalFieldsFirst.append(emptyVideoForm);
-
-        removeVideoField();
-    });
-
-    function removeVideoField() {
-        let allAdditionalFieldBtns = document.querySelectorAll('.btn-video-remove');
-        allAdditionalFieldBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const field = btn.parentElement;
-                AdditionalFieldsFirst.removeChild(field);
-
-                for (let index = 0; index < AdditionalFieldsFirst.children.length; index++) {
-                    const regexAfterRemove = new RegExp(`${index+1}`, 'g');
-                    AdditionalFieldsFirst.children[index].innerHTML = AdditionalFieldsFirst.children[index].innerHTML.replace(regexAfterRemove, index);
-                }
-                removeVideoField();
-            });
-        });
-    };
-</script>
-<script>
-    const AddAdditionalField = document.querySelector('#add-additional-field');
-    const AdditionalFieldsSecond = document.querySelectorAll('.additional-fields')[2];
-
-    AddAdditionalField.addEventListener('click', () => {
-        const AdditionalFieldsCount = document.querySelectorAll('.additional-additional-field').length;
-        const emptyAdditionalForm = document.querySelector('#empty-additional-form').cloneNode(true);
-        emptyAdditionalForm.setAttribute('class', 'additional-additional-field');
-        emptyAdditionalForm.setAttribute('id', '');
-        emptyAdditionalForm.innerHTML = emptyAdditionalForm.innerHTML.replace(regex, AdditionalFieldsCount)
-
-        AdditionalFieldsSecond.append(emptyAdditionalForm);
-
-        removeAdditionalField();
-    });
-
-    function removeAdditionalField() {
-        let allAdditionalFieldBtns = document.querySelectorAll('.btn-additional-remove');
-        allAdditionalFieldBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const field = btn.parentElement;
-                AdditionalFieldsSecond.removeChild(field);
-
-                for (let index = 0; index < AdditionalFieldsSecond.children.length; index++) {
-                    const regexAfterRemove = new RegExp(`${index+1}`, 'g');
-                    AdditionalFieldsSecond.children[index].innerHTML = AdditionalFieldsSecond.children[index].innerHTML.replace(regexAfterRemove, index);
-                }
-                removeAdditionalField();
-            });
-        });
-    };
+    // Setup handlers for each formset
+    setupFormsetHandlers('image', 'add-image-field', 0);
+    setupFormsetHandlers('video', 'add-video-field', 1);
+    setupFormsetHandlers('additional', 'add-additional-field', 2);
 
     function updateFormsetManagementForms(formsetPrefix) {
-        const forms = document.querySelectorAll(.${formsetPrefix}-form);
-        const totalFormsInput = document.querySelector(input[name=${formsetPrefix}-TOTAL_FORMS]);
-        const initialFormsInput = document.querySelector(input[name=${formsetPrefix}-INITIAL_FORMS]);
+        const forms = document.querySelectorAll(`.${formsetPrefix}-form`);
+        const totalFormsInput = document.querySelector(`input[name=${formsetPrefix}-TOTAL_FORMS]`);
+        const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}-INITIAL_FORMS]`);
     
         totalFormsInput.value = forms.length;
         initialFormsInput.value = forms.length;  // Adjust this if initial forms count is different
     
         // Update any hidden form templates for adding new forms
-        const emptyFormTemplate = document.querySelector(#empty-${formsetPrefix}-form);
+        const emptyFormTemplate = document.querySelector(`#empty-${formsetPrefix}-form`);
         const newFormIndex = forms.length;  // Use this index to adjust the template for the next form
         emptyFormTemplate.innerHTML = emptyFormTemplate.innerHTML.replace(/prefix/g, newFormIndex);
     };
