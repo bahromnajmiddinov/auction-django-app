@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock style %}
+
+{% block content %}
+<section class="dashboard">
+    <div class="dashboard-list">
+        <h1 class="title">Your Auctions</h1>
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Remove</th>
+            </tr>
+            {% for auction in auctions %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
+                </td>
+                <td>
+                    <a href="{% url 'dashboard-auction-detail' auction.slug %}">{{ auction.title }}</a>
+                </td>
+                <td>
+                    <p>${{ auction.get_current_price }}</p>
+                </td>
+                <td>{{ auction.start_time }}</td>
+                <td>{{ auction.end_time }}</td>
+                <td><a href="" class="btn">Remove</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+{% endblock content %}

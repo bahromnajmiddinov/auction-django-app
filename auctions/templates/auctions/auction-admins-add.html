@@ -5,8 +5,7 @@
 {% block content %}
 <!-- user detail section -->
 <section class="user-detail">
-    <a href="{% url 'auction-admins-add' auction.slug %}" class="btn" style="margin-bottom: 2rem">Add Admin</a>
-    {% for auction_admin in auction_admins %}
+    {% for auction_admin in participants %}
     <div class="single-user" style="display: flex; flex-direction: row; border-bottom: 1px solid black; margin-bottom: .5rem;">
         <div class="user-avatar">
             <img src="{{ auction_admin.get_avatar_url }}" alt="Avatar">
@@ -15,12 +14,14 @@
             <h2>{{ auction_admin.first_name }} {{ auction_admin.last_name }}</h2>
             <p>Email: {{ auction_admin.email }}</p>
             <div class="btn-group">
-                <a href="{% url 'auction-admin' auction.slug auction_admin.username %}" class="btn btn-primary">Edit Admin Permissions</a>
-                <a href="{% url 'auction-admin-delete' auction.slug auction_admin.username %}" class="btn">Delete Admin</a>
+                <a href="{% url 'auction-admin-add' auction_slug auction_admin.username %}" class="btn">Add Admin</a>
             </div>
         </div>
     </div>
     {% endfor %}
+    {% if not participants %}
+        <h3>Nothing Found...</h3>
+    {% endif %}
 </section>
 <!-- end of user detail section -->
 {% endblock content %}

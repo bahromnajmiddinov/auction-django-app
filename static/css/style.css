@@ -274,6 +274,12 @@ form {
     user-select: none;
     color: var(--primary-main-color);
 }
+
+.labels .label {
+    background-color: var(--primary-main-color);
+    padding: .5rem;
+    border-radius: 10px;
+}
    
 /* header */
 

@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import formset_factory
+from django.forms.models import inlineformset_factory
 
 from django_ckeditor_5.widgets import CKEditor5Widget
 
@@ -49,3 +50,9 @@ class AuctionUserPermissionForm(forms.ModelForm):
     class Meta:
         model = AuctionUserPermission
         fields = ('can_edit', 'can_delete', 'can_add_admin',)
+
+
+ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0)
+VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0)
+AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0)
+

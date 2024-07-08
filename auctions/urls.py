@@ -19,6 +19,7 @@ urlpatterns = [
     path('auction/<slug:slug>/comment/add/<user_id>', views.add_comment, name='auction-comment-add'),
     
     path('auction/<slug:slug>/admins/', views.auction_admins, name='auction-admins'),
+    path('auction/<slug:slug>/admins/add/', views.auction_admins_add, name='auction-admins-add'),
     path('auction/<slug:slug>/admins/admin/@<username>', views.auction_admin, name='auction-admin'),
     path('auction/<slug:slug>/admins/admin/@<username>/add/', views.auction_admin_add, name='auction-admin-add'),
     path('auction/<slug:slug>/admins/admin/@<username>/delete/', views.auction_admin_delete, name='auction-admin-delete'),

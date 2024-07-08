@@ -6,13 +6,13 @@ from auctions.models import Auction, ParticipantData, Like, Watchers, LocationDa
 
 def dashboard(request):
     auctions = request.user.auctions.all()
+    admin_of_auctions = request.user.auctionuserpermission_set.exclude(auction__owner=request.user)
     
     auctions_ids = auctions.values_list('id', flat=True)
     
     total_likes = Like.objects.filter(auction__id__in=auctions_ids).count()
     total_users = ParticipantData.objects.filter(auction__id__in=auctions_ids).count()
     total_views = Watchers.objects.filter(auction__id__in=auctions_ids).count()
-    user_counts_by_country = LocationData.objects.values('country').annotate(user_count=Count('ip_address'))
     
     all_numbers = {
         'total_auctions': auctions.count(),
@@ -23,6 +23,7 @@ def dashboard(request):
     
     context = {
         'auctions': auctions,
+        'admin_of_auctions': admin_of_auctions,
         'all_numbers':  all_numbers,
     }
     

@@ -13,6 +13,7 @@ from django_filters.views import FilterView
 from .utils import get_client_ip, code_to_country_name
 from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData, Comment
 from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm, AuctionUserPermissionForm
+from .forms import ImageFieldFormset, VideoFieldFormset, AdditionalFieldFormset
 from accounts.models import CustomUser
 from .filters import AuctionFilter
 
@@ -40,6 +41,8 @@ def auctions(request):
 
 def auction(request, slug):
     auction_detail = get_object_or_404(Auction, slug=slug, type='PB')
+    categories = auction_detail.categories.all()
+    tags = auction_detail.tags.all()
     
     client_ip = get_client_ip(request)
     if client_ip.country is not None:
@@ -53,6 +56,8 @@ def auction(request, slug):
         
     context = {
         'auction': auction_detail,
+        'categories': categories,
+        'tags': tags,
     }
         
     return render(request, 'auctions/auction-detail.html', context)
@@ -95,13 +100,8 @@ def bid(request, slug):
 def auction_create(request):
     auction_form = AuctionForm()
     
-    ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0, fields=('image',))
     image_formset = ImageFieldFormset()
-    
-    VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0, fields=('video',))
     video_formset = VideoFieldFormset()
-    
-    AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=1)
     additional_formset = AdditionalFieldFormset()
     
     if request.method == 'POST':
@@ -159,20 +159,16 @@ def auction_update(request, slug):
     can_user_edit = get_object_or_404(AuctionUserPermission, user=request.user, auction=auction).can_edit
     if can_user_edit:
         auction_form = AuctionForm(instance=auction)
-        ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0, fields=('image',))
-        image_formset = ImageFieldFormset(instance=auction)
-        
-        VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0, fields=('video',))
-        video_formset = VideoFieldFormset(instance=auction)
-        
-        AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0)
-        additional_formset = AdditionalFieldFormset(instance=auction)
+
+        image_formset = ImageFieldFormset(instance=auction, queryset=ImageField.objects.filter(auction=auction))
+        video_formset = VideoFieldFormset(instance=auction, queryset=VideoField.objects.filter(auction=auction))
+        additional_formset = AdditionalFieldFormset(instance=auction, queryset=AdditionalField.objects.filter(auction=auction))
         
         if request.method == 'POST':
             auction_form = AuctionForm(request.POST, request.FILES, instance=auction)
-            image_formset = ImageFieldFormset(request.POST, request.FILES, queryset=auction)
-            video_formset = VideoFieldFormset(request.POST, request.FILES, queryset=auction)
-            additional_formset = AdditionalFieldFormset(request.POST, request.FILES, queryset=auction)
+            image_formset = ImageFieldFormset(request.POST, request.FILES, queryset=ImageField.objects.filter(auction=auction))
+            video_formset = VideoFieldFormset(request.POST, request.FILES, queryset=VideoField.objects.filter(auction=auction))
+            additional_formset = AdditionalFieldFormset(request.POST, request.FILES, queryset=AdditionalField.objects.filter(auction=auction))
             
             if all([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()]):
                 auction_form.save()
@@ -277,6 +273,15 @@ def auction_admin(request, slug, username):
     }
     
     return render(request, 'auctions/auction-admin.html', context)
+
+
+def auction_admins_add(request, slug):
+    auction = get_object_or_404(Auction, slug=slug)
+    auction_slug = auction.slug
+    auction_permissions = auction.permissions.values_list('id', flat=True)
+    participants = auction.participants.exclude(id__in=auction_permissions)
+    
+    return render(request, 'auctions/auction-admins-add.html', {'participants': participants, 'auction_slug': auction_slug})
 
 
 def auction_admin_add(request, slug, username):

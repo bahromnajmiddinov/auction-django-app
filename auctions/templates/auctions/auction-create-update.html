@@ -35,6 +35,7 @@
             </div>
 
             <div class="tab-content" id="2">
+                {{ image_formset.management_form }}
                 <div class="additional-fields">
                     {% for image_form in image_formset %}
                     <div class="additional-field">
@@ -65,6 +66,7 @@
             </div>
 
             <div class="tab-content" id="3">
+                {{ video_formset.management_form }}
                 <div class="additional-fields">
                     {% for video_form in video_formset %}
                     <div class="additional-video-field">
@@ -95,6 +97,7 @@
             </div>
 
             <div class="tab-content" id="4">
+                {{ additional_formset.management_form }}
                 <div class="additional-fields">
                     {% for additional_form in additional_formset %}
                     <div class="additional-additional-field">
@@ -225,6 +228,20 @@
                 removeAdditionalField();
             });
         });
+    };
+
+    function updateFormsetManagementForms(formsetPrefix) {
+        const forms = document.querySelectorAll(.${formsetPrefix}-form);
+        const totalFormsInput = document.querySelector(input[name=${formsetPrefix}-TOTAL_FORMS]);
+        const initialFormsInput = document.querySelector(input[name=${formsetPrefix}-INITIAL_FORMS]);
+    
+        totalFormsInput.value = forms.length;
+        initialFormsInput.value = forms.length;  // Adjust this if initial forms count is different
+    
+        // Update any hidden form templates for adding new forms
+        const emptyFormTemplate = document.querySelector(#empty-${formsetPrefix}-form);
+        const newFormIndex = forms.length;  // Use this index to adjust the template for the next form
+        emptyFormTemplate.innerHTML = emptyFormTemplate.innerHTML.replace(/prefix/g, newFormIndex);
     };
 </script>
 {% endblock script %}

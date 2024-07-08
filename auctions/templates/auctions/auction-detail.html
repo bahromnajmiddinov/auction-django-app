@@ -44,6 +44,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <div class="auction-side-column">
         <div class="auction-btns">
@@ -71,6 +72,20 @@
                 </div>
             {% endfor %}
         </div>
+        {% comment %} <div class="labels">
+            <h3>Categories</h3>
+            {% for category in categories %}
+            <p>
+                <a class="label">{{ category.name }}</a>
+            </p>
+            {% endfor %}
+            <h3>Tags</h3>
+            {% for tag in tags %}
+            <p>
+                <a class="label">{{ tag.name }}
+            </p>
+            {% endfor %}
+        </div> {% endcomment %}
     </div>
     <div class="auction-comments">
         <h2 class="title">Comments</h2>
