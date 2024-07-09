@@ -109,7 +109,7 @@ def auction_create(request):
         image_formset = ImageFieldFormset(request.POST, request.FILES)
         video_formset = VideoFieldFormset(request.POST, request.FILES)
         additional_formset = AdditionalFieldFormset(request.POST, request.FILES)
-        print([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()])
+        
         if all([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()]):
             new_auction = auction_form.save(commit=False)
             new_auction.owner = request.user
@@ -143,7 +143,9 @@ def auction_create(request):
                 pass
             
             return redirect('auction', new_auction.slug)
-        
+        else:
+            print(image_formset.errors)
+            
     context = {
         'auction_form': auction_form,
         'image_formset': image_formset,
@@ -160,26 +162,23 @@ def auction_update(request, slug):
     if can_user_edit:
         auction_form = AuctionForm(instance=auction)
 
-        image_formset = ImageFieldFormset(instance=auction, queryset=ImageField.objects.filter(auction=auction))
-        video_formset = VideoFieldFormset(instance=auction, queryset=VideoField.objects.filter(auction=auction))
-        additional_formset = AdditionalFieldFormset(instance=auction, queryset=AdditionalField.objects.filter(auction=auction))
+        image_formset = ImageFieldFormset(instance=auction)
+        video_formset = VideoFieldFormset(instance=auction)
+        additional_formset = AdditionalFieldFormset(instance=auction)
         
         if request.method == 'POST':
             auction_form = AuctionForm(request.POST, request.FILES, instance=auction)
-            image_formset = ImageFieldFormset(request.POST, request.FILES, queryset=ImageField.objects.filter(auction=auction))
-            video_formset = VideoFieldFormset(request.POST, request.FILES, queryset=VideoField.objects.filter(auction=auction))
-            additional_formset = AdditionalFieldFormset(request.POST, request.FILES, queryset=AdditionalField.objects.filter(auction=auction))
+            image_formset = ImageFieldFormset(request.POST, request.FILES, instance=auction)
+            video_formset = VideoFieldFormset(request.POST, request.FILES, instance=auction)
+            additional_formset = AdditionalFieldFormset(request.POST, request.FILES, instance=auction)
             
+            print([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()])
             if all([auction_form.is_valid(), image_formset.is_valid(), video_formset.is_valid(), additional_formset.is_valid()]):
                 auction_form.save()
-                for image_form in image_formset:
-                    image_form.save()
                 
-                for video_form in video_formset:
-                    video_form.save()
-                
-                for additional_form in additional_formset:
-                    additional_form.save()
+                image_formset.save()
+                video_formset.save()
+                additional_formset.save()
                 
                 return redirect('auction', auction.slug)
             

@@ -38,17 +38,19 @@
                 {{ image_formset.management_form }}
                 <div class="additional-fields">
                     {% for image_form in image_formset %}
-                    <div class="additional-field">
+                    <div class="additional-image-field">
+                        {% for field in image_form %}
                         <div class="form-control">
-                            {{ image_form.image.label_tag }}
-                            {{ image_form.image }}
-                            {{ image_form.image.errors }}
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
                         </div>
-                        <div class="form-control delete-checkbox">
+                        {% endfor %}
+                        {% comment %} <div class="form-control delete-checkbox">
                             {{ image_form.DELETE.label_tag }}
                             {{ image_form.DELETE }}
                             {{ image_form.DELETE.errors }}
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                     {% endfor %}
                 </div>
@@ -56,11 +58,13 @@
 
                 <!-- hidden form -->
                 <div id="empty-image-form" class="hidden">
+                    {% for field in image_formset.empty_form %}
                     <div class="form-control">
-                        {{ image_formset.empty_form.image.label_tag }}
-                        {{ image_formset.empty_form.image }}
-                        {{ image_formset.empty_form.image.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
                     </div>
+                    {% endfor %}
                     <button type="button" class="btn btn-image-remove">Remove</button>
                 </div>
             </div>
@@ -138,7 +142,7 @@
         const AddFieldButton = document.querySelector(`#${addButtonId}`);
         const AdditionalFields = document.querySelectorAll('.additional-fields')[additionalFieldsIndex];
         const emptyFormTemplate = document.querySelector(`#empty-${formsetPrefix}-form`);
-        const regex = new RegExp('prefix', 'g');
+        const regex = new RegExp('__prefix__', 'g');
 
         AddFieldButton.addEventListener('click', () => {
             const AdditionalFieldsCount = document.querySelectorAll(`.additional-${formsetPrefix}-field`).length;
@@ -148,6 +152,13 @@
             emptyForm.innerHTML = emptyForm.innerHTML.replace(regex, AdditionalFieldsCount);
 
             AdditionalFields.append(emptyForm);
+            document.querySelector(`#id_${ formsetPrefix }_fields-${ AdditionalFieldsCount }-id`).value = crypto.randomUUID();
+
+            // Update TOTAL_FORMS count
+            const totalFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-TOTAL_FORMS]`);
+            const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-INITIAL_FORMS]`);
+            totalFormsInput.value = AdditionalFieldsCount + 1;
+            initialFormsInput.value = AdditionalFieldsCount + 1;
 
             removeFieldHandlers(formsetPrefix, AdditionalFields);
         });
@@ -168,6 +179,12 @@
                     form.innerHTML = form.innerHTML.replace(regexAfterRemove, index);
                 });
 
+                // Update TOTAL_FORMS count
+                const totalFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-TOTAL_FORMS]`);
+                const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-INITIAL_FORMS]`);
+                totalFormsInput.value = forms.length;
+                initialFormsInput.value = forms.length;
+
                 removeFieldHandlers(formsetPrefix, AdditionalFields);
             });
         });
@@ -177,19 +194,5 @@
     setupFormsetHandlers('image', 'add-image-field', 0);
     setupFormsetHandlers('video', 'add-video-field', 1);
     setupFormsetHandlers('additional', 'add-additional-field', 2);
-
-    function updateFormsetManagementForms(formsetPrefix) {
-        const forms = document.querySelectorAll(`.${formsetPrefix}-form`);
-        const totalFormsInput = document.querySelector(`input[name=${formsetPrefix}-TOTAL_FORMS]`);
-        const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}-INITIAL_FORMS]`);
-    
-        totalFormsInput.value = forms.length;
-        initialFormsInput.value = forms.length;  // Adjust this if initial forms count is different
-    
-        // Update any hidden form templates for adding new forms
-        const emptyFormTemplate = document.querySelector(`#empty-${formsetPrefix}-form`);
-        const newFormIndex = forms.length;  // Use this index to adjust the template for the next form
-        emptyFormTemplate.innerHTML = emptyFormTemplate.innerHTML.replace(/prefix/g, newFormIndex);
-    };
 </script>
 {% endblock script %}
