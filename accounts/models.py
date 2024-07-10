@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.templatetags.static import static
 
 from django_ckeditor_5.fields import CKEditor5Field
+from django_countries.fields import CountryField 
 
 
 USER_ACCOUNT_TYPE_CHOICES = (
@@ -37,3 +38,23 @@ class Contact(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='users_that_saved_me')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+
+
+class Address(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    recipient_name = models.CharField(max_length=255)
+    street_address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    country = CountryField()
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField(blank=True)
+    instructions = models.TextField(blank=True)
+    is_primary = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.recipient_name} - {self.street_address}, {self.city}, {self.country}"
+
+    class Meta:
+        verbose_name_plural = 'Addresses'

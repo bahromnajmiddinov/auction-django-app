@@ -13,26 +13,25 @@ def card_detail(request):
     return render(request, 'card/card.html', {'card_items': card_items})
 
 
-def add_to_card(request, slug, user_id):
-    if request.user.is_anynomus:
+def add_to_card(request, slug):
+    if request.user.is_anonymous:
         pass
         
     auction = get_object_or_404(Auction, slug=slug)
-    user = get_object_or_404(CustomUser, pk=user_id)
+    user = request.user
     
-    data = {'success': None}
+    data = {'added': False}
     
     card, created = Card.objects.get_or_create(user=user)
     card_item, created = CardItem.objects.get_or_create(card=card, auction=auction)
     
-    data['success'] = True
+    if created:
+        data['added'] = True
+    else:
+        card_item.delete()
     
     return JsonResponse(data)
 
 
 def remove_from_card(request):
-    pass
-
-
-def delete_from_card(request):
     pass

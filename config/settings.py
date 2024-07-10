@@ -165,6 +165,16 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',  # Frontend origin
 ]
 
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'Cookies',
+    'Cookie',
+    'X-Requested-With',
+    'X-CSRFToken',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # CKEDITOR 5 CONFIGURATIONS
 customColorPalette = [
     {

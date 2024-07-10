@@ -55,5 +55,5 @@ class AuctionUserPermissionForm(forms.ModelForm):
 
 ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0)
 VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0)
-AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0)
+AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, extra=0, exclude=('auction',))
 

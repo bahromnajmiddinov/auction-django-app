@@ -119,6 +119,7 @@
     const remindBtn = document.querySelector('.remind-btn');
     const likeBtn = document.querySelector('.like-btn');
     const saveBtn = document.querySelector('.save-btn');
+    const sessionCookie = document.cookie;
 
     remindBtn.addEventListener('click', function() {
         fetch('http://localhost:8000/auctions/auction/{{ auction.slug }}/remind-me/{{ request.user.id }}')
@@ -163,7 +164,16 @@
     });
 
     saveBtn.addEventListener('click', function() {
-        fetch('http://localhost:8000/card/{{ auction.slug }}/add/{{ request.user.id }}')
+        const csrftoken = getCookie('csrftoken');
+        fetch('http://localhost:8000/card/{{ auction.slug }}/add/', {
+            method: 'GET',
+            credentials: 'include',
+            headers:{
+                'Content-Type':'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrftoken,
+            }, 
+        })
         .then(function(response) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -171,7 +181,7 @@
             return response.json(); 
         })
         .then(function(data) {
-            if (data.success === true) {
+            if (data.added === true) {
                 saveBtn.innerHTML = 'Saved';
             } else {
                 saveBtn.innerHTML = ' Save';
@@ -181,6 +191,21 @@
             console.error('Fetch request failed', error);
         });
     });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 </script>
 <script>
     const commentBtn = document.querySelector('.comment-btn');
