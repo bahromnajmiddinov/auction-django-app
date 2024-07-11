@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock style %}
+
+{% block content %}
+<section class="checkout">
+    <div class="payment-list">
+        <div class="all-numbers">
+            <div class="number-box">
+                <p>Total Price</p>
+                <span>{{ total_price }}</span>
+            </div>
+            <div class="number-box">
+                <p>Shipping Cost</p>
+                <span>$10.00</span>
+            </div>
+            <div class="number-box">
+                <p>Total Price with Shipping</p>
+                <span>total_price + 10</span>
+            </div>
+            <div class="number-box">
+                <p>Payment Method</p>
+                <span>PayPal</span>
+            </div>
+            <div class="number-box">
+                <p>Payment Status</p>
+                <span>Pending</span>
+            </div>
+            <div class="number-box">
+                <p>Payment Date</p>
+                <span>{{ current_date }}</span>
+            </div>
+            <div class="number-box">
+                <p>Tracking Number</p>
+                <span>1234567890</span>
+            </div>
+            <div class="number-box">
+                <p>Order ID</p>
+                <span>1234567890</span>
+            </div>
+            <div class="number-box">
+                <p>Payment Confirmation</p>
+                <span>You will receive a confirmation email shortly.</span>
+            </div>
+        </div>
+        <div class="btn-group">
+            <a href="{% url 'order-data' %}" class="btn">Pay Now</a>
+        </div>
+    </div>
+    
+    <div class="address-list">
+        <h1>Shipping Address</h1>
+        <div>
+            <input type="radio" name="address-radio" id="">Tadhkent
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">Uzbekistan
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">USA
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">Russia
+        </div>
+    </div>
+    
+    <div class="dashboard-list">
+        <h1 class="title">Your Auctions</h1>
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+            </tr>
+            {% for card_item in card_items %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ card_item.auction.get_main_image }}" alt="{{ card_item.auction.title }}">
+                </td>
+                <td>
+                    <a href="{% url 'dashboard-auction-detail' card_item.auction.slug %}">{{ card_item.auction.title }}</a>
+                </td>
+                <td>
+                    <p>${{ card_item.auction.get_current_price }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+{% endblock content %}
+

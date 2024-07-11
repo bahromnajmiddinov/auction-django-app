@@ -1,6 +1,6 @@
 from django.db import models
 
-from auction.models import Auction
+from auctions.models import Auction
 from accounts.models import CustomUser, Address
 
 

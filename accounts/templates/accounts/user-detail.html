@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock style %}
 
 {% block content %}
 <!-- user detail section -->
@@ -32,6 +38,28 @@
             {% elif user_contact %}
             <a class="btn" href="{% url 'user-update-contact' user.username %}">Edit Contact</a>
             {% endif %}
+        </div>
+    </div>
+
+    <div class="user-data" style="margin-top: 4rem">
+        <div class="orders">
+            <h2 class="title" style="margin-bottom: 1rem">Your Orders</h2>
+            <table class="user-auctions">
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Paid</th>
+                    <th>Delevired</th>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td>
+                        <a href="">test</a>
+                    </td>
+                    <td>Yes</td>
+                    <td>No</td>
+                </tr>
+            </table>
         </div>
     </div>
 </section>

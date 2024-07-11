@@ -1,0 +1,48 @@
+/* checkout section */
+.checkout-form {
+    display: none;
+}
+
+.checkout {
+    display: grid;
+    grid-template-areas: 
+    'b a'
+    'b c';
+    gap: 1rem;
+}
+
+@media screen and (max-width: 777px) {
+    .checkout {
+        grid-template-areas: 
+        'a'
+        'c'
+        'b';
+    }
+}
+
+.checkout .address-list {
+    grid-area: c;
+}
+
+.checkout .payment-list {
+    grid-area: a;
+}
+
+.checkout .dashboard-list {
+    grid-area: b;
+}
+
+.checkout .dashboard-list .user-auctions {
+    min-width: fit-content;
+}
+
+.payment-list div:has(input),
+.address-list div:has(input) {
+    padding: 1rem;
+}
+
+.payment-list input,
+.address-list input {
+    margin-right: .5rem;
+}
+/* end of checkout section */

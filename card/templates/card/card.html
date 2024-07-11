@@ -10,6 +10,20 @@
 
 {% block content %}
 <section class="dashboard">
+    <div class="all-numbers">
+        <h1 class="title">Total</h1>
+        <div class="number-box">
+            <p>Total Items</p>
+            <span>{{  all_numbers.total_items }}</span>
+        </div>
+        <div class="number-box">
+            <p>Total Price</p>
+            <span>${{ all_numbers.total_price }}</span>
+        </div>
+    </div>
+    <div class="btn-group" style="margin-bottom: 2rem;">
+        <a href="{% url 'checkout' %}" class="btn">Checkout</a>
+    </div>
     <div class="dashboard-list">
         <h1 class="title">Your Auctions</h1>
         <table class="user-auctions">
@@ -34,7 +48,7 @@
                 </td>
                 <td>{{ card_item.auction.start_time }}</td>
                 <td>{{ card_item.auction.end_time }}</td>
-                <td><a href="" class="btn">Remove</a></td>
+                <td><a href="{% url 'add-to-card' card_item.auction.slug %}" class="btn">Remove</a></td>
             </tr>
             {% endfor %}
         </table>

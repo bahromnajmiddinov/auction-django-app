@@ -167,12 +167,12 @@
         const csrftoken = getCookie('csrftoken');
         fetch('http://localhost:8000/card/{{ auction.slug }}/add/', {
             method: 'GET',
-            credentials: 'include',
             headers:{
                 'Content-Type':'application/json',
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-CSRFToken': csrftoken,
             }, 
+            credentials: 'same-origin',
         })
         .then(function(response) {
             if (!response.ok) {

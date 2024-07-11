@@ -28,5 +28,6 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('', include('link_generator.urls')),
     path('card/', include('card.urls')),
+    path('orders/', include('order.urls')),
     path('payment/', include('payments.urls', namespace='payments')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -152,13 +152,12 @@
             emptyForm.innerHTML = emptyForm.innerHTML.replace(regex, AdditionalFieldsCount);
 
             AdditionalFields.append(emptyForm);
-            document.querySelector(`#id_${ formsetPrefix }_fields-${ AdditionalFieldsCount }-id`).value = crypto.randomUUID();
 
             // Update TOTAL_FORMS count
             const totalFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-TOTAL_FORMS]`);
-            const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-INITIAL_FORMS]`);
+            {% comment %} const initialFormsInput = document.querySelector(`input[name=${formsetPrefix}_fields-INITIAL_FORMS]`); {% endcomment %}
             totalFormsInput.value = AdditionalFieldsCount + 1;
-            initialFormsInput.value = AdditionalFieldsCount + 1;
+            {% comment %} initialFormsInput.value = AdditionalFieldsCount + 1; {% endcomment %}
 
             removeFieldHandlers(formsetPrefix, AdditionalFields);
         });

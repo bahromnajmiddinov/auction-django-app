@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'auctions',
     'dashboard',
     'card',
+    'order',
     'labeler',
     'payments',
     'link_generator',

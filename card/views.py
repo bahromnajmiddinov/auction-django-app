@@ -10,7 +10,18 @@ def card_detail(request):
     card = request.user.cards.last()
     card_items = card.items.all()
     
-    return render(request, 'card/card.html', {'card_items': card_items})
+    total_count = 0
+    total_price = 0
+    for auction_price in card_items:
+        total_price += auction_price.auction.get_current_price
+        total_count += 1
+    
+    all_numbers = {
+        'total_items': total_count,
+        'total_price': total_price,
+    }
+    
+    return render(request, 'card/card.html', {'card_items': card_items, 'all_numbers': all_numbers})
 
 
 def add_to_card(request, slug):

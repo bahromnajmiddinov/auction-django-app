@@ -3,7 +3,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
 from django.db.models import Q
-from django.forms.models import inlineformset_factory
 from django.http import Http404, JsonResponse
 
 import json
@@ -40,7 +39,7 @@ def auctions(request):
 
 
 def auction(request, slug):
-    auction_detail = get_object_or_404(Auction, slug=slug, type='PB')
+    auction_detail = get_object_or_404(Auction, slug=slug)
     categories = auction_detail.categories.all()
     tags = auction_detail.tags.all()
     
@@ -51,7 +50,10 @@ def auction(request, slug):
         ip_address = client_ip.ip
         LocationData.objects.get_or_create(auction=auction_detail, country=client_country, city=client_city, ip_address=ip_address)
     
-    if request.user not in auction_detail.participants.all():
+    if request.user not in auction_detail.user_watchers.all():
+        if auction_detail.type != 'PB':
+            return Http404()
+        
         auction_detail.user_watchers.add(request.user)
         
     context = {
@@ -60,26 +62,6 @@ def auction(request, slug):
         'tags': tags,
     }
         
-    return render(request, 'auctions/auction-detail.html', context)
-
-
-def auction_private(request, slug):
-    auction_detail = get_object_or_404(Auction, slug=slug)
-    
-    client_ip = get_client_ip(request)
-    if client_ip.country is not None:
-        client_country = client_ip.country
-        client_city = client_ip.city
-        ip_address = client_ip.ip
-        LocationData.objects.get_or_create(auction=auction_detail, country=client_country, city=client_city, ip_address=ip_address)
-    
-    if not request.user in auction_detail.user_watchers.all():
-        return Http404()
-    
-    context = {
-        'auction': auction_detail
-    }
-    
     return render(request, 'auctions/auction-detail.html', context)
 
 
@@ -100,7 +82,7 @@ def bid(request, slug):
 def auction_create(request):
     auction_form = AuctionForm()
     
-    image_formset = ImageFieldFormset()
+    image_formset = ImageFieldFormset(queryset=None)
     video_formset = VideoFieldFormset()
     additional_formset = AdditionalFieldFormset()
     

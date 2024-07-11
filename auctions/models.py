@@ -46,6 +46,7 @@ def additional_field_icon_path(instance, filename):
 class Auction(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='auctions')
+    winner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True, related_name='winner')
     main_image = models.ImageField(upload_to=auction_image_path)
     type = models.CharField(max_length=2, choices=AUCTION_TYPE_CHOICES, default='PB')
     title = models.CharField(max_length=60)
@@ -60,7 +61,7 @@ class Auction(models.Model):
     
     active = models.BooleanField(default=False)
     start_time = models.DateTimeField(blank=True, null=True)
-    end_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -77,7 +78,9 @@ class Auction(models.Model):
     
     @property
     def get_absolute_url(self):
-        return reverse('auction', args=[self.slug])
+        if self.type == 'PB':
+            return reverse('auction', args=[self.slug])
+        return reverse('auction-private', args=[self.slug])
     
     @property
     def get_current_price(self):

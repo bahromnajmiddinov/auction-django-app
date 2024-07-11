@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock style %}
+
+{% block content %}
+<section class="checkout">
+    <div class="payment-list">
+        <h1>Select Payment Method</h1>
+        <div>
+            <input type="radio" name="payment-radio" id="">Paypal
+        </div>
+        <div>
+            <input type="radio" name="payment-radio" id="">Payoner
+        </div>
+        <div>
+            <input type="radio" name="payment-radio" id="">Stripe
+        </div>
+    </div>
+    
+    <div class="address-list">
+        <h1>Select Address</h1>
+        <div>
+            <input type="radio" name="address-radio" id="">Tadhkent
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">Uzbekistan
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">USA
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="">Russia
+        </div>
+        <div>
+            <input type="radio" name="address-radio" id="new-address">New Address
+
+            <form action="" class="checkout-form">
+                <div class="form-body">
+                    {% for field in new_address %}
+                    <div class="form-control">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="dashboard-list">
+        <h1 class="title">Your Auctions</h1>
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+            </tr>
+            {% for card_item in card_items %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ card_item.auction.get_main_image }}" alt="{{ card_item.auction.title }}">
+                </td>
+                <td>
+                    <a href="{% url 'dashboard-auction-detail' card_item.auction.slug %}">{{ card_item.auction.title }}</a>
+                </td>
+                <td>
+                    <p>${{ card_item.auction.get_current_price }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="btn-group">
+        <a href="{% url 'order-data' %}" class="btn">Place Order</a>
+    </div>
+</section>
+{% endblock content %}
+
+{% block script %}
+<script>
+    const newAddres = document.querySelector('#new-address');
+
+    newAddres.addEventListener('change', () => {
+        const formBody = document.querySelector('.checkout-form');
+        formBody.style.display = this.checked ? 'none' : 'block';
+    });
+</script>
+{% endblock script %}
