@@ -168,7 +168,9 @@ form {
   margin-bottom: 1px;
 }
 
-.form-control input {
+.form-control input,
+.form-control select,
+.from-control textarea {
   width: 100%;
   padding: 8px;
   font-size: 14px;
@@ -279,6 +281,21 @@ form {
     background-color: var(--primary-main-color);
     padding: .5rem;
     border-radius: 10px;
+}
+
+.address-info {
+    padding: 1rem;
+    display: block;
+}
+
+.address-info:hover {
+    color: hsl(357, 86%, 64%)   ;
+}
+
+.disabled {
+    color: var(--primary-main-color);
+    background-color: #ccc;
+    cursor: not-allowed;
 }
    
 /* header */

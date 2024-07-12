@@ -44,6 +44,35 @@
         <a href="{% url 'private-links' auction.slug %}" class="btn">Private Links</a>
         {% endif %}
     </div>
+
+    <div class="order-data" style="margin-top: 2rem;">
+        <h1>Order Data</h1>
+        
+        <div class="all-numbers">
+            <div class="number-box">
+                <p>Ordered</p>
+                <span>{{ auction.orderitem_set.exists }}</span>
+            </div>
+            <div class="number-box">
+                <p>Ordered Date</p>
+                <span>12.02.2008</span>
+            </div>
+            <div class="number-box">
+                <p>Payed</p>
+                <span>{{ auction.orderitem_set.first.order.paid }}</span>
+            </div>
+            <div class="number-box">
+                <p>Payment Method</p>
+                <span>Stripe</span>
+            </div>
+            <div class="number-box">
+                <p>Deleivered</p>
+                <span>
+                    <input type="checkbox" checked>
+                </span>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock content %}
 

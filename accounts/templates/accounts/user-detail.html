@@ -40,7 +40,7 @@
             {% endif %}
         </div>
     </div>
-
+    {% if request.user == user %}
     <div class="user-data" style="margin-top: 4rem">
         <div class="orders">
             <h2 class="title" style="margin-bottom: 1rem">Your Orders</h2>
@@ -51,17 +51,20 @@
                     <th>Paid</th>
                     <th>Delevired</th>
                 </tr>
+                {% for order in request.user.order_set.all %}
                 <tr>
-                    <td>01</td>
+                    <td>{{ order.id }}</td>
                     <td>
-                        <a href="">test</a>
+                        <a href="{% url 'order-data' order.id %}">{{ order.address.city }}</a>
                     </td>
-                    <td>Yes</td>
-                    <td>No</td>
+                    <td>{{ order.paid }}</td>
+                    <td>{{ order.deleivered }}</td>
                 </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
+    {% endif %}
 </section>
 <!-- end of user detail section -->
 {% endblock content %}

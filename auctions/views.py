@@ -1,5 +1,4 @@
 #TODO: add pagination
-#TODO: after auction end users cannot add new prices
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
 from django.db.models import Q

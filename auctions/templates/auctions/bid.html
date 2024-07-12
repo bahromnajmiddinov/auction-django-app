@@ -23,10 +23,12 @@
     </div>
     {% endif %}
     <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
+    {% if auction.get_end_time %}
     <div id="price-form">
         <label for="price-input">$</label>
         <input id="price-input" type="number" placeholder="enter the price" name="price">
     </div>
+    {% endif %}
     <div class="boxes">
         <ul class="tab-headers">
             <li class="active" data-content-id="1">Last Bids</li>

@@ -31,6 +31,8 @@ class AuctionBidConsumer(WebsocketConsumer):
                 'type': 'chat_message_handler',
                 'message_id': message.id,
             }
+        elif not self.auction.get_end_time:
+            return
             
         elif type == 'bid':
             if self.user not in self.auction.participants.all():

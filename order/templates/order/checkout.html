@@ -9,38 +9,26 @@
 {% endblock style %}
 
 {% block content %}
-<section class="checkout">
+<form class="checkout checkout-main-form" method="POST" action="{% url 'order-data' %}">
+    {% csrf_token %}
     <div class="payment-list">
         <h1>Select Payment Method</h1>
         <div>
-            <input type="radio" name="payment-radio" id="">Paypal
-        </div>
-        <div>
-            <input type="radio" name="payment-radio" id="">Payoner
-        </div>
-        <div>
-            <input type="radio" name="payment-radio" id="">Stripe
+            <input type="radio" name="payment-radio" required value='ST'>Stripe
         </div>
     </div>
     
     <div class="address-list">
         <h1>Select Address</h1>
+        {% for saved_adress in saved_addresses %}
         <div>
-            <input type="radio" name="address-radio" id="">Tadhkent
+            <input type="radio" name="address-radio" required value={{ saved_adress.id }}>{{ saved_adress.city }}
         </div>
+        {% endfor %}
         <div>
-            <input type="radio" name="address-radio" id="">Uzbekistan
-        </div>
-        <div>
-            <input type="radio" name="address-radio" id="">USA
-        </div>
-        <div>
-            <input type="radio" name="address-radio" id="">Russia
-        </div>
-        <div>
-            <input type="radio" name="address-radio" id="new-address">New Address
+            <input type="radio" name="address-radio" required id="new-address" value="new_address">New Address
 
-            <form action="" class="checkout-form">
+            <div action="" class="checkout-form">
                 <div class="form-body">
                     {% for field in new_address %}
                     <div class="form-control">
@@ -50,7 +38,7 @@
                     </div>
                     {% endfor %}
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     
@@ -77,11 +65,11 @@
             {% endfor %}
         </table>
     </div>
-
+    
     <div class="btn-group">
-        <a href="{% url 'order-data' %}" class="btn">Place Order</a>
+        <button type="submit" class="btn">Place Order</button>
     </div>
-</section>
+</form>
 {% endblock content %}
 
 {% block script %}

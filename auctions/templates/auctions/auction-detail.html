@@ -25,8 +25,12 @@
             {% endif %}
         </div>
         <div class="detail-section-info">
+            {% if auction.start_time %}
             <div class="additional-field" style="display: flex; justify-content: space-between;"><span>Start Time:</span> {{ auction.start_time }}</div>
+            {% endif %}
+            {% if auction.end_time %}
             <div class="additional-field" style="display: flex; justify-content: space-between;"><span>End Time:</span> {{ auction.end_time }}</div>
+            {% endif %}
             <div class="auction-price">${{ auction.get_current_price }}</div>
             <div class="description auction-description">
                 <h2 class="title">Description</h2>
@@ -48,7 +52,7 @@
     </div>
     <div class="auction-side-column">
         <div class="auction-btns">
-            <button type="button" class="btn save-btn">Save</button>
+            <button type="button" class="btn save-btn {% if auction.orderitem_set.exists %}disabled{% endif %}">Save</button>
             <button type="button" class="btn like-btn">Like</button>
             <a href="{% url 'auction-bid' auction.slug %}" type="button" class="btn bid-btn">Bid Now</a>
         </div>
@@ -59,7 +63,9 @@
                 <button type="submit" class="btn auction-btn">Contact</button>
             </form>
         </div>
+        {% if not auction.orderitem_set.exists %}
         <button type="button" class="btn remind-btn">Remind ME</button>
+        {% endif %}
         <h2 class="title" style="margin-top: 2rem;">Agents</h2>
         <div class="agents">
             {% for agent in auction.permissions.all %}
@@ -162,7 +168,7 @@
             console.error('Fetch request failed', error);
         });
     });
-
+    {% if not auction.orderitem_set.exists %}
     saveBtn.addEventListener('click', function() {
         const csrftoken = getCookie('csrftoken');
         fetch('http://localhost:8000/card/{{ auction.slug }}/add/', {
@@ -191,7 +197,7 @@
             console.error('Fetch request failed', error);
         });
     });
-
+    {% endif %}
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {

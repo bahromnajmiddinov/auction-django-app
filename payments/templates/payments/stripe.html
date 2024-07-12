@@ -1,0 +1,26 @@
+<!-- checkout.html -->
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<h1>You are redirecting...</h1>
+{% endblock content %}
+
+{% block script %}
+<!-- Include the Stripe.js library -->
+ <script src="https://js.stripe.com/v3/"></script>
+ <script>
+     var stripe = Stripe('{{ stripe_public_key }}');
+     function redirect_stripe() {
+         stripe.redirectToCheckout({
+             sessionId: '{{ session_id }}'
+         }).then(function(result) {
+             // Handle result.error or do nothing on success
+         });
+     }
+
+     redirect_stripe();
+ </script>
+ {% endblock script %}
+

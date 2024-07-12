@@ -3,6 +3,18 @@
     display: none;
 }
 
+.checkout-main-form {
+    min-height: max-content;
+    max-width: 90vw;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 666px) {
+    .checkout-main-form {
+        width: 95vw;
+    }
+}
+
 .checkout {
     display: grid;
     grid-template-areas: 

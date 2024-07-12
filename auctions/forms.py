@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import formset_factory
-from django.forms.models import inlineformset_factory, modelformset_factory
-import uuid
+from django.forms.models import inlineformset_factory
+
 from django_ckeditor_5.widgets import CKEditor5Widget
 
 from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission
@@ -53,7 +53,6 @@ class AuctionUserPermissionForm(forms.ModelForm):
 
 
 ImageFieldFormset = inlineformset_factory(Auction, ImageField, form=ImageFieldForm, extra=0)
-# ImageFieldFormset = modelformset_factory(ImageField, form=ImageFieldForm, extra=0)
 VideoFieldFormset = inlineformset_factory(Auction, VideoField, form=VideoFieldForm, extra=0)
 AdditionalFieldFormset = inlineformset_factory(Auction, AdditionalField, form=AdditionalFieldForm, exclude=['auction', 'id'], extra=0)
 

@@ -123,8 +123,8 @@
             <a class="auction-link" href="{{ auction.get_absolute_url }}"><span class="auction-link-text">More</span> <span class="auction-pointer">>>></span></a>
         </div>
 
-        <div class="show-time">
-            <span class="auction-show-time">Participants: {{ auction.participants.count }}</span>
+        <div class="show-time" style="display: flex; justify-content: space-between;">
+            <span class="auction-show-time">Participants:</span><span class="auction-show-time">{{ auction.participants.count }}</span>
         </div>
     </article> 
     {% endfor %}

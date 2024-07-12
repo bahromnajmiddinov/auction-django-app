@@ -34,7 +34,8 @@ def add_to_card(request, slug):
     data = {'added': False}
     
     card, created = Card.objects.get_or_create(user=user)
-    card_item, created = CardItem.objects.get_or_create(card=card, auction=auction)
+    if not auction.orderitem_set.exists():
+        card_item, created = CardItem.objects.get_or_create(card=card, auction=auction)
     
     if created:
         data['added'] = True
