@@ -1,6 +1,6 @@
 #TODO: add pagination
 from django.shortcuts import render, redirect, get_object_or_404
-# from django.pagination import paginator
+from django.core.paginator import Paginator
 from django.db.models import Q, Min, Max
 from django.http import Http404, JsonResponse
 
@@ -58,6 +58,9 @@ def auctions(request):
     min_price = all_auctions.aggregate(min_price=Min('auction_price'))['min_price']
     
     # Pagination
+    paginator = Paginator(all_auctions, 12)
+    page = request.GET.get('page', 1)
+    all_auctions = paginator.page(page)
     
     context = {
         'all_auctions': all_auctions,

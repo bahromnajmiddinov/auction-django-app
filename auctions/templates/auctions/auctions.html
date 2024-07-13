@@ -6,7 +6,7 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/auctions-filter.css' %}">
-{% comment %} <link rel="stylesheet" href="{% static 'css/auctions-pagination.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -123,6 +123,19 @@
     </article> 
     {% endfor %}
 </section>
+<div class="pagination-container">
+    <div class="pagination p12">
+        <ul>
+            {% if all_auctions.has_previous %}
+            <a href="{% url 'auctions' all_auctions.previos_page_number %}"><li>Previous</li></a>
+            {% endif %}
+            <a class="is-active"><li>{{ all_auctions.number }}</li></a>
+            {% if all_auctions.has_next %}
+            <a href="{% url 'auctions' all_auctions.next_page_number %}"><li>Next</li></a>
+            {% endif %}
+        </ul>
+    </div>
+</div>
 {% endblock content %}
 
 {% block script %}
