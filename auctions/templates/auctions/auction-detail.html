@@ -52,7 +52,7 @@
     </div>
     <div class="auction-side-column">
         <div class="auction-btns">
-            <button type="button" class="btn save-btn {% if auction.orderitem_set.exists %}disabled{% endif %}">Save</button>
+            <a href="{% url 'add-to-card' auction.slug %}" type="button" class="btn save-btn {% if auction.orderitem_set.exists %}disabled{% endif %}">{% if saved %}Saved{% else %}Save{% endif %}</a>
             <button type="button" class="btn like-btn">Like</button>
             <a href="{% url 'auction-bid' auction.slug %}" type="button" class="btn bid-btn">Bid Now</a>
         </div>
@@ -121,6 +121,7 @@
 
 {% block script %}
 <script src="{% static 'js/tabs.js' %}"></script>
+{% if not request.user.is_anonymous %}
 <script>
     const remindBtn = document.querySelector('.remind-btn');
     const likeBtn = document.querySelector('.like-btn');
@@ -169,7 +170,7 @@
         });
     });
     {% if not auction.orderitem_set.exists %}
-    saveBtn.addEventListener('click', function() {
+    {% comment %} saveBtn.addEventListener('click', function() {
         const csrftoken = getCookie('csrftoken');
         fetch('http://localhost:8000/card/{{ auction.slug }}/add/', {
             method: 'GET',
@@ -196,7 +197,7 @@
         .catch(function(error) {
             console.error('Fetch request failed', error);
         });
-    });
+    }); {% endcomment %}
     {% endif %}
     function getCookie(name) {
         let cookieValue = null;
@@ -249,4 +250,5 @@
         });
     });
 </script>
+{% endif %}
 {% endblock script %}

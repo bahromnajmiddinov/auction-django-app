@@ -30,7 +30,11 @@ def _time_scheduler(date_obj, schedule_name, auction_id):
 
 
 def auctions(request):
-    all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__in=CustomUser.objects.filter(contacts__user=request.user)) & Q(type='OC')))
+    if request.user.is_anonymous:
+        all_auctions = Auction.objects.filter(type='PB')
+    else:
+        all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__contacts__in=[user]) & Q(type='OC')))
+    
     categories = Category.objects.all()
     tags = Tag.objects.all()
     
@@ -79,6 +83,11 @@ def auction(request, slug):
     categories = auction_detail.categories.all()
     tags = auction_detail.tags.all()
     
+    if request.user.is_anonymous:
+        saved = True if str(auction_detail.id) in request.session.get('cart', []) else False
+    else:
+        saved = True if request.user.user_cart_items.filter(id=auciton_detail.id).exists() else False
+    
     client_ip = get_client_ip(request)
     if client_ip.country is not None:
         client_country = client_ip.country
@@ -89,13 +98,14 @@ def auction(request, slug):
     if request.user not in auction_detail.user_watchers.all():
         if auction_detail.type != 'PB':
             return Http404()
-        
-        auction_detail.user_watchers.add(request.user)
+        if not request.user.is_anonymous:
+            auction_detail.user_watchers.add(request.user)
         
     context = {
         'auction': auction_detail,
         'categories': categories,
         'tags': tags,
+        'saved': saved,
     }
         
     return render(request, 'auctions/auction-detail.html', context)
