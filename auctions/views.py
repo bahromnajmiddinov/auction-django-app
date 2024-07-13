@@ -33,7 +33,7 @@ def auctions(request):
     if request.user.is_anonymous:
         all_auctions = Auction.objects.filter(type='PB')
     else:
-        all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__contacts__in=[user]) & Q(type='OC')))
+        all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__contacts__in=[request.user.id]) & Q(type='OC')))
     
     categories = Category.objects.all()
     tags = Tag.objects.all()
