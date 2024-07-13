@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 
 from auctions.models import Auction, ParticipantData, Like, Watchers, LocationData
 
 
+@login_required
 def dashboard(request):
     auctions = request.user.auctions.all()
     admin_of_auctions = request.user.auctionuserpermission_set.exclude(auction__owner=request.user)
@@ -30,6 +32,7 @@ def dashboard(request):
     return render(request, 'dashboard/dashboard.html', context)
 
 
+@login_required
 def dashboard_auction_detail(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     locations = auction.users_locations.all()

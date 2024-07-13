@@ -282,8 +282,6 @@ JAZZMIN_SETTINGS = {
     "site_header": "OnAuc",
     "site_brand": "OnAuc",
     'site_logo': 'images/logo/white-logo.svg',
-    "login_logo": 'images/logo/logo.svg',
-    "login_logo_dark": 'images/logo/white-logo.svg',
 }
 
 # CELERY SETTINGS
@@ -307,6 +305,13 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         }
     }
+}
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.CustomSignupForm',
 }
 
 # PAYMENTS

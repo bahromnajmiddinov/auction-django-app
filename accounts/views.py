@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import CustomUser, Contact
 from .forms import UserUpdateForm
 
 
+@login_required
 def user_detail(request, username=None):
     user = request.user
     user_contact = None
@@ -21,6 +23,7 @@ def user_balance(request):
     pass
 
 
+@login_required
 def user_update(request):
     form = UserUpdateForm(instance=request.user)
     
@@ -34,6 +37,7 @@ def user_update(request):
     return render(request, 'accounts/user-update.html', {'form': form})
 
 
+@login_required
 def user_delete(request):
     obj = 'account'
     check_text = request.POST.get('check_text' or None)
@@ -44,12 +48,14 @@ def user_delete(request):
     return render(request, 'delete-object.html', {'obj': obj})
 
 
+@login_required
 def user_contacts(request):
     user_contacts = request.user.contacts.all()
     
     return render(request, 'accounts/user-contacts.html', {'user_contacts': user_contacts})
 
 
+@login_required
 def user_save_contact(request, other_username):
     contact = get_object_or_404(CustomUser, username=other_username)
     contact_errors = {}
@@ -70,6 +76,7 @@ def user_save_contact(request, other_username):
     return render(request, 'accounts/user-contact-update-create.html', {'contact': contact, 'contact_errors': contact_errors})
 
 
+@login_required
 def user_update_contact(request, other_username):
     other_user = get_object_or_404(CustomUser, username=other_username)
     contact_errors = {}
@@ -94,6 +101,7 @@ def user_update_contact(request, other_username):
     return render(request, 'accounts/user-contact-update-create.html', {'contact': contact, 'contact_errors': contact_errors})
 
 
+@login_required
 def user_delete_contact(request, other_username):
     other_user = get_object_or_404(CustomUser, username=other_username)
     

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q, Min, Max
 from django.http import Http404, JsonResponse
+from django.contrib.auth.decorators import login_required
 
 import json
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
@@ -114,6 +115,7 @@ def bid(request, slug):
     return render(request, 'auctions/bid.html', context)
 
 
+@login_required
 def auction_create(request):
     auction_form = AuctionForm()
     
@@ -173,6 +175,7 @@ def auction_create(request):
     return render(request, 'auctions/auction-create-update.html', context)
 
 
+@login_required
 def auction_update(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     can_user_edit = get_object_or_404(AuctionUserPermission, user=request.user, auction=auction).can_edit
@@ -210,6 +213,7 @@ def auction_update(request, slug):
         return render(request, 'auctions/auction-create-update.html', context)
 
 
+@login_required
 def auction_delete(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     can_user_delete = get_object_or_404(AuctionUserPermission, user=request.user, auction=auction).can_delete
@@ -223,6 +227,7 @@ def auction_delete(request, slug):
         return render(request, 'delete-object.html', {'obj': auction.title})
 
 
+@login_required
 def auction_like(request, slug, user_id):
     auction = get_object_or_404(Auction, slug=slug)
     user = get_object_or_404(CustomUser, pk=user_id)
@@ -237,6 +242,7 @@ def auction_like(request, slug, user_id):
     return JsonResponse(data)
 
 
+@login_required
 def remind_me(request, slug, user_id):
     user = get_object_or_404(CustomUser, pk=user_id)
     auction = get_object_or_404(Auction, slug=slug)
@@ -251,6 +257,7 @@ def remind_me(request, slug, user_id):
     return JsonResponse(data)
 
 
+@login_required
 def add_comment(request, slug, user_id):
     user = get_object_or_404(CustomUser, pk=user_id)
     auction = get_object_or_404(Auction, slug=slug)
@@ -261,6 +268,7 @@ def add_comment(request, slug, user_id):
     return JsonResponse(data)
 
 
+@login_required
 def auction_admins(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     
@@ -269,6 +277,7 @@ def auction_admins(request, slug):
     return render(request, 'auctions/auction-admins.html', {'auction_admins': auction_admins, 'auction': auction})
 
 
+@login_required
 def auction_admin(request, slug, username):
     auction = get_object_or_404(Auction, slug=slug)
     admin = get_object_or_404(CustomUser, username=username)
@@ -291,6 +300,7 @@ def auction_admin(request, slug, username):
     return render(request, 'auctions/auction-admin.html', context)
 
 
+@login_required
 def auction_admins_add(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     auction_slug = auction.slug
@@ -300,6 +310,7 @@ def auction_admins_add(request, slug):
     return render(request, 'auctions/auction-admins-add.html', {'participants': participants, 'auction_slug': auction_slug})
 
 
+@login_required
 def auction_admin_add(request, slug, username):
     auction = get_object_or_404(Auction, slug=slug)
     new_admin = get_object_or_404(CustomUser, username=username)
@@ -331,6 +342,7 @@ def auction_admin_add(request, slug, username):
     return render(request, 'auctions/auction-admin.html', {'permission_form': permission_form})
 
 
+@login_required
 def auction_admin_delete(request, slug, username):
     auction = get_object_or_404(Auction, slug=slug)
     admin = get_object_or_404(CustomUser, username=username)

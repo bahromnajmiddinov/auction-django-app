@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+<!-- Sign UP Section -->
+<section class="signup-section">
+    
+    <form method="POST">
+        {% csrf_token %}
+        <h2 class="form-header">Sign UP</h2>
+        <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in.</a></p>
+
+        <div class="form-body">
+            <div>
+                {% for field in form %}
+                <div class="form-control">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn">Save</button>
+            </div>
+        </div>
+    </form>
+</section>
+<!-- Auction Create Section end -->
+{% endblock content %}

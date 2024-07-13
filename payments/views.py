@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 import stripe
 from django.conf import settings
@@ -8,6 +9,7 @@ from django.http import JsonResponse
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+@login_required
 def create_checkout_session(request, order_id):
     try:
         order = get_object_or_404(request.user.order_set, pk=order_id)

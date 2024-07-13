@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 # from django.db import Q
+from django.contrib.auth.decorators import login_required
 
 from auctions.models import Auction
 from .models import Link
 from .forms import LinkForm
 
 
+@login_required
 def private_links(request, slug):
     auction = get_object_or_404(Auction, slug=slug, type='PR')
     
@@ -18,6 +20,7 @@ def private_links(request, slug):
     return render(request, 'link_generator/private_links.html', {'all_private_links': all_private_links, 'auction': auction})
 
 
+@login_required
 def private_link(request, path):
     link = get_object_or_404(Link, path=path)
     if not link.is_expired():
@@ -31,6 +34,7 @@ def private_link(request, path):
     return redirect('auction-private', link.auction.slug)
 
 
+@login_required
 def private_link_delete(request, link_id):
     link = get_object_or_404(Link, id=link_id)
     
@@ -41,6 +45,7 @@ def private_link_delete(request, link_id):
     return redirect('auctions')
 
 
+@login_required
 def private_link_generate(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     

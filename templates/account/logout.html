@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block style %}
+<style>
+    form {
+        max-width: 100%;
+        min-height: min-content;
+        border: none;
+        box-shadow: none;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+    <h1>Sign Out</h1>
+    <p>Are you sure you want to sign out?</p>
+    <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Sign Out</button>
+    </form>
+</div>
+{% endblock content %}
