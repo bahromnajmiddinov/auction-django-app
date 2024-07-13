@@ -18,17 +18,6 @@ from labeler.models import Category, Tag
 from .filters import AuctionFilter
 
 
-def _time_scheduler(date_obj, schedule_name, auction_id):
-    year = date_obj.year
-    month = date_obj.month
-    day = date_obj.day
-    hour = date_obj.hour
-    minute = date_obj.minute 
-    
-    schedule, created = CrontabSchedule.get_or_create(year=year, month=month, day=day, hour=hour, minute=minute)
-    task = PeriodicTask.objects.create(crontab=schedule, name=schedule_name, task='tasks.time_end', args=json.dumps((auction_id,)))
-
-
 def auctions(request):
     if request.user.is_anonymous:
         all_auctions = Auction.objects.filter(type='PB')
@@ -164,12 +153,6 @@ def auction_create(request):
                 new_additional_form = additional_form.save(commit=False)
                 new_additional_form.auction = new_auction
                 new_additional_form.save()
-            
-            if new_auction.start_time:
-                pass
-            
-            if new_auction.end_time:
-                pass
             
             return redirect('auction', new_auction.slug)
         else:

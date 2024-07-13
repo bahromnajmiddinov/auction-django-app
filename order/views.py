@@ -17,7 +17,7 @@ def checkout(request):
     for card_item in card_items:
         auction = card_item.auction
         # check user if the winner of the auction
-        if auction.winner != request.user:
+        if auction.winner != request.user and auction.orderitem_set.exits():
             return HttpResponse('you cant')
             
         total_price += auction.get_current_price
@@ -52,7 +52,7 @@ def order_data(request, order_id=None):
         payment_method = request.POST.get('payment-radio')
         
         address_id = request.POST.get('address-radio')
-        print(address_id)
+        
         if address_id == 'new_address':
             new_address = AddressForm(request.POST)
             if new_address.is_valid():
@@ -78,7 +78,5 @@ def order_data(request, order_id=None):
         'order': order,
         'order_items': order.orderitem_set.all(),
     }
-    
-    print(order)
         
     return render(request, 'order/order-data.html', context)

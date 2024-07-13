@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auction Started</title>
+</head>
+<body>
+    <h2>Dear {{ full_name }},</h2>
+    
+    <p>The auction for <strong>
+        <a href="{% url 'auction' auction_slug %}">{{ auction_title }}</a>
+    </strong> has started!</p>
+    
+    <p><strong>Description:</strong> {{ auction_summary }}</p>
+    
+    <p>The starting bid is {{ starting_bid }}.</p>
+    
+    <p>Hurry and place your bids now!</p>
+    
+    <p>Regards,<br>
+    Your OnAuc Team</p>
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import formset_factory
 from django.forms.models import inlineformset_factory
+from django.utils import timezone
 
 from django_ckeditor_5.widgets import CKEditor5Widget
 
@@ -26,6 +27,24 @@ class AuctionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['description'].required = False
+    
+    def clean_start_time(self):
+        start_time = self.cleaned_data['start_time']
+        if start_time < timezone.now():
+            raise forms.ValidationError('Start time must be in the future.')
+        return start_time
+    
+    def clean_end_time(self):
+        end_time = self.cleaned_data['end_time']
+        start_time = self.cleaned_data['start_time']
+        
+        if start_time:
+            if end_time <= start_time:
+                raise forms.ValidationError('End time must be after the start time.')
+        
+        if end_time <= timezone.now():
+            raise forms.ValidationError('End time must be in the future.')
+        return end_time
 
 
 class ImageFieldForm(forms.ModelForm):

@@ -1,1 +1,25 @@
-# TODO: create signal when user create new auction it create new link for private and public types
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
+
+from .models import Auction
+from .utils import time_scheduler
+
+
+@receiver(post_save, sender=Auction)
+def model_saved(sender, instance, created, **kwargs):
+    if created:
+        if instance.start_time:
+            time_scheduler(instance.start_date, f'auction_start_time_{instance.id}', instance.id, task='start_time')
+        if instance.end_time:
+            time_scheduler(instance.end_date, f'auction_end_time_{instance.id}', instance.id, task='end_time')
+        instance.save()
+
+
+@receiver(pre_save, sender=Auction)
+def model_updated(sender, instance, **kwargs):
+    if instance.start_time:
+        time_scheduler(instance.start_date, f'auction_start_time_{instance.id}', instance.id, task='start_time')
+    if instance.end_time:
+        time_scheduler(instance.end_date, f'auction_end_time_{instance.id}', instance.id, task='end_time')
+    instance.save()
+
