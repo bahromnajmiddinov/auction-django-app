@@ -1,7 +1,7 @@
 #TODO: add pagination
 from django.shortcuts import render, redirect, get_object_or_404
 # from django.pagination import paginator
-from django.db.models import Q
+from django.db.models import Q, Min, Max
 from django.http import Http404, JsonResponse
 
 import json
@@ -9,10 +9,11 @@ from django_celery_beat.models import PeriodicTask, CrontabSchedule
 from django_filters.views import FilterView
 
 from .utils import get_client_ip, code_to_country_name
-from .models import Auction, ImageField, VideoField, AdditionalField, AuctionUserPermission, ParticipantData, LocationData, Comment
-from .forms import AuctionForm, ImageFieldForm, VideoFieldForm, AdditionalFieldForm, AuctionUserPermissionForm
+from .models import Auction, AuctionUserPermission, LocationData, Comment
+from .forms import AuctionForm, AuctionUserPermissionForm
 from .forms import ImageFieldFormset, VideoFieldFormset, AdditionalFieldFormset
 from accounts.models import CustomUser
+from labeler.models import Category, Tag
 from .filters import AuctionFilter
 
 
@@ -29,9 +30,41 @@ def _time_scheduler(date_obj, schedule_name, auction_id):
 
 def auctions(request):
     all_auctions = Auction.objects.filter(Q(type='PB') | Q(user_watchers__in=[request.user]) | (Q(owner__in=CustomUser.objects.filter(contacts__user=request.user)) & Q(type='OC')))
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+    
+    search_input = request.GET.get('search-input')
+    min_range_price = request.GET.get('min-range-input')
+    max_range_price = request.GET.get('max-range-input')
+    selected_categories = request.GET.getlist('category')
+    selected_tags = request.GET.getlist('tag')
+    
+    if search_input:
+        all_auctions = all_auctions.filter(title__icontains=search_input)
+    
+    if min_range_price:
+        all_auctions = all_auctions.filter(auction_price__gte=min_range_price)
+    
+    if max_range_price:
+        all_auctions = all_auctions.filter(auction_price__lte=max_range_price)
+    
+    if selected_categories:
+        all_auctions = all_auctions.filter(categories__in=selected_categories)
+    
+    if selected_tags:
+        all_auctions = all_auctions.filter(tags__in=selected_tags)
+        
+    max_price = all_auctions.aggregate(max_price=Max('auction_price'))['max_price']
+    min_price = all_auctions.aggregate(min_price=Min('auction_price'))['min_price']
+    
+    # Pagination
     
     context = {
         'all_auctions': all_auctions,
+        'categories': categories,
+        'tags': tags,
+        'max_price': max_price,
+        'min_price': min_price,
     }
     
     return render(request, 'auctions/auctions.html', context)

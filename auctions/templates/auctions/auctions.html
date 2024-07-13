@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/auctions-filter.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'css/auctions-pagination.css' %}"> {% endcomment %}
+{% endblock %}
 
 {% block content %}
 <h1 class="title" style="margin: 0 auto; width: fit-content;">Auctions
@@ -10,100 +17,87 @@
 
 <div id="filter-panel" style="display: none;">
     <div class="container">
-    <p>Filter</p>
-    <div class="card">
-        <article class="card-group-item">
-            <div class="filter-content">
-                <div class="card-body">
-                    <div class="search">
-                        <label for="">Search: </label>
-                        <input type="text">
+        <form class="card">
+            <article class="card-group-item">
+                <div class="filter-content">
+                    <div class="card-body">
+                        <div class="search">
+                            <button>
+                                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <input class="search-input" placeholder="Search auctions ..." type="text" name="search-input">
+                            <button class="reset" type="reset">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div> <!-- card-body.// -->
+                </div>
+            </article> <!-- card-group-item.// -->
+
+            <div class="card-filters">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h4 class="title">Range input </h4>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-row">
+                            <div class="range-form-group">
+                                <label>Min</label>
+                                <input type="number" class="range-input" name="min-range-input" placeholder="${{ min_price }}" min="{{ min_price }}">
+                            </div>
+                            <div class="range-form-group">
+                                <label>Max</label>
+                                <input type="number" class="range-input" name="max-range-input" placeholder="${{ max_price }}" max="{{ max_price }}">
+                            </div>
+                            </div>
+                        </div> <!-- card-body.// -->
                     </div>
-                </div> <!-- card-body.// -->
+                </article> <!-- card-group-item.// -->
+        
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h4 class="title">Categories </h4>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            {% for category in categories %}
+                            <div class="badge-checkbox">
+                                <span class="float-right badge badge-light round">{{ category.auction_categories.count }}</span>
+                                <label class="cl-checkbox">
+                                    <input type="checkbox" name="category" value="{{ category.name }}">
+                                    <span>{{ category.name }}</span>
+                                </label>
+                            </div> <!-- form-check.// -->
+                            {% endfor %}
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+        
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h4 class="title">Tags </h4>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            {% for tag in tags %}
+                            <div class="custom-control custom-checkbox">
+                                <label class="cl-checkbox">
+                                    <input type="checkbox" name="tag" value="{{ tag.name }}">
+                                    <span>{{ tag.name }}</span>
+                                </label>
+                            </div> <!-- form-check.// -->
+                            {% endfor %}
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
             </div>
-        </article> <!-- card-group-item.// -->
-
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Range input </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                <div class="form-row">
-                <div class="form-group col-md-6">
-                <label>Min</label>
-                <input type="number" class="form-control" id="inputEmail4" placeholder="$0">
-                </div>
-                <div class="form-group col-md-6 text-right">
-                <label>Max</label>
-                <input type="number" class="form-control" placeholder="$1,0000">
-                </div>
-                </div>
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- card-group-item.// -->
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Category </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <div class="custom-control custom-checkbox">
-                        <span class="float-right badge badge-light round">52</span>
-                        <input type="checkbox" class="custom-control-input" id="Check1">
-                        <label class="custom-control-label" for="Check1">Samsung</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <span class="float-right badge badge-light round">132</span>
-                        <input type="checkbox" class="custom-control-input" id="Check2">
-                        <label class="custom-control-label" for="Check2">Black berry</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <span class="float-right badge badge-light round">17</span>
-                        <input type="checkbox" class="custom-control-input" id="Check3">
-                        <label class="custom-control-label" for="Check3">Samsung</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <span class="float-right badge badge-light round">7</span>
-                        <input type="checkbox" class="custom-control-input" id="Check4">
-                        <label class="custom-control-label" for="Check4">Other Brand</label>
-                    </div> <!-- form-check.// -->
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- card-group-item.// -->
-
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Tags </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="Check1">
-                        <label class="custom-control-label" for="Check1">Samsung</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="Check2">
-                        <label class="custom-control-label" for="Check2">Black berry</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="Check3">
-                        <label class="custom-control-label" for="Check3">Samsung</label>
-                    </div> <!-- form-check.// -->
-
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="Check4">
-                        <label class="custom-control-label" for="Check4">Other Brand</label>
-                    </div> <!-- form-check.// -->
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- card-group-item.// -->
-    </div> <!-- card.// -->
+            <button class="btn">Filter</button>
+        </fo> <!-- card.// -->
     </div> 
     <!--container end.//-->
 </div>
