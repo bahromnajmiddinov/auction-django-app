@@ -75,8 +75,8 @@ def auction(request, slug):
     if request.user.is_anonymous:
         saved = True if str(auction_detail.id) in request.session.get('cart', []) else False
     else:
-        saved = True if request.user.user_cart_items.filter(id=auciton_detail.id).exists() else False
-    
+        saved = True if request.user.cards.first().items.filter(auction=auction_detail).exists() else False
+        
     client_ip = get_client_ip(request)
     if client_ip.country is not None:
         client_country = client_ip.country

@@ -49,7 +49,7 @@
                     <th>Id</th>
                     <th>Title</th>
                     <th>Paid</th>
-                    <th>Delevired</th>
+                    <th>Delivered</th>
                 </tr>
                 {% for order in request.user.order_set.all %}
                 <tr>
@@ -63,6 +63,76 @@
                 {% endfor %}
             </table>
         </div>
+    </div>
+
+    <div class="dashboard-list">
+        <h1 class="title" style="margin-bottom: 1rem;">Auctions that You participanted</h1>
+        {% if request.user.participantdata_set.exists %}
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Participants</th>
+                <th>Current Price</th>
+                <th>End Time</th>
+                <th>Your Bid</th>
+            </tr>
+            {% for data in request.user.participantdata_set.all %}
+            {% with auction=data.auction %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
+                </td>
+                <td>
+                    <a href="{% url 'auction' auction.slug %}">{{ auction.title }}</a>
+                </td>
+                <td>
+                    <p>{{ auction.participants.count }}</p>
+                </td>
+                <td>
+                    <p>${{ auction.get_current_price }}</p>
+                </td>
+                <td>{{ auction.end_time }}</td>
+                <td>${{ data.price }}</td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+        </table>
+        {% else %}
+        <h3>No auctions found.</h3>
+        {% endif %}
+    </div>
+
+    <div class="dashboard-list">
+        <h1 class="title" style="margin-bottom: 1rem;">Auctions that You Winned</h1>
+        {% if request.user.winner.all %}
+        <table class="user-auctions">
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Participants</th>
+                <th>End Time</th>
+                <th>Your Bid</th>
+            </tr>
+            {% for auction in request.user.winner.all %}
+            <tr class="user-auction">
+                <td class="user-auction-image">
+                    <img src="{{ auction.get_main_image }}" alt="{{ auction.title }}">
+                </td>
+                <td>
+                    <a href="{% url 'auction' auction.slug %}">{{ auction.title }}</a>
+                </td>
+                <td>
+                    <p>{{ auction.participants.count }}</p>
+                </td>
+                <td>{{ auction.end_time }}</td> 
+                <td>${{ auction.get_current_price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h3>No auctions found.</h3>
+        {% endif %}
     </div>
     {% endif %}
 </section>

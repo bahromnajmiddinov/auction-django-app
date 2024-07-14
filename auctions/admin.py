@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Auction, AuctionUserPermission, ImageField, VideoField, AdditionalField, LocationData, Comment
+from .models import Auction, AuctionUserPermission, ImageField, VideoField, AdditionalField, LocationData, Comment, ParticipantData
 
 
 class AuctionUserPermissionInline(admin.TabularInline):
@@ -33,3 +33,4 @@ admin.site.register(VideoField)
 admin.site.register(AdditionalField)
 admin.site.register(LocationData)
 admin.site.register(Comment)
+admin.site.register(ParticipantData)
