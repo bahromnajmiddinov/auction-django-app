@@ -16,6 +16,6 @@ urlpatterns = [
     
     path('account/user-addresses/', views.user_addresses, name='user-addresses'),
     path('account/user-addresses/address/add/', views.user_address_add, name='address-add'),
-    path('account/user-addresses/address/<id>', views.user_address_update, name='address-update'),
-    path('account/user-addresses/address/<id>', views.user_address_delete, name='address-delete'),
+    path('account/user-addresses/address/<id>/update/', views.user_address_update, name='address-update'),
+    path('account/user-addresses/address/<id>/delete/', views.user_address_delete, name='address-delete'),
 ]
