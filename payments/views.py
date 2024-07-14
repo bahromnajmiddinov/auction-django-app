@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 import stripe
 from django.conf import settings
 from django.http import JsonResponse
+
+from order.models import Order
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -32,12 +36,14 @@ def create_checkout_session(request, order_id):
             payment_method_types=['card'],
             line_items=line_items,
             mode='payment',
-            success_url=request.build_absolute_uri('payment/success/') + '?success=true',
-            cancel_url=request.build_absolute_uri('payment/cancel/') + '?canceled=true',
+            success_url='http://localhost:8000' + reverse('payments:success'),
+            cancel_url='http://localhost:8000' + reverse('payments:cancel'),
+            metadata={'order_id': str(order.id)},
         )
         return render(request, 'payments/stripe.html', {'session_id': checkout_session.id, 'stripe_public_key': settings.STRIPE_PUBLIC_KEY})
     except Exception as e:
-        return JsonResponse({'error': str(e)})
+        # return JsonResponse({'error': str(e)})
+        return render(request, 'went_wrong.html')
 
 
 @csrf_exempt
@@ -79,8 +85,8 @@ def stripe_webhook(request):
 
 
 def success(request):
-    return render(request, 'success.html')
+    return render(request, 'payments/success.html')
 
 
 def cancel(request):
-    return render(request, 'cancel.html')
+    return render(request, 'payments/cancel.html')

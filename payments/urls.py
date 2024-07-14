@@ -9,4 +9,5 @@ urlpatterns = [
     path('success/', views.success, name='success'),
     path('cancel/', views.cancel, name='cancel'),
     path('stripe/<order_id>', views.create_checkout_session, name='stripe'),
+    path('stripe/webhook/', views.stripe_webhook, name='stripe_webhook'),
 ]
