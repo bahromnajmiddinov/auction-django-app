@@ -292,6 +292,10 @@ form {
     color: hsl(357, 86%, 64%)   ;
 }
 
+.address-item {
+    padding: 1rem;
+}
+
 .disabled {
     color: var(--primary-main-color);
     background-color: #ccc;

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import CustomUser, Contact
-from .forms import UserUpdateForm
+from .models import CustomUser, Contact, Address
+from .forms import UserUpdateForm, AddressForm
 
 
 @login_required
@@ -17,10 +17,6 @@ def user_detail(request, username=None):
             pass
     
     return render(request, 'accounts/user-detail.html', {'user': user, 'user_contact': user_contact})
-
-
-def user_balance(request):
-    pass
 
 
 @login_required
@@ -115,3 +111,51 @@ def user_delete_contact(request, other_username):
         return redirect('user-save-contact', other_username)
     
     return render(request, 'delete-object.html', {'obj': contact.first_name})
+
+
+@login_required
+def user_addresses(request):
+    user_addresses = request.user.address_set.all()
+    
+    return render(request, 'accounts/user-addresses.html', {'user_addresses': user_addresses})
+
+
+@login_required
+def user_address_update(request, id):
+    address = get_object_or_404(Address, id=id, user=request.user)
+    
+    form = AddressForm(instance=address)
+    
+    if request.method == 'POST':
+        form = AddressForm(request.POST, instance=address)
+        if form.is_valid():
+            address.save()
+
+            return redirect('user-addresses')
+    
+    return render(request, 'accounts/user-address-create-update.html', {'form': form})
+    
+
+
+@login_required
+def user_address_delete(request, id):
+    address = get_object_or_404(Address, id=id, user=request.user)
+    address.delete()
+    
+    return redirect('user-addresses')
+
+
+@login_required
+def user_address_add(request):
+    form = AddressForm()
+    
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+
+            return redirect('user-addresses')
+    
+    return render(request, 'accounts/user-address-create-update.html', {'form': form})

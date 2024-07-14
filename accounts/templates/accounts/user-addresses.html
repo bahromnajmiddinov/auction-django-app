@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Your Addresses
+{% endblock title %}
+
+{% block content %}
+<section class="addresses-list">
+    <div class="btn-group" style="margin-bottom: 1rem;">
+        <a class="btn" href="{% url 'address-add' %}">Add New Address</a>
+    </div>
+    {% for address in user_addresses %}
+    <div>
+        <div class="address-item">
+            <div class="address-details">
+                <h2>{{ address.recipient_name }}</h2>
+                <p>{{ address.street_address }}</p>
+                <p>{{ address.city }}, {{ address.state }} {{ address.postal_code }}</p>
+            </div>
+            <div class="btn-group">
+                <a class="btn" href="{% url 'address-update' address.id %}">Edit</a>
+                <a class="btn" href="{% url 'address-delete' address.id %}">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock content %}
