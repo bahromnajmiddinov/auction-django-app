@@ -17,28 +17,12 @@
                 <span>{{ order.total_amount }}</span>
             </div>
             <div class="number-box">
-                <p>Shipping Cost</p>
-                <span>$10.00</span>
-            </div>
-            <div class="number-box">
-                <p>Total Price with Shipping</p>
-                <span>total_price + 10</span>
-            </div>
-            <div class="number-box">
                 <p>Payment Method</p>
                 <span>{{ order.payment_method }}</span>
             </div>
             <div class="number-box">
                 <p>Payment Status</p>
-                <span>Pending</span>
-            </div>
-            <div class="number-box">
-                <p>Payment Date</p>
-                <span>{{ current_date }}</span>
-            </div>
-            <div class="number-box">
-                <p>Tracking Number</p>
-                <span>1234567890</span>
+                <span>{{ order.paid }}</span>
             </div>
             <div class="number-box">
                 <p>Order ID</p>
@@ -85,9 +69,11 @@
         </table>
     </div>
 
+    {% if not order.paid %}
     <div class="btn-group">
         <a href="{% url 'payments:stripe' order.id %}" class="btn">Pay Now</a>
     </div>
+    {% endif %}
 </section>
 {% endblock content %}
 
