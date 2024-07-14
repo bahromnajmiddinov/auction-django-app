@@ -1,8 +1,4 @@
 /* checkout section */
-.checkout-form {
-    display: none;
-}
-
 .checkout-main-form {
     min-height: max-content;
     max-width: 90vw;

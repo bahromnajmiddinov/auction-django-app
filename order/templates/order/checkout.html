@@ -21,11 +21,17 @@
     <div class="address-list">
         <h1>Select Address</h1>
         {% for saved_adress in saved_addresses %}
-        <div>
-            <input type="radio" name="address-radio" required value={{ saved_adress.id }}>{{ saved_adress.city }}
+        <div class="address-list">
+            <label class="address-info">
+                <input type="radio" name="address-radio" required value={{ saved_adress.id }}>
+                {% with address=saved_adress %}
+                <h4 style="display: inline-block;">{{ address.recipient_name }}</h3>
+                <p>{{ address.street_address }}</p>
+                {% endwith %}
+            </a>
         </div>
         {% endfor %}
-        <div>
+        <label>
             <input type="radio" name="address-radio" required id="new-address" value="new_address">New Address
 
             <div action="" class="checkout-form">
@@ -39,7 +45,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </label>
     </div>
     
     <div class="dashboard-list">
@@ -73,12 +79,10 @@
 {% endblock content %}
 
 {% block script %}
-<script>
-    const newAddres = document.querySelector('#new-address');
-
-    newAddres.addEventListener('change', () => {
-        const formBody = document.querySelector('.checkout-form');
-        formBody.style.display = this.checked ? 'none' : 'block';
-    });
-</script>
-{% endblock script %}
+    <script>
+        const formElements = document.querySelectorAll('.form-control input, .form-control select');
+        formElements.forEach(element => {
+            element.removeAttribute('required');
+        });
+    </script>
+{% endblock %}

@@ -43,7 +43,7 @@ def order_data(request, order_id=None):
     user = request.user
     
     # get order data
-    if order_data:
+    if order_id:
         order = get_object_or_404(user.order_set, pk=order_id)
     # create new order
     else:
