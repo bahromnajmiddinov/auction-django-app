@@ -17,8 +17,8 @@ def checkout(request):
     for card_item in card_items:
         auction = card_item.auction
         # check user if the winner of the auction
-        if auction.winner != request.user and auction.orderitem_set.exits():
-            return HttpResponse('you cant')
+        if auction.winner != request.user or auction.orderitem_set.exists():
+            return render(request, 'order/not_allowed.html')
             
         total_price += auction.get_current_price
         total_count += 1
