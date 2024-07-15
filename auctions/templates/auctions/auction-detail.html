@@ -39,13 +39,15 @@
                 </p>
             </div>
             <div class="additional-fields">
+                {% for field in auction.additional_fields.all %}
                 <div class="additional-field">
-                    <img src="{{ auction.get_main_image }}" alt="" class="additional-field-icon">
+                    <img src="{{ field.icon }}" alt="" class="additional-field-icon">
                     <div class="additional-field-info">
-                        <h3 class="additional-field-title">auction.additional_fields.title</h3>
-                        <p class="additional-field-description">auction.additional_fields.description</p>
+                        <h3 class="additional-field-title">{{field.title}}</h3>
+                        <p class="additional-field-description">{{field.description}}</p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
 
