@@ -108,6 +108,10 @@
         }, 1000)
     };
 
+    if (now >= countdownDate) {
+        countdownDate = countdownDateEnd;
+        countdownDateEnd = 0;
+    }
     timer(countdownDate, countdownDateEnd, now, type);
 </script>
 <script>
