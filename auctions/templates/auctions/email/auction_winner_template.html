@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winner Notification: Auction Name</title>
+    <style>
+        /* Styling for email content */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777777;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Winner Notification: Auction Name</h2>
+        </div>
+        <div class="content">
+            <p>Hello <strong>{{ winner_name }}</strong>,</p>
+            <p>Congratulations! You are the winner of the auction for <strong>{{ item_name }}</strong>.</p>
+            <p>We are excited to inform you that your bid has been successful. Please find below the details:</p>
+            <ul>
+                <li><strong>Item Name:</strong> {{ item_name }}</li>
+                <li><strong>Winner's Name:</strong> {{ winner_name }}</li>
+                <li><strong>Contact Email:</strong> {{ winner_email }}</li>
+                <li><strong>Contact Phone:</strong> {{ winner_phone }}</li>
+                <li><strong>Auction End Date:</strong> {{ auction_end_date }}</li>
+            </ul>
+            <p>Please proceed with the payment and pickup details as per the auction terms and conditions.</p>
+            <p>If you have any questions or need further assistance, feel free to contact us at <a href="mailto:najmiddinovbahrom402@gmail.com">najmiddinovbahrom402@gmail.com</a>.</p>
+            <p>Thank you for participating!</p>
+        </div>
+        <div class="footer">
+            <p>This email was sent automatically. Please do not reply.</p>
+        </div>
+    </div>
+</body>
+</html>

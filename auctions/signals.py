@@ -9,17 +9,15 @@ from .utils import time_scheduler
 def model_saved(sender, instance, created, **kwargs):
     if created:
         if instance.start_time:
-            time_scheduler(instance.start_date, f'auction_start_time_{instance.id}', instance.id, task='start_time')
+            time_scheduler(instance.start_time, f'auction_start_time_{instance.id}', instance.id, task='start_time')
         if instance.end_time:
-            time_scheduler(instance.end_date, f'auction_end_time_{instance.id}', instance.id, task='end_time')
-        instance.save()
+            time_scheduler(instance.end_time, f'auction_end_time_{instance.id}', instance.id, task='end_time')
 
 
 @receiver(pre_save, sender=Auction)
 def model_updated(sender, instance, **kwargs):
     if instance.start_time:
-        time_scheduler(instance.start_date, f'auction_start_time_{instance.id}', instance.id, task='start_time')
+        time_scheduler(instance.start_time, f'auction_start_time_{instance.id}', instance.id, task='start_time')
     if instance.end_time:
-        time_scheduler(instance.end_date, f'auction_end_time_{instance.id}', instance.id, task='end_time')
-    instance.save()
+        time_scheduler(instance.end_time, f'auction_end_time_{instance.id}', instance.id, task='end_time')
 

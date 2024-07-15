@@ -1,5 +1,7 @@
+import json
 import geocoder
 import pycountry
+from django_celery_beat.models import PeriodicTask, CrontabSchedule
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -30,5 +32,5 @@ def time_scheduler(date_obj, schedule_name, auction_id, task):
     hour = date_obj.hour
     minute = date_obj.minute 
     
-    schedule, created = CrontabSchedule.get_or_create(year=year, month=month, day=day, hour=hour, minute=minute)
-    task = PeriodicTask.objects.create(crontab=schedule, name=schedule_name, task='tasks.time_end', args=json.dumps((auction_id, task,)))
+    schedule, created = CrontabSchedule.objects.get_or_create(month_of_year=month, day_of_month=day, hour=hour, minute=minute)
+    task = PeriodicTask.objects.update_or_create(crontab=schedule, name=schedule_name, task='auctions.tasks.time_end', args=json.dumps((str(auction_id), task,)))

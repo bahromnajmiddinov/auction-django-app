@@ -28,6 +28,24 @@ def time_end(self, auction_id, task):
         email_title = f'Auction Ended: {auction.title}'
         template_name = 'auctions/email/end_email_template.html'
         context['winning_bid'] = auction.get_current_price
+        
+        html_message_winner = render_to_string('auctions/email/auction_winner_template.html', {
+            'winner_name': auction.winner.first_name,
+            'item_name': auction.title,
+            'winner_email': auction.winner.email,
+            'winner_phone': auction.winner.phone,
+            'auction_end_date': auction.end_time,
+        })
+        plain_message_winner = strip_tags(html_message)
+        
+        send_mail(
+            subject='You WIN!',
+            plain_message=plain_message_winner,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[auction.winner.email],
+            html_message=html_message_winner,
+            fail_silently=True,
+        )
     
     
     for participant in participants:

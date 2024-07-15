@@ -6,4 +6,4 @@ class AuctionsConfig(AppConfig):
     name = 'auctions'
     
     def ready(self):
-        import card.signals
+        import auctions.signals
