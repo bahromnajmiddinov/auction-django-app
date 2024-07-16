@@ -47,7 +47,7 @@ class AuctionDetailApiView(APIView):
         
         if get_messages == 'true':
             chat_messages = auction.messages.all()
-            chat_message_serializer = MessageSerializer(chat_messages, many=True)
+            chat_message_serializer = MessageSerializer(chat_messages, many=True, context={'request': request})
         
         if get_bids == 'true':
             bids = auction.participantdata_set.all()

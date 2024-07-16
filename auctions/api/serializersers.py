@@ -15,7 +15,7 @@ class AuctionSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # user = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='')
+    user = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='user-detail-api')
     
     class Meta:
         model = Comment
@@ -24,12 +24,12 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    # sender = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='user-detail')
+    user = serializers.HyperlinkedRelatedField(many=False, read_only=True, view_name='user-detail-api')
     
     class Meta:
         model = Message
         fields = '__all__'
-        read_only_fields = ['sender', 'auction']
+        read_only_fields = ['auction']
 
 
 class ParticipantDataSerializer(serializers.ModelSerializer):
@@ -37,3 +37,4 @@ class ParticipantDataSerializer(serializers.ModelSerializer):
         model = ParticipantData
         fields = '__all__'
         read_only_fields = ['auction', 'participant']
+        

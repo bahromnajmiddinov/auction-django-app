@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
 
-from accounts.models import CustomUser
 from auctions.models import Auction
 from .models import Card, CardItem
 

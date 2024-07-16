@@ -25,7 +25,12 @@ from auctions.views import auctions
 
 
 api_urlpatterns = [
-    path('api/v1/auctions/', include('auctions.api.urls'))
+    path('api/v1/users/', include('accounts.api.urls')),
+    path('api/v1/auctions/', include('auctions.api.urls')),
+    path('api/v1/dashboard/', include('dashboard.api.urls')),
+    path('api/v1/links/', include('link_generator.api.urls')),
+    path('api/v1/cart/', include('card.api.urls')),
+    path('api/v1/orders/', include('orders.api.urls')),  
 ]
 
 
