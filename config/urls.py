@@ -21,6 +21,13 @@ from django.conf.urls.static import static
 
 from auctions.views import auctions
 
+# from auctions.api.urls import router as api_auction_routers
+
+
+api_urlpatterns = [
+    path('api/v1/auctions/', include('auctions.api.urls'))
+]
+
 
 urlpatterns = [
     path('', auctions),
@@ -35,3 +42,5 @@ urlpatterns = [
     path('orders/', include('order.urls')),
     path('payment/', include('payments.urls', namespace='payments')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += api_urlpatterns
