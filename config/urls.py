@@ -19,9 +19,24 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
 from auctions.views import auctions
 
-# from auctions.api.urls import router as api_auction_routers
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="OnAuc API",
+        default_version='v1',
+        description="OnAuc is a Django-based online auction platform that offers a robust user experience with features such as user authentication, auction creation, bidding, and real-time chat.",
+        contact=openapi.Contact(email="najmiddinovbahrom402@gmail.com"),
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 
 api_urlpatterns = [
@@ -30,7 +45,10 @@ api_urlpatterns = [
     path('api/v1/dashboard/', include('dashboard.api.urls')),
     path('api/v1/links/', include('link_generator.api.urls')),
     path('api/v1/cart/', include('card.api.urls')),
-    path('api/v1/orders/', include('orders.api.urls')),  
+    path('api/v1/orders/', include('order.api.urls')),  
+    
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
 
