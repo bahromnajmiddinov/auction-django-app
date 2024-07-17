@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 
 import json
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
-from django_filters.views import FilterView
 
 from .utils import get_client_ip, code_to_country_name
 from .models import Auction, AuctionUserPermission, LocationData, Comment
@@ -15,7 +14,6 @@ from .forms import AuctionForm, AuctionUserPermissionForm
 from .forms import ImageFieldFormset, VideoFieldFormset, AdditionalFieldFormset
 from accounts.models import CustomUser
 from labeler.models import Category, Tag
-from .filters import AuctionFilter
 
 
 def auctions(request):
