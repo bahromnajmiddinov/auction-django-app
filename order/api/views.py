@@ -39,7 +39,7 @@ def checkout(request):
     return Response(data)
 
 
-@api_view
+@api_view(['GET'])
 def order_data(request, order_id=None):
     user = request.user
     
