@@ -20,12 +20,16 @@ class BaseAuctionPermission(permissions.BasePermission):
 class CanDeleteAuction(BaseAuctionPermission):
     permission_field = 'can_delete'
 
+
 class CanEditAuction(BaseAuctionPermission):
     permission_field = 'can_edit'
+
 
 class CanAddAdminToAuction(BaseAuctionPermission):
     permission_field = 'can_add_admin'
 
 
-
+class IsAdminOfAuction(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user in obj.permissions.all()
     

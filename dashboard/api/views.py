@@ -2,13 +2,16 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Count
 
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 from auctions.models import Auction, Like, ParticipantData, Watchers
 from auctions.api.serializersers import AuctionSerializer
+from auctions.api.permissions import IsAdminOfAuction
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def dashboard(request):
     auctions = request.user.auctions.all()
     admin_of_auctions = request.user.auctionuserpermission_set.exclude(auction__owner=request.user)
@@ -36,6 +39,7 @@ def dashboard(request):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdminOfAuction])
 def dashboard_auction_detail(request, slug):
     auction = get_object_or_404(Auction, slug=slug)
     locations = auction.users_locations.all()
