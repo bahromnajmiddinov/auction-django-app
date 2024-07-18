@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 
 from auctions.models import Auction
 from card.models import Card, CardItem
@@ -75,4 +76,16 @@ class AddToCartApiView(APIView):
             data['saved'] = False
         
         return Response(data)
+    
+
+@api_view(['GET'])
+def is_item_saved(request, auction_slug):
+    auction = get_object_or_404(Auction, slug=auction_slug)
+    
+    if request.user.is_anonymous:
+        saved = True if str(auction.id) in request.session.get('cart', []) else False
+    else:
+        saved = True if request.user.cards.first().items.filter(auction=auction).exists() else False
+    
+    return Response({'saved': saved})
         
