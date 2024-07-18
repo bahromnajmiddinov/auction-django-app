@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from auctions.models import Auction, Comment, Message, ParticipantData
+from auctions.models import Auction, Comment, Message, ParticipantData, AuctionUserPermission
 from labeler.api.serializers import TagSerializer, CategorySerializer
 
 
@@ -41,4 +41,10 @@ class ParticipantDataSerializer(serializers.ModelSerializer):
         model = ParticipantData
         fields = '__all__'
         read_only_fields = ['auction', 'participant']
+        
+
+class AuctionUserPermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuctionUserPermission
+        fields = '__all__'
         
