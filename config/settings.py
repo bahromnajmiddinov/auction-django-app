@@ -284,6 +284,8 @@ JAZZMIN_SETTINGS = {
     "site_header": "OnAuc",
     "site_brand": "OnAuc",
     'site_logo': 'images/logo/white-logo.svg',
+    'login_logo': 'images/logo/logo.svg',
+    'login_logo_dark': 'images/logo/logo.svg',
 }
 
 # CELERY SETTINGS

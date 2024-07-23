@@ -155,7 +155,67 @@ class AuctionDetailApiView(APIView):
 
     @swagger_auto_schema(
         operation_summary="Retrieve Auction",
-        operation_description="Retrieve an auction by its slug. Optionally include related messages and bids.",
+        operation_description="""Retrieve an auction by its slug. Optionally include related messages and bids.
+        WebSocket connection for auction bidding.
+
+        URL:
+            ws://127.0.0.1:8000/websocket/auction-bid/{{ auction.slug }}
+
+        Functionality:
+            - On clicking the chat button, sends a message in the following format:
+                {
+                    "type": "message",
+                    "message": message.value
+                }
+            - On clicking the auction bid button, sends a bid in the following format:
+                {
+                    "type": "bid",
+                    "price": price
+                }
+
+        WebSocket OnMessage:
+            - Parses incoming data with JSON.parse(event.data).
+            - Handles two types of data: 'message' and 'bid'.
+
+            'message' type data:
+                - Contains the message text sent by users.
+
+            'bid' type data:
+                - Contains the last bid price placed by the user.
+                - Checks if the last bid is greater than the current price.
+                - Returns:
+                    - `change_auction_price`: True if the last bid is greater than the current price, otherwise False.
+                    - `current_price`: The current highest bid price.
+
+        Example:
+            WebSocket URL format:
+            ws://127.0.0.1:8000/websocket/auction-bid/<auction-slug>
+
+            Sending a message:
+            {
+                "type": "message",
+                "message": "Hello, is this auction still active?"
+            }
+
+            Sending a bid:
+            {
+                "type": "bid",
+                "price": 150.00
+            }
+
+            Handling received message data:
+            {
+                "type": "message",
+                "message": "Auction will end in 10 minutes."
+            }
+
+            Handling received bid data:
+            {
+                "type": "bid",
+                "last_bid": 160.00,
+                "change_auction_price": True,
+                "current_price": 160.00
+            }""",
         manual_parameters=[
             openapi.Parameter('messages', openapi.IN_QUERY, description="Include related messages", type=openapi.TYPE_STRING),
             openapi.Parameter('bids', openapi.IN_QUERY, description="Include related bids", type=openapi.TYPE_STRING),
