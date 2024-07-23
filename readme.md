@@ -18,7 +18,7 @@ OnAuc is a Django-based online auction platform that offers a robust user experi
 * Auction Creation: Users can create auctions with detailed descriptions, starting bids, end times, and auction type.
 * Private Links: Users can generate private links for private and contacts-only auctions to share with specific individuals.
 * Auction Dashboard: Users can manage their created and watched auctions.
-![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auction-create.png)
+[Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auciton-create.png)
 ![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auction-additional-feilds.png)
 ![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auction-contacts.png)
 
