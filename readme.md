@@ -44,17 +44,17 @@ OnAuc is a Django-based online auction platform that offers a robust user experi
 #### Payment and Card Management
 * Card Saving: Users can save credit card information for faster checkout (without requiring login).
 * Secure Card Storage: Encrypted card data stored securely in the database after login.
-* Payment Integration: (Optional) Integration with payment gateways for auction purchases.
-![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auction-order.png)
+* Payment Integration: Integration with payment gateways for auction purchases.
+![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auciton-order.png)
 
 #### Additional Features
 * Admin Roles: Users can assign admin roles to other users for their auctions.
 * Customizable Auction Fields: Flexible auction creation with additional custom fields.
 * Search and Filtering: Advanced search and filter options for auctions.
 * Notifications: Email and in-app notifications for auction updates, bids, and messages.
-![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/add-admin-to-auction.png)
-![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/edit-admin-permissions.png)
-![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auciton-profile.png)
+![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/add-admins-to-auction.png)
+![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/edit-admins-permissions.png)
+![Auctions Page](https://github.com/bahromnajmiddinov/media-files/blob/main/auction-media/auction-profile.png)
 
 ### Technical Implementation
 * Django Framework: Core web development framework.
