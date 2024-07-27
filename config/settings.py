@@ -313,6 +313,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+LOGIN_REDIRECT_URL = 'user-detail'
 
 ACCOUNT_FORMS = {
     'signup': 'accounts.forms.CustomSignupForm',
