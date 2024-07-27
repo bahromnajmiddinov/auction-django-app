@@ -14,6 +14,9 @@ def checkout(request):
     saved_addresses = request.user.address_set.all()
     card_items = request.user.cards.last().items.all()
     
+    if not card_item.exists():
+        return Response({'info': 'cart cannot be empty'}, status=405)
+    
     total_count = 0
     total_price = 0
     for card_item in card_items:

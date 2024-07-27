@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
@@ -11,6 +11,9 @@ def checkout(request):
     saved_addresses = request.user.address_set.all()
     new_address = AddressForm()
     card_items = request.user.cards.last().items.all()
+    
+    if not card_items.exists():
+        return redirect('card-detail')
     
     total_count = 0
     total_price = 0
