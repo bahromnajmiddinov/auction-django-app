@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\link_generator\models.py:9
+msgid "Path"
+msgstr "Путь"
+
+#: .\link_generator\models.py:10
+msgid "Limit By Time"
+msgstr "Ограничение по времени"
+
+#: .\link_generator\models.py:11
+msgid "Limit By Clicks"
+msgstr "Ограничение по кликам"
+
+#: .\link_generator\models.py:12
+msgid "Users"
+msgstr "Пользователи"
+
+#: .\link_generator\models.py:13
+msgid "Auction"
+msgstr "Аукцион"
+
+#: .\link_generator\models.py:14
+msgid "Clicks"
+msgstr "Клики"
+
+#: .\link_generator\models.py:15
+msgid "Created"
+msgstr "Создано"
+
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:4
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:11
+msgid "Private Link"
+msgstr "Приватная ссылка"
+
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:21
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\link_generator\templates\link_generator\private_links.html:11
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\link_generator\templates\link_generator\private_links.html:15
+msgid "Add link"
+msgstr "Добавить ссылку"

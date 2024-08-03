@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: .\dashboard\templates\dashboard\dashboard-detail.html:7
+msgid "Dashboard Detail"
+msgstr "Détails du tableau de bord"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:22
+msgid "User Distribution by Country"
+msgstr "Répartition des utilisateurs par pays"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:26
+#: .\dashboard\templates\dashboard\dashboard.html:17
+msgid "All Numbers"
+msgstr "Tous les chiffres"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:28
+#: .\dashboard\templates\dashboard\dashboard.html:23
+msgid "Total Users"
+msgstr "Nombre total d'utilisateurs"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:32
+#: .\dashboard\templates\dashboard\dashboard.html:27
+msgid "Total Likes"
+msgstr "Nombre total de likes"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:36
+#: .\dashboard\templates\dashboard\dashboard.html:31
+msgid "Total Views"
+msgstr "Nombre total de vues"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:42
+msgid "Back to Dashboard"
+msgstr "Retour au tableau de bord"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:43
+msgid "Edit Auction"
+msgstr "Modifier l'enchère"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:44
+msgid "Delete Auction"
+msgstr "Supprimer l'enchère"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:45
+msgid "Admins"
+msgstr "Administrateurs"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:47
+msgid "Private Links"
+msgstr "Liens privés"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:52
+msgid "Order Data"
+msgstr "Données de commande"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:56
+msgid "Ordered"
+msgstr "Commandé"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:60
+msgid "Ordered Date"
+msgstr "Date de commande"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:64
+msgid "Payed"
+msgstr "Payé"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:68
+msgid "Payment Method"
+msgstr "Méthode de paiement"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:69
+msgid "Stripe"
+msgstr "Stripe"
+
+#: .\dashboard\templates\dashboard\dashboard-detail.html:72
+msgid "Deleivered"
+msgstr "Livré"
+
+#: .\dashboard\templates\dashboard\dashboard.html:7
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: .\dashboard\templates\dashboard\dashboard.html:19
+msgid "Total Auctions"
+msgstr "Nombre total d'enchères"
+
+#: .\dashboard\templates\dashboard\dashboard.html:36
+msgid "New Auction"
+msgstr "Nouvelle enchère"
+
+#: .\dashboard\templates\dashboard\dashboard.html:39
+msgid "Your Auctions"
+msgstr "Vos enchères"
+
+#: .\dashboard\templates\dashboard\dashboard.html:42
+#: .\dashboard\templates\dashboard\dashboard.html:75
+msgid "Image"
+msgstr "Image"
+
+#: .\dashboard\templates\dashboard\dashboard.html:43
+#: .\dashboard\templates\dashboard\dashboard.html:76
+msgid "Title"
+msgstr "Titre"
+
+#: .\dashboard\templates\dashboard\dashboard.html:44
+#: .\dashboard\templates\dashboard\dashboard.html:77
+msgid "Participants"
+msgstr "Participants"
+
+#: .\dashboard\templates\dashboard\dashboard.html:45
+#: .\dashboard\templates\dashboard\dashboard.html:78
+msgid "Price"
+msgstr "Prix"
+
+#: .\dashboard\templates\dashboard\dashboard.html:46
+#: .\dashboard\templates\dashboard\dashboard.html:79
+msgid "Start Time"
+msgstr "Heure de début"
+
+#: .\dashboard\templates\dashboard\dashboard.html:47
+#: .\dashboard\templates\dashboard\dashboard.html:80
+msgid "End Time"
+msgstr "Heure de fin"
+
+#: .\dashboard\templates\dashboard\dashboard.html:48
+#: .\dashboard\templates\dashboard\dashboard.html:81
+msgid "Likes"
+msgstr "Likes"
+
+#: .\dashboard\templates\dashboard\dashboard.html:49
+#: .\dashboard\templates\dashboard\dashboard.html:82
+msgid "Views"
+msgstr "Vues"
+
+#: .\dashboard\templates\dashboard\dashboard.html:72
+msgid "Auctions that you have permissions"
+msgstr "Enchères pour lesquelles vous avez des autorisations"

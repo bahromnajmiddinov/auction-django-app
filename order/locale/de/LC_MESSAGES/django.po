@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\order\models.py:14
+msgid "User"
+msgstr "Benutzer"
+
+#: .\order\models.py:15
+msgid "Address"
+msgstr "Adresse"
+
+#: .\order\models.py:16
+msgid "Total Amount"
+msgstr "Gesamtbetrag"
+
+#: .\order\models.py:17
+msgid "Delivered"
+msgstr "Geliefert"
+
+#: .\order\models.py:18
+msgid "Paid"
+msgstr "Bezahlt"
+
+#: .\order\models.py:19 .\order\templates\order\order-data.html:24
+msgid "Payment Method"
+msgstr "Zahlungsmethode"
+
+#: .\order\templates\order\checkout.html:7
+msgid "Checkout"
+msgstr "Zur Kasse"
+
+#: .\order\templates\order\checkout.html:19
+#, fuzzy
+#| msgid "Payment Method"
+msgid "Select Payment Method"
+msgstr "Zahlungsmethode auswählen"
+
+#: .\order\templates\order\checkout.html:21
+msgid "Stripe"
+msgstr "Stripe"
+
+#: .\order\templates\order\checkout.html:26
+#, fuzzy
+#| msgid "Address"
+msgid "Select Address"
+msgstr "Adresse auswählen"
+
+#: .\order\templates\order\checkout.html:39
+#, fuzzy
+#| msgid "Address"
+msgid "New Address"
+msgstr "Neue Adresse"
+
+#: .\order\templates\order\checkout.html:56
+#: .\order\templates\order\order-data.html:53
+msgid "Your Auctions"
+msgstr "Ihre Auktionen"
+
+#: .\order\templates\order\checkout.html:59
+#: .\order\templates\order\order-data.html:56
+msgid "Image"
+msgstr "Bild"
+
+#: .\order\templates\order\checkout.html:60
+#: .\order\templates\order\order-data.html:57
+msgid "Title"
+msgstr "Titel"
+
+#: .\order\templates\order\checkout.html:61
+#: .\order\templates\order\order-data.html:58
+msgid "Price"
+msgstr "Preis"
+
+#: .\order\templates\order\checkout.html:80
+msgid "Place Order"
+msgstr "Bestellung aufgeben"
+
+#: .\order\templates\order\not_allowed.html:4
+msgid "Not Allowed"
+msgstr "Nicht erlaubt"
+
+#: .\order\templates\order\not_allowed.html:8
+msgid "Before order, you should be the winner of auction!"
+msgstr "Bevor Sie bestellen können, müssen Sie den Zuschlag für die Auktion gewonnen haben!"
+
+#: .\order\templates\order\order-data.html:7
+msgid "Order"
+msgstr "Bestellung"
+
+#: .\order\templates\order\order-data.html:20
+msgid "Total Price"
+msgstr "Gesamtpreis"
+
+#: .\order\templates\order\order-data.html:28
+#, fuzzy
+#| msgid "Payment Method"
+msgid "Payment Status"
+msgstr "Zahlungsstatus"
+
+#: .\order\templates\order\order-data.html:32
+msgid "Order ID"
+msgstr "Bestell-ID"
+
+#: .\order\templates\order\order-data.html:36
+msgid "Payment Confirmation"
+msgstr "Zahlungsbestätigung"
+
+#: .\order\templates\order\order-data.html:37
+msgid "You will receive a confirmation email shortly."
+msgstr "Sie erhalten in Kürze eine Bestätigungs-E-Mail."
+
+#: .\order\templates\order\order-data.html:43
+#, fuzzy
+#| msgid "Address"
+msgid "Shipping Address"
+msgstr "Lieferadresse"
+
+#: .\order\templates\order\order-data.html:78
+msgid "Pay Now"
+msgstr "Jetzt bezahlen"

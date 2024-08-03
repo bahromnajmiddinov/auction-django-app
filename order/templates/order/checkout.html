@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans "Checkout" %}
+{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -12,14 +16,14 @@
 <form class="checkout checkout-main-form" method="POST" action="{% url 'order-data' %}">
     {% csrf_token %}
     <div class="payment-list">
-        <h1>Select Payment Method</h1>
+        <h1>{% trans "Select Payment Method" %}</h1>
         <div>
-            <input type="radio" name="payment-radio" required value='ST'>Stripe
+            <input type="radio" name="payment-radio" required value='ST'>{% trans "Stripe" %}
         </div>
     </div>
     
     <div class="address-list">
-        <h1>Select Address</h1>
+        <h1>{% trans "Select Address" %}</h1>
         {% for saved_adress in saved_addresses %}
         <div class="address-list">
             <label class="address-info">
@@ -32,7 +36,7 @@
         </div>
         {% endfor %}
         <label>
-            <input type="radio" name="address-radio" required id="new-address" value="new_address">New Address
+            <input type="radio" name="address-radio" required id="new-address" value="new_address">{% trans "New Address" %}
 
             <div action="" class="checkout-form">
                 <div class="form-body">
@@ -49,12 +53,12 @@
     </div>
     
     <div class="dashboard-list">
-        <h1 class="title">Your Auctions</h1>
+        <h1 class="title">{% trans "Your Auctions" %}</h1>
         <table class="user-auctions">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
+                <th>{% trans "Image" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Price" %}</th>
             </tr>
             {% for card_item in card_items %}
             <tr class="user-auction">
@@ -73,7 +77,7 @@
     </div>
     
     <div class="btn-group">
-        <button type="submit" class="btn">Place Order</button>
+        <button type="submit" class="btn">{% trans "Place Order" %}</button>
     </div>
 </form>
 {% endblock content %}

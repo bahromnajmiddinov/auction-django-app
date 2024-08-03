@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'Contact' %}{% endblock title %}
 
 {% block content %}
 <section class="user-contact-e-c">
     <form method="POST">
         {% csrf_token %}
-        <h2 class="form-header">Contact</h2>
+        <h2 class="form-header">{% trans 'Contact' %}</h2>
         <div class="form-body">
             <div class="form-control">
-                <label for="contact-first-name">First Name:</label>
+                <label for="contact-first-name">{% trans 'First Name:' %}</label>
                 <input type="text" id="contact-first-name" value="{{ contact.first_name }}" name="contact_first_name" required>
             </div>
             <div class="form-control">
-                <label for="contact-last-name">Last Name:</label>
+                <label for="contact-last-name">{% trans 'Last Name:' %}</label>
                 <input type="text" id="contact-last-name" value="{{ contact.last_name }}" name="contact_last_name">
             </div>
         </div>
-        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="submit">{% trans 'Save' %}</button>
     </form>
 </section>
 {% endblock content %}

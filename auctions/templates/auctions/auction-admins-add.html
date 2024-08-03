@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}
+{% trans "Auction Admin" %}
+{% endblock title %}
 
 {% block content %}
 <!-- user detail section -->
@@ -12,15 +14,15 @@
         </div>
         <div class="user-info" style="margin-left: 20px; text-align: left;">
             <h2>{{ auction_admin.first_name }} {{ auction_admin.last_name }}</h2>
-            <p>Email: {{ auction_admin.email }}</p>
+            <p>{% trans "Email:" %} {{ auction_admin.email }}</p>
             <div class="btn-group">
-                <a href="{% url 'auction-admin-add' auction_slug auction_admin.username %}" class="btn">Add Admin</a>
+                <a href="{% url 'auction-admin-add' auction_slug auction_admin.username %}" class="btn">{% trans "Add Admin" %}</a>
             </div>
         </div>
     </div>
     {% endfor %}
     {% if not participants %}
-        <h3>Nothing Found...</h3>
+        <h3>{% trans "Nothing Found..." %}</h3>
     {% endif %}
 </section>
 <!-- end of user detail section -->

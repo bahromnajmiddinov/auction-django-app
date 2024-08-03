@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\order\models.py:14
+msgid "User"
+msgstr "ユーザー"
+
+#: .\order\models.py:15
+msgid "Address"
+msgstr "住所"
+
+#: .\order\models.py:16
+msgid "Total Amount"
+msgstr "合計金額"
+
+#: .\order\models.py:17
+msgid "Delivered"
+msgstr "配達済み"
+
+#: .\order\models.py:18
+msgid "Paid"
+msgstr "支払い済み"
+
+#: .\order\models.py:19 .\order\templates\order\order-data.html:24
+msgid "Payment Method"
+msgstr "支払い方法"
+
+#: .\order\templates\order\checkout.html:7
+msgid "Checkout"
+msgstr "チェックアウト"
+
+#: .\order\templates\order\checkout.html:19
+#, fuzzy
+#| msgid "Payment Method"
+msgid "Select Payment Method"
+msgstr "支払い方法を選択"
+
+#: .\order\templates\order\checkout.html:21
+msgid "Stripe"
+msgstr "ストライプ"
+
+#: .\order\templates\order\checkout.html:26
+#, fuzzy
+#| msgid "Address"
+msgid "Select Address"
+msgstr "住所を選択"
+
+#: .\order\templates\order\checkout.html:39
+#, fuzzy
+#| msgid "Address"
+msgid "New Address"
+msgstr "新しい住所"
+
+#: .\order\templates\order\checkout.html:56
+#: .\order\templates\order\order-data.html:53
+msgid "Your Auctions"
+msgstr "あなたのオークション"
+
+#: .\order\templates\order\checkout.html:59
+#: .\order\templates\order\order-data.html:56
+msgid "Image"
+msgstr "画像"
+
+#: .\order\templates\order\checkout.html:60
+#: .\order\templates\order\order-data.html:57
+msgid "Title"
+msgstr "タイトル"
+
+#: .\order\templates\order\checkout.html:61
+#: .\order\templates\order\order-data.html:58
+msgid "Price"
+msgstr "価格"
+
+#: .\order\templates\order\checkout.html:80
+msgid "Place Order"
+msgstr "注文を確定"
+
+#: .\order\templates\order\not_allowed.html:4
+msgid "Not Allowed"
+msgstr "許可されていません"
+
+#: .\order\templates\order\not_allowed.html:8
+msgid "Before order, you should be the winner of auction!"
+msgstr "注文する前に、オークションの勝者である必要があります！"
+
+#: .\order\templates\order\order-data.html:7
+msgid "Order"
+msgstr "注文"
+
+#: .\order\templates\order\order-data.html:20
+msgid "Total Price"
+msgstr "合計価格"
+
+#: .\order\templates\order\order-data.html:28
+#, fuzzy
+#| msgid "Payment Method"
+msgid "Payment Status"
+msgstr "支払い状況"
+
+#: .\order\templates\order\order-data.html:32
+msgid "Order ID"
+msgstr "注文ID"
+
+#: .\order\templates\order\order-data.html:36
+msgid "Payment Confirmation"
+msgstr "支払い確認"
+
+#: .\order\templates\order\order-data.html:37
+msgid "You will receive a confirmation email shortly."
+msgstr "確認メールが間もなく届きます。"
+
+#: .\order\templates\order\order-data.html:43
+#, fuzzy
+#| msgid "Address"
+msgid "Shipping Address"
+msgstr "配送先住所"
+
+#: .\order\templates\order\order-data.html:78
+msgid "Pay Now"
+msgstr "今すぐ支払う"

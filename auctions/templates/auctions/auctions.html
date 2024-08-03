@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans 'Auctions' %}
+{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/auctions-filter.css' %}">
@@ -10,8 +13,8 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="title" style="margin: 0 auto; width: fit-content;">Auctions
-    <button id="close-btn" type="button" class="btn" style="margin-top: -.35rem">Advanced Search</button>
+<h1 class="title" style="margin: 0 auto; width: fit-content;">{% trans "Auctions" %}
+    <button id="close-btn" type="button" class="btn" style="margin-top: -.35rem">{% trans "Advanced Search" %}</button>
 </h1>
 
 
@@ -41,17 +44,17 @@
             <div class="card-filters">
                 <article class="card-group-item">
                     <header class="card-header">
-                        <h4 class="title">Range input </h4>
+                        <h4 class="title">{% trans "Range input" %} </h4>
                     </header>
                     <div class="filter-content">
                         <div class="card-body">
                             <div class="form-row">
                             <div class="range-form-group">
-                                <label>Min</label>
+                                <label>{% trans "Min" %}</label>
                                 <input type="number" class="range-input" name="min-range-input" placeholder="${{ min_price }}" min="{{ min_price }}">
                             </div>
                             <div class="range-form-group">
-                                <label>Max</label>
+                                <label>{% trans "Max" %}</label>
                                 <input type="number" class="range-input" name="max-range-input" placeholder="${{ max_price }}" max="{{ max_price }}">
                             </div>
                             </div>
@@ -61,7 +64,7 @@
         
                 <article class="card-group-item">
                     <header class="card-header">
-                        <h4 class="title">Categories </h4>
+                        <h4 class="title">{% trans "Categories" %} </h4>
                     </header>
                     <div class="filter-content">
                         <div class="card-body">
@@ -80,7 +83,7 @@
         
                 <article class="card-group-item">
                     <header class="card-header">
-                        <h4 class="title">Tags </h4>
+                        <h4 class="title">{% trans "Tags" %} </h4>
                     </header>
                     <div class="filter-content">
                         <div class="card-body">
@@ -96,7 +99,7 @@
                     </div>
                 </article> <!-- card-group-item.// -->
             </div>
-            <button class="btn">Filter</button>
+            <button class="btn">{% trans "Filter" %}</button>
         </fo> <!-- card.// -->
     </div> 
     <!--container end.//-->
@@ -114,11 +117,11 @@
         </div>
         <div class="auction-footer">
             <span class="auction-price">${{ auction.get_current_price }}</span>
-            <a class="auction-link" href="{{ auction.get_absolute_url }}"><span class="auction-link-text">More</span> <span class="auction-pointer">>>></span></a>
+            <a class="auction-link" href="{{ auction.get_absolute_url }}"><span class="auction-link-text">{% trans "More" %}</span> <span class="auction-pointer">>>></span></a>
         </div>
 
         <div class="show-time" style="display: flex; justify-content: space-between;">
-            <span class="auction-show-time">Participants:</span><span class="auction-show-time">{{ auction.participants.count }}</span>
+            <span class="auction-show-time">{% trans "Participants" %}:</span><span class="auction-show-time">{{ auction.participants.count }}</span>
         </div>
     </article> 
     {% endfor %}
@@ -127,11 +130,11 @@
     <div class="pagination p12">
         <ul>
             {% if all_auctions.has_previous %}
-            <a href="{% url 'auctions' all_auctions.previos_page_number %}"><li>Previous</li></a>
+            <a href="{% url 'auctions' all_auctions.previos_page_number %}"><li>{% trans "Previous" %}</li></a>
             {% endif %}
             <a class="is-active"><li>{{ all_auctions.number }}</li></a>
             {% if all_auctions.has_next %}
-            <a href="{% url 'auctions' all_auctions.next_page_number %}"><li>Next</li></a>
+            <a href="{% url 'auctions' all_auctions.next_page_number %}"><li>{% trans "Next" %}</li></a>
             {% endif %}
         </ul>
     </div>

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}
+{% trans "Not Allowed" %}
+{% endblock title %}
 
 {% block content %}
-<h1>Before order, you should be the winner of auction!</h1>
+<h1>{% trans "Before order, you should be the winner of auction!" %}</h1>
 {% endblock content %}

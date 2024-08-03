@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock title %}
+{% load i18n %}
+
+{% block title %}
+{% trans "Sign Up" %}
+{% endblock title %}
 
 {% block content %}
 <!-- Sign UP Section -->
@@ -8,8 +12,11 @@
     
     <form method="POST">
         {% csrf_token %}
-        <h2 class="form-header">Sign UP</h2>
-        <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in.</a></p>
+        <h2 class="form-header">{% trans "Sign UP" %}</h2>
+        <p>
+           {% trans " Already have an account? Then please sign in." %}
+            <a href="{% url 'account_login' %}">{% trans "sign in" %}</a>
+        </p>
 
         <div class="form-body">
             <div>
@@ -20,10 +27,10 @@
                     {{ field.errors }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn">Save</button>
+                <button type="submit" class="btn">{% trans "Save" %}</button>
             </div>
         </div>
     </form>
 </section>
-<!-- Auction Create Section end -->
+<!-- Sign UP Section end -->
 {% endblock content %}

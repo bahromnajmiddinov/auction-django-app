@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from allauth.account.forms import SignupForm
 from django_ckeditor_5.widgets import CKEditor5Widget
@@ -24,8 +25,8 @@ class AddressForm(forms.ModelForm):
 
 
 class CustomSignupForm(SignupForm):
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
+    first_name = forms.CharField(max_length=30, label=_('First Name'))
+    last_name = forms.CharField(max_length=30, label=_('Last Name'))
     
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)

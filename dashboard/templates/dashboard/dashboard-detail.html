@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans 'Dashboard Detail' %}
+{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -16,57 +19,57 @@
 
 {% block content %}
 <section class="dashboard">
-    <h1 class="Title">User Distribution by Country</h1>
+    <h1 class="Title">{% trans "User Distribution by Country" %}</h1>
     <div class="map" id="svgMap">
     </div>
     <div class="all-numbers">
-        <h1 class="title">All Numbers</h1>
+        <h1 class="title">{% trans "All Numbers" %}</h1>
         <div class="number-box">
-            <p>Total Users</p>
+            <p>{% trans "Total Users" %}</p>
             <span>{{ all_numbers.total_users }}</span>
         </div>
         <div class="number-box">
-            <p>Total Likes</p>
+            <p>{% trans "Total Likes" %}</p>
             <span>{{ all_numbers.total_likes }}</span>
         </div>
         <div class="number-box">
-            <p>Total Views</p>
+            <p>{% trans "Total Views" %}</p>
             <span>{{ all_numbers.total_views }}</span>
         </div>
     </div>
 
     <div class="btn-group">
-        <a href="{% url 'dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
-        <a href="{% url 'auction-update' auction.slug %}" class="btn btn-secondary">Edit Auction</a>
-        <a href="{% url 'auction-delete' auction.slug %}" class="btn btn-secondary">Delete Auction</a>
-        <a href="{% url 'auction-admins' auction.slug %}" class="btn btn-danger">Admins</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">{% trans "Back to Dashboard" %}</a>
+        <a href="{% url 'auction-update' auction.slug %}" class="btn btn-secondary">{% trans "Edit Auction" %}</a>
+        <a href="{% url 'auction-delete' auction.slug %}" class="btn btn-secondary">{% trans "Delete Auction" %}</a>
+        <a href="{% url 'auction-admins' auction.slug %}" class="btn btn-danger">{% trans "Admins" %}</a>
         {% if auction.type != 'PB' %}
-        <a href="{% url 'private-links' auction.slug %}" class="btn">Private Links</a>
+        <a href="{% url 'private-links' auction.slug %}" class="btn">{% trans "Private Links" %}</a>
         {% endif %}
     </div>
 
     <div class="order-data" style="margin-top: 2rem;">
-        <h1>Order Data</h1>
+        <h1>{% trans "Order Data" %}</h1>
         
         <div class="all-numbers">
             <div class="number-box">
-                <p>Ordered</p>
+                <p>{% trans "Ordered" %}</p>
                 <span>{{ auction.orderitem_set.exists }}</span>
             </div>
             <div class="number-box">
-                <p>Ordered Date</p>
+                <p>{% trans "Ordered Date" %}</p>
                 <span>12.02.2008</span>
             </div>
             <div class="number-box">
-                <p>Payed</p>
+                <p>{% trans "Payed" %}</p>
                 <span>{{ auction.orderitem_set.first.order.paid }}</span>
             </div>
             <div class="number-box">
-                <p>Payment Method</p>
-                <span>Stripe</span>
+                <p>{% trans "Payment Method" %}</p>
+                <span>{% trans "Stripe" %}</span>
             </div>
             <div class="number-box">
-                <p>Deleivered</p>
+                <p>{% trans "Deleivered" %}</p>
                 <span>
                     <input type="checkbox" checked>
                 </span>

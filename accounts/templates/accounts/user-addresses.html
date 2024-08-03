@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block title %}
-Your Addresses
+{% trans 'Your Addresses' %}
 {% endblock title %}
 
 {% block content %}
 <section class="addresses-list">
     <div class="btn-group" style="margin-bottom: 1rem;">
-        <a class="btn" href="{% url 'address-add' %}">Add New Address</a>
+        <a class="btn" href="{% url 'address-add' %}">{% trans 'Add New Address' %}</a>
     </div>
     {% for address in user_addresses %}
     <div>
@@ -18,8 +18,8 @@ Your Addresses
                 <p>{{ address.city }}, {{ address.state }} {{ address.postal_code }}</p>
             </div>
             <div class="btn-group">
-                <a class="btn" href="{% url 'address-update' address.id %}">Edit</a>
-                <a class="btn" href="{% url 'address-delete' address.id %}">Delete</a>
+                <a class="btn" href="{% url 'address-update' address.id %}">{% trans 'Edit' %}</a>
+                <a class="btn" href="{% url 'address-delete' address.id %}">{% trans 'Delete' %}</a>
             </div>
         </div>
     </div>

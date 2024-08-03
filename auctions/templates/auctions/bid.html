@@ -2,7 +2,9 @@
 
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans 'Bid Auction' %}
+{% endblock title %}
 
 {% block content %}
 <!-- detail section -->
@@ -10,19 +12,16 @@
     {% if auction.get_start_time or auction.get_end_time %}
     <div class="timer">
         {% if auction.get_start_time %}
-        <h2 class="title">Auction Start After</h2>
-        <div class="timer-clock">
-            00:00:00
-        </div>
+        <h2 class="title">{% trans "Auction Start After" %}</h2>
         {% elif auction.get_end_time %}
-        <h2 class="title">Auction End After</h2>
+        <h2 class="title">{% trans "Auction End After" %}</h2>
+        {% endif %}
         <div class="timer-clock">
             00:00:00
         </div>
-        {% endif %}
     </div>
     {% endif %}
-    <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">Current Price</span></div>
+    <div class="auction-price auction-page-price"><span class="price">${{ auction.get_current_price }}</span><span class="slogan">{% trans "Current Price" %}</span></div>
     {% if auction.get_end_time %}
     <div id="price-form">
         <label for="price-input">$</label>
@@ -31,14 +30,14 @@
     {% endif %}
     <div class="boxes">
         <ul class="tab-headers">
-            <li class="active" data-content-id="1">Last Bids</li>
-            <li data-content-id="2">Chat</li>
+            <li class="active" data-content-id="1">{% trans "Last Bids" %}</li>
+            <li data-content-id="2">{% trans "Chat" %}</li>
         </ul>
         <div class="prices-box tab-content active" id="1">
             {% for bid in bids %}
             <div class="price-last">
                 <p>
-                    <a href="#">{{ bid.participant.first_name }}</a> invite ${{ bid.price }}
+                    <a href="#">{{ bid.participant.first_name }}</a> {% trans "invite" %} ${{ bid.price }}
                 </p>
             </div>
             {% endfor %}
@@ -61,7 +60,7 @@
                 {% endfor %}
             </ol>
             <input class="textarea" type="text" placeholder="Type here!"/>
-            <button class="chat-btn" type="button">Submit</button>
+            <button class="chat-btn" type="button">{% trans "Submit" %}</button>
         </div>
     </div>
 </section>
@@ -125,15 +124,18 @@
         message.value = '';
     });
 
-    bidInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const price = bidInput.value;
-            if (price) {
-                wb.send(JSON.stringify({ "type": "bid", "price": price }));
-                bidInput.value = '';
+    try {
+        bidInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const price = bidInput.value;
+                if (price) {
+                    wb.send(JSON.stringify({ "type": "bid", "price": price }));
+                    bidInput.value = '';
+                }
             }
-        }
-    });
+        });
+
+    } catch (error) {  }
 
     wb.onmessage = (event) => {
         const json_data = JSON.parse(event.data);

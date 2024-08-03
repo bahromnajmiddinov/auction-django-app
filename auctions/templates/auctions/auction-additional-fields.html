@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'Additional Fields' %}{% endblock title %}
 
 {% block content %}
 <!-- Auction Additional Fields Section -->
 <section class="auction-additional-fields">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2 class="form-header">Additional Fields</h2>
+        <h2 class="form-header">{% trans "Additional Fields" %}</h2>
         <div class="form-body">
             {% for field in auction_form %}
             <div class="form-group">
@@ -17,7 +17,7 @@
             {% endfor %}
         </div>
         <div class="form-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
         </div>
     </form>
 </section>

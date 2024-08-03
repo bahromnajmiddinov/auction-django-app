@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'Auction Admin' %}{% endblock title %}
 
 {% block content %}
 <!-- user detail section -->
@@ -14,7 +14,7 @@
         {% else %}
         <h2>{{ auction_admin.first_name }} {{ auction_admin.last_name }}</h2>
         {% endif %}
-        <p>Email: {{ auction_admin.email }}</p>
+        <p>{% trans "Email:" %} {{ auction_admin.email }}</p>
         <form method="POST" style="margin-top: 0; border: transparent; box-shadow: none; min-height: fit-content;">
             {% csrf_token %}
             {% for field in permission_form %}
@@ -23,7 +23,7 @@
             {{ field }}
             </div>
             {% endfor %}
-            <button type="submit" class="btn">Save</button>
+            <button type="submit" class="btn">{% trans "Save" %}</button>
         </form>
     </div>
 </section>

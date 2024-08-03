@@ -1,0 +1,352 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\auctions\models.py:17
+msgid "Public"
+msgstr "Публичный"
+
+#: .\auctions\models.py:18
+msgid "Private"
+msgstr "Частный"
+
+#: .\auctions\models.py:19
+msgid "Only Contacts"
+msgstr "Только контакты"
+
+#: .\auctions\models.py:48 .\auctions\models.py:160 .\auctions\models.py:172
+#: .\auctions\models.py:184
+msgid "Id"
+msgstr "Идентификатор"
+
+#: .\auctions\models.py:49
+msgid "Owner"
+msgstr "Владелец"
+
+#: .\auctions\models.py:50
+msgid "Winner"
+msgstr "Победитель"
+
+#: .\auctions\models.py:51
+msgid "Main Image"
+msgstr "Главное изображение"
+
+#: .\auctions\models.py:52
+msgid "Type"
+msgstr "Тип"
+
+#: .\auctions\models.py:53 .\auctions\models.py:187
+msgid "Title"
+msgstr "Название"
+
+#: .\auctions\models.py:54
+msgid "Slug"
+msgstr "Слаг"
+
+#: .\auctions\models.py:55
+msgid "Summary"
+msgstr "Резюме"
+
+#: .\auctions\models.py:56 .\auctions\models.py:188
+#: .\auctions\templates\auctions\auction-detail.html:38
+msgid "Description"
+msgstr "Описание"
+
+#: .\auctions\models.py:57
+msgid "Starter Price"
+msgstr "Начальная цена"
+
+#: .\auctions\models.py:58
+msgid "Auction Price"
+msgstr "Цена аукциона"
+
+#: .\auctions\models.py:59 .\auctions\templates\auctions\auctions.html:123
+msgid "Participants"
+msgstr "Участники"
+
+#: .\auctions\models.py:60
+msgid "User Watchers"
+msgstr "Наблюдатели"
+
+#: .\auctions\models.py:61
+msgid "User Likes"
+msgstr "Лайки пользователей"
+
+#: .\auctions\models.py:63
+msgid "Active"
+msgstr "Активный"
+
+#: .\auctions\models.py:64
+msgid "Start Time"
+msgstr "Время начала"
+
+#: .\auctions\models.py:65
+msgid "End Time"
+msgstr "Время окончания"
+
+#: .\auctions\models.py:66 .\auctions\models.py:164 .\auctions\models.py:176
+#: .\auctions\models.py:190
+msgid "Created"
+msgstr "Создано"
+
+#: .\auctions\models.py:67 .\auctions\models.py:165 .\auctions\models.py:177
+msgid "Updated"
+msgstr "Обновлено"
+
+#: .\auctions\models.py:69 .\auctions\templates\auctions\auctions.html:66
+msgid "Categories"
+msgstr "Категории"
+
+#: .\auctions\models.py:70 .\auctions\templates\auctions\auctions.html:85
+msgid "Tags"
+msgstr "Теги"
+
+#: .\auctions\models.py:161
+msgid "Image"
+msgstr "Изображение"
+
+#: .\auctions\models.py:162 .\auctions\models.py:174 .\auctions\models.py:185
+#: .\auctions\templates\auctions\auction-create-update.html:6
+msgid "Auction"
+msgstr "Аукцион"
+
+#: .\auctions\models.py:173
+msgid "Video"
+msgstr "Видео"
+
+#: .\auctions\models.py:186
+msgid "Icon"
+msgstr "Иконка"
+
+#: .\auctions\models.py:191
+msgid "UPdated"
+msgstr "Обновлено"
+
+#: .\auctions\templates\auctions\auction-additional-fields.html:3
+#: .\auctions\templates\auctions\auction-additional-fields.html:10
+#: .\auctions\templates\auctions\auction-create-update.html:24
+msgid "Additional Fields"
+msgstr "Дополнительные поля"
+
+#: .\auctions\templates\auctions\auction-additional-fields.html:20
+#: .\auctions\templates\auctions\auction-detail.html:120
+#: .\auctions\templates\auctions\bid.html:63
+msgid "Submit"
+msgstr "Отправить"
+
+#: .\auctions\templates\auctions\auction-admin.html:3
+#: .\auctions\templates\auctions\auction-admins-add.html:4
+#, fuzzy
+#| msgid "Auction"
+msgid "Auction Admin"
+msgstr "Администратор аукциона"
+
+#: .\auctions\templates\auctions\auction-admin.html:17
+#: .\auctions\templates\auctions\auction-admins-add.html:17
+#: .\auctions\templates\auctions\auction-admins.html:18
+msgid "Email:"
+msgstr "Электронная почта:"
+
+#: .\auctions\templates\auctions\auction-admin.html:26
+#: .\auctions\templates\auctions\auction-create-update.html:36
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\auctions\templates\auctions\auction-admins-add.html:19
+#: .\auctions\templates\auctions\auction-admins.html:10
+msgid "Add Admin"
+msgstr "Добавить администратора"
+
+#: .\auctions\templates\auctions\auction-admins-add.html:25
+msgid "Nothing Found..."
+msgstr "Ничего не найдено..."
+
+#: .\auctions\templates\auctions\auction-admins.html:4
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auctions Admins"
+msgstr "Администраторы аукциона"
+
+#: .\auctions\templates\auctions\auction-admins.html:20
+msgid "Edit Admin Permissions"
+msgstr "Редактировать права администратора"
+
+#: .\auctions\templates\auctions\auction-admins.html:21
+msgid "Delete Admin"
+msgstr "Удалить администратора"
+
+#: .\auctions\templates\auctions\auction-create-update.html:19
+#, fuzzy
+#| msgid "Auction"
+msgid "Create Auction"
+msgstr "Создать аукцион"
+
+#: .\auctions\templates\auctions\auction-create-update.html:21
+#, fuzzy
+#| msgid "Auction"
+msgid "Auction Form"
+msgstr "Форма аукциона"
+
+#: .\auctions\templates\auctions\auction-create-update.html:22
+msgid "Image Fields"
+msgstr "Поля изображения"
+
+#: .\auctions\templates\auctions\auction-create-update.html:23
+msgid "Video Fields"
+msgstr "Поля видео"
+
+#: .\auctions\templates\auctions\auction-create-update.html:60
+#: .\auctions\templates\auctions\auction-create-update.html:93
+#: .\auctions\templates\auctions\auction-create-update.html:121
+msgid "Add Another Field"
+msgstr "Добавить другое поле"
+
+#: .\auctions\templates\auctions\auction-create-update.html:71
+#: .\auctions\templates\auctions\auction-create-update.html:102
+#: .\auctions\templates\auctions\auction-create-update.html:133
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\auctions\templates\auctions\auction-detail.html:6
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction Detail"
+msgstr "Детали аукциона"
+
+#: .\auctions\templates\auctions\auction-detail.html:31
+#, fuzzy
+#| msgid "Start Time"
+msgid "Start Time:"
+msgstr "Время начала:"
+
+#: .\auctions\templates\auctions\auction-detail.html:34
+#, fuzzy
+#| msgid "End Time"
+msgid "End Time:"
+msgstr "Время окончания:"
+
+#: .\auctions\templates\auctions\auction-detail.html:60
+msgid "Like"
+msgstr "Нравится"
+
+#: .\auctions\templates\auctions\auction-detail.html:61
+msgid "Bid Now"
+msgstr "Сделать ставку"
+
+#: .\auctions\templates\auctions\auction-detail.html:64
+#, fuzzy
+#| msgid "Only Contacts"
+msgid "Contact Us"
+msgstr "Связаться с нами"
+
+#: .\auctions\templates\auctions\auction-detail.html:67
+#, fuzzy
+#| msgid "Only Contacts"
+msgid "Contact"
+msgstr "Контакт"
+
+#: .\auctions\templates\auctions\auction-detail.html:71
+msgid "Remind ME"
+msgstr "Напомнить мне"
+
+#: .\auctions\templates\auctions\auction-detail.html:73
+msgid "Agents"
+msgstr "Агенты"
+
+#: .\auctions\templates\auctions\auction-detail.html:102
+msgid "Comments"
+msgstr "Комментарии"
+
+#: .\auctions\templates\auctions\auctions.html:6
+#: .\auctions\templates\auctions\auctions.html:15
+#, fuzzy
+#| msgid "Auction"
+msgid "Auctions"
+msgstr "Аукционы"
+
+#: .\auctions\templates\auctions\auctions.html:16
+msgid "Advanced Search"
+msgstr "Расширенный поиск"
+
+#: .\auctions\templates\auctions\auctions.html:46
+msgid "Range input"
+msgstr "Диапазон"
+
+#: .\auctions\templates\auctions\auctions.html:52
+msgid "Min"
+msgstr "Мин"
+
+#: .\auctions\templates\auctions\auctions.html:56
+msgid "Max"
+msgstr "Макс"
+
+#: .\auctions\templates\auctions\auctions.html:101
+msgid "Filter"
+msgstr "Фильтр"
+
+#: .\auctions\templates\auctions\auctions.html:119
+msgid "More"
+msgstr "Еще"
+
+#: .\auctions\templates\auctions\auctions.html:132
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: .\auctions\templates\auctions\auctions.html:136
+msgid "Next"
+msgstr "Следующий"
+
+#: .\auctions\templates\auctions\bid.html:6
+#, fuzzy
+#| msgid "Auction"
+msgid "Bid Auction"
+msgstr "Сделать ставку на аукцион"
+
+#: .\auctions\templates\auctions\bid.html:15
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction Start After"
+msgstr "Аукцион начнется через"
+
+#: .\auctions\templates\auctions\bid.html:17
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction End After"
+msgstr "Аукцион закончится через"
+
+#: .\auctions\templates\auctions\bid.html:24
+#, fuzzy
+#| msgid "Starter Price"
+msgid "Current Price"
+msgstr "Текущая цена"
+
+#: .\auctions\templates\auctions\bid.html:33
+msgid "Last Bids"
+msgstr "Последние ставки"
+
+#: .\auctions\templates\auctions\bid.html:34
+msgid "Chat"
+msgstr "Чат"
+
+#: .\auctions\templates\auctions\bid.html:40
+#: .\auctions\templates\auctions\snippets\last-bid.html:4
+msgid "invite"
+msgstr "пригласить"

@@ -14,6 +14,8 @@ from pathlib import Path
 
 from environ import Env
 
+from django.utils.translation import gettext_lazy as _
+
 env = Env()
 Env.read_env()
 
@@ -55,7 +57,8 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'rest_framework',
-     'drf_yasg',
+    'drf_yasg',
+    'rosetta',
     # local
     'accounts',
     'auctions',
@@ -72,6 +75,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -147,12 +151,26 @@ AUTHENTICATION_BACKENDS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('ru', _('Russian')),
+    ('es', _('Spanish')),
+    ('it', _('Italian')),
+    ('fr', _('French')),
+    ('de', _('German')),
+    ('ja', _('Japanese')),
+    ('uz', _('Uzbek')),
+]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
 
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -286,6 +304,7 @@ JAZZMIN_SETTINGS = {
     'site_logo': 'images/logo/white-logo.svg',
     'login_logo': 'images/logo/logo.svg',
     'login_logo_dark': 'images/logo/logo.svg',
+    "language_chooser": True,
 }
 
 # CELERY SETTINGS

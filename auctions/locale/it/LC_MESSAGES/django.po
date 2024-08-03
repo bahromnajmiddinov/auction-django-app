@@ -1,0 +1,350 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\auctions\models.py:17
+msgid "Public"
+msgstr "Pubblico"
+
+#: .\auctions\models.py:18
+msgid "Private"
+msgstr "Privato"
+
+#: .\auctions\models.py:19
+msgid "Only Contacts"
+msgstr "Solo contatti"
+
+#: .\auctions\models.py:48 .\auctions\models.py:160 .\auctions\models.py:172
+#: .\auctions\models.py:184
+msgid "Id"
+msgstr "Id"
+
+#: .\auctions\models.py:49
+msgid "Owner"
+msgstr "Proprietario"
+
+#: .\auctions\models.py:50
+msgid "Winner"
+msgstr "Vincitore"
+
+#: .\auctions\models.py:51
+msgid "Main Image"
+msgstr "Immagine principale"
+
+#: .\auctions\models.py:52
+msgid "Type"
+msgstr "Tipo"
+
+#: .\auctions\models.py:53 .\auctions\models.py:187
+msgid "Title"
+msgstr "Titolo"
+
+#: .\auctions\models.py:54
+msgid "Slug"
+msgstr "Slug"
+
+#: .\auctions\models.py:55
+msgid "Summary"
+msgstr "Riepilogo"
+
+#: .\auctions\models.py:56 .\auctions\models.py:188
+#: .\auctions\templates\auctions\auction-detail.html:38
+msgid "Description"
+msgstr "Descrizione"
+
+#: .\auctions\models.py:57
+msgid "Starter Price"
+msgstr "Prezzo iniziale"
+
+#: .\auctions\models.py:58
+msgid "Auction Price"
+msgstr "Prezzo di asta"
+
+#: .\auctions\models.py:59 .\auctions\templates\auctions\auctions.html:123
+msgid "Participants"
+msgstr "Partecipanti"
+
+#: .\auctions\models.py:60
+msgid "User Watchers"
+msgstr "Osservatori"
+
+#: .\auctions\models.py:61
+msgid "User Likes"
+msgstr "Mi piace degli utenti"
+
+#: .\auctions\models.py:63
+msgid "Active"
+msgstr "Attivo"
+
+#: .\auctions\models.py:64
+msgid "Start Time"
+msgstr "Ora di inizio"
+
+#: .\auctions\models.py:65
+msgid "End Time"
+msgstr "Ora di fine"
+
+#: .\auctions\models.py:66 .\auctions\models.py:164 .\auctions\models.py:176
+#: .\auctions\models.py:190
+msgid "Created"
+msgstr "Creato"
+
+#: .\auctions\models.py:67 .\auctions\models.py:165 .\auctions\models.py:177
+msgid "Updated"
+msgstr "Aggiornato"
+
+#: .\auctions\models.py:69 .\auctions\templates\auctions\auctions.html:66
+msgid "Categories"
+msgstr "Categorie"
+
+#: .\auctions\models.py:70 .\auctions\templates\auctions\auctions.html:85
+msgid "Tags"
+msgstr "Tag"
+
+#: .\auctions\models.py:161
+msgid "Image"
+msgstr "Immagine"
+
+#: .\auctions\models.py:162 .\auctions\models.py:174 .\auctions\models.py:185
+#: .\auctions\templates\auctions\auction-create-update.html:6
+msgid "Auction"
+msgstr "Asta"
+
+#: .\auctions\models.py:173
+msgid "Video"
+msgstr "Video"
+
+#: .\auctions\models.py:186
+msgid "Icon"
+msgstr "Icona"
+
+#: .\auctions\models.py:191
+msgid "UPdated"
+msgstr "Aggiornato"
+
+#: .\auctions\templates\auctions\auction-additional-fields.html:3
+#: .\auctions\templates\auctions\auction-additional-fields.html:10
+#: .\auctions\templates\auctions\auction-create-update.html:24
+msgid "Additional Fields"
+msgstr "Campi Aggiuntivi"
+
+#: .\auctions\templates\auctions\auction-additional-fields.html:20
+#: .\auctions\templates\auctions\auction-detail.html:120
+#: .\auctions\templates\auctions\bid.html:63
+msgid "Submit"
+msgstr "Invia"
+
+#: .\auctions\templates\auctions\auction-admin.html:3
+#: .\auctions\templates\auctions\auction-admins-add.html:4
+#, fuzzy
+#| msgid "Auction"
+msgid "Auction Admin"
+msgstr "Admin Asta"
+
+#: .\auctions\templates\auctions\auction-admin.html:17
+#: .\auctions\templates\auctions\auction-admins-add.html:17
+#: .\auctions\templates\auctions\auction-admins.html:18
+msgid "Email:"
+msgstr "Email:"
+
+#: .\auctions\templates\auctions\auction-admin.html:26
+#: .\auctions\templates\auctions\auction-create-update.html:36
+msgid "Save"
+msgstr "Salva"
+
+#: .\auctions\templates\auctions\auction-admins-add.html:19
+#: .\auctions\templates\auctions\auction-admins.html:10
+msgid "Add Admin"
+msgstr "Aggiungi Admin"
+
+#: .\auctions\templates\auctions\auction-admins-add.html:25
+msgid "Nothing Found..."
+msgstr "Nessun Risultato..."
+
+#: .\auctions\templates\auctions\auction-admins.html:4
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auctions Admins"
+msgstr "Admin Aste"
+
+#: .\auctions\templates\auctions\auction-admins.html:20
+msgid "Edit Admin Permissions"
+msgstr "Modifica Permessi Admin"
+
+#: .\auctions\templates\auctions\auction-admins.html:21
+msgid "Delete Admin"
+msgstr "Elimina Admin"
+
+#: .\auctions\templates\auctions\auction-create-update.html:19
+#, fuzzy
+#| msgid "Auction"
+msgid "Create Auction"
+msgstr "Crea Asta"
+
+#: .\auctions\templates\auctions\auction-create-update.html:21
+#, fuzzy
+#| msgid "Auction"
+msgid "Auction Form"
+msgstr "Modulo Asta"
+
+#: .\auctions\templates\auctions\auction-create-update.html:22
+msgid "Image Fields"
+msgstr "Campi Immagine"
+
+#: .\auctions\templates\auctions\auction-create-update.html:23
+msgid "Video Fields"
+msgstr "Campi Video"
+
+#: .\auctions\templates\auctions\auction-create-update.html:60
+#: .\auctions\templates\auctions\auction-create-update.html:93
+#: .\auctions\templates\auctions\auction-create-update.html:121
+msgid "Add Another Field"
+msgstr "Aggiungi Un Altro Campo"
+
+#: .\auctions\templates\auctions\auction-create-update.html:71
+#: .\auctions\templates\auctions\auction-create-update.html:102
+#: .\auctions\templates\auctions\auction-create-update.html:133
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: .\auctions\templates\auctions\auction-detail.html:6
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction Detail"
+msgstr "Dettagli Asta"
+
+#: .\auctions\templates\auctions\auction-detail.html:31
+#, fuzzy
+#| msgid "Start Time"
+msgid "Start Time:"
+msgstr "Orario di Inizio:"
+
+#: .\auctions\templates\auctions\auction-detail.html:34
+#, fuzzy
+#| msgid "End Time"
+msgid "End Time:"
+msgstr "Orario di Fine:"
+
+#: .\auctions\templates\auctions\auction-detail.html:60
+msgid "Like"
+msgstr "Mi Piace"
+
+#: .\auctions\templates\auctions\auction-detail.html:61
+msgid "Bid Now"
+msgstr "Offri Ora"
+
+#: .\auctions\templates\auctions\auction-detail.html:64
+#, fuzzy
+#| msgid "Only Contacts"
+msgid "Contact Us"
+msgstr "Contattaci"
+
+#: .\auctions\templates\auctions\auction-detail.html:67
+#, fuzzy
+#| msgid "Only Contacts"
+msgid "Contact"
+msgstr "Contatto"
+
+#: .\auctions\templates\auctions\auction-detail.html:71
+msgid "Remind ME"
+msgstr "Ricordami"
+
+#: .\auctions\templates\auctions\auction-detail.html:73
+msgid "Agents"
+msgstr "Agenti"
+
+#: .\auctions\templates\auctions\auction-detail.html:102
+msgid "Comments"
+msgstr "Commenti"
+
+#: .\auctions\templates\auctions\auctions.html:6
+#: .\auctions\templates\auctions\auctions.html:15
+#, fuzzy
+#| msgid "Auction"
+msgid "Auctions"
+msgstr "Aste"
+
+#: .\auctions\templates\auctions\auctions.html:16
+msgid "Advanced Search"
+msgstr "Ricerca Avanzata"
+
+#: .\auctions\templates\auctions\auctions.html:46
+msgid "Range input"
+msgstr "Input Intervallo"
+
+#: .\auctions\templates\auctions\auctions.html:52
+msgid "Min"
+msgstr "Minimo"
+
+#: .\auctions\templates\auctions\auctions.html:56
+msgid "Max"
+msgstr "Massimo"
+
+#: .\auctions\templates\auctions\auctions.html:101
+msgid "Filter"
+msgstr "Filtra"
+
+#: .\auctions\templates\auctions\auctions.html:119
+msgid "More"
+msgstr "Altro"
+
+#: .\auctions\templates\auctions\auctions.html:132
+msgid "Previous"
+msgstr "Precedente"
+
+#: .\auctions\templates\auctions\auctions.html:136
+msgid "Next"
+msgstr "Successivo"
+
+#: .\auctions\templates\auctions\bid.html:6
+#, fuzzy
+#| msgid "Auction"
+msgid "Bid Auction"
+msgstr "Offerta Asta"
+
+#: .\auctions\templates\auctions\bid.html:15
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction Start After"
+msgstr "Inizio Asta Dopo"
+
+#: .\auctions\templates\auctions\bid.html:17
+#, fuzzy
+#| msgid "Auction Price"
+msgid "Auction End After"
+msgstr "Fine Asta Dopo"
+
+#: .\auctions\templates\auctions\bid.html:24
+#, fuzzy
+#| msgid "Starter Price"
+msgid "Current Price"
+msgstr "Prezzo Attuale"
+
+#: .\auctions\templates\auctions\bid.html:33
+msgid "Last Bids"
+msgstr "Ultime Offerte"
+
+#: .\auctions\templates\auctions\bid.html:34
+msgid "Chat"
+msgstr "Chat"
+
+#: .\auctions\templates\auctions\bid.html:40
+#: .\auctions\templates\auctions\snippets\last-bid.html:4
+msgid "invite"
+msgstr "invita"

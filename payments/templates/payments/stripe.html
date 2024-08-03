@@ -1,10 +1,12 @@
 <!-- checkout.html -->
 {% extends 'base.html' %}
-
-{% block title %}Checkout{% endblock title %}
+{% load i18n %}
+{% block title %}
+{% trans "Checkout" %}
+{% endblock title %}
 
 {% block content %}
-<h1>You are redirecting...</h1>
+<h1>{% trans "You are redirecting..." %}</h1>
 {% endblock content %}
 
 {% block script %}

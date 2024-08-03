@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\accounts\forms.py:28 .\accounts\models.py:24 .\accounts\models.py:40
+msgid "First Name"
+msgstr "Ism"
+
+#: .\accounts\forms.py:29 .\accounts\models.py:25 .\accounts\models.py:41
+msgid "Last Name"
+msgstr "Familiya"
+
+#: .\accounts\models.py:11
+msgid "PUBLIC"
+msgstr "OMMAVIY"
+
+#: .\accounts\models.py:12
+msgid "PRIVATE"
+msgstr "XUSUSIY"
+
+#: .\accounts\models.py:23
+msgid "Type"
+msgstr "Tur"
+
+#: .\accounts\models.py:26
+msgid "Avatar"
+msgstr "Avatar"
+
+#: .\accounts\models.py:27
+msgid "Description"
+msgstr "Tavsif"
+
+#: .\accounts\models.py:38
+msgid "Owner"
+msgstr "Egasini"
+
+#: .\accounts\models.py:39 .\accounts\models.py:45
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: .\accounts\models.py:46
+msgid "Recipient Name"
+msgstr "Qabul qiluvchining ismi"
+
+#: .\accounts\models.py:47
+msgid "Street Address"
+msgstr "Ko'cha manzili"
+
+#: .\accounts\models.py:48
+msgid "City"
+msgstr "Shahar"
+
+#: .\accounts\models.py:49
+msgid "State"
+msgstr "Davlat"
+
+#: .\accounts\models.py:50
+msgid "Postal Code"
+msgstr "Pochta indeksi"
+
+#: .\accounts\models.py:51
+msgid "Country"
+msgstr "Mamlakat"
+
+#: .\accounts\models.py:52
+msgid "Phone Number"
+msgstr "Telefon raqami"
+
+#: .\accounts\models.py:53
+msgid "Email"
+msgstr "Elektron pochta"
+
+#: .\accounts\models.py:54
+msgid "Instructions"
+msgstr "Ko'rsatmalar"
+
+#: .\accounts\models.py:55
+msgid "Is Primary"
+msgstr "Asosiy"
+
+#: .\accounts\templates\accounts\user-address-create-update.html:3
+#: .\accounts\templates\accounts\user-address-create-update.html:15
+msgid "Address Form"
+msgstr "Manzil formasini"
+
+#: .\accounts\templates\accounts\user-address-create-update.html:9
+msgid "Please correct the error below."
+msgstr "Iltimos, quyidagi xatoni tuzating."
+
+#: .\accounts\templates\accounts\user-address-create-update.html:24
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+#: .\accounts\templates\accounts\user-address-create-update.html:25
+#: .\accounts\templates\accounts\user-contact-update-create.html:20
+msgid "Save"
+msgstr "Saqlash"
+
+#: .\accounts\templates\accounts\user-addresses.html:4
+#, fuzzy
+#| msgid "Street Address"
+msgid "Your Addresses"
+msgstr "Sizning manzillar"
+
+#: .\accounts\templates\accounts\user-addresses.html:10
+#, fuzzy
+#| msgid "Street Address"
+msgid "Add New Address"
+msgstr "Yangi manzil qo'shish"
+
+#: .\accounts\templates\accounts\user-addresses.html:21
+msgid "Edit"
+msgstr "Tahrirlash"
+
+#: .\accounts\templates\accounts\user-addresses.html:22
+msgid "Delete"
+msgstr "O'chirish"
+
+#: .\accounts\templates\accounts\user-contact-update-create.html:3
+#: .\accounts\templates\accounts\user-contact-update-create.html:9
+msgid "Contact"
+msgstr "Aloqa"
+
+#: .\accounts\templates\accounts\user-contact-update-create.html:12
+#, fuzzy
+#| msgid "First Name"
+msgid "First Name:"
+msgstr "Ism:"
+
+#: .\accounts\templates\accounts\user-contact-update-create.html:16
+#, fuzzy
+#| msgid "Last Name"
+msgid "Last Name:"
+msgstr "Familiya:"
+
+#: .\accounts\templates\accounts\user-contacts.html:3
+#: .\accounts\templates\accounts\user-detail.html:33
+msgid "Contacts"
+msgstr "Aloqalar"
+
+#: .\accounts\templates\accounts\user-contacts.html:16
+#: .\accounts\templates\accounts\user-detail.html:23
+#, fuzzy
+#| msgid "Email"
+msgid "Email:"
+msgstr "Email:"
+
+#: .\accounts\templates\accounts\user-contacts.html:18
+#: .\accounts\templates\accounts\user-detail.html:39
+msgid "Edit Contact"
+msgstr "Aloqani tahrirlash"
+
+#: .\accounts\templates\accounts\user-contacts.html:19
+msgid "Delete Contact"
+msgstr "Aloqani o'chirish"
+
+#: .\accounts\templates\accounts\user-contacts.html:25
+msgid "You haven't saved contacts yet..."
+msgstr "Siz hali aloqalarni saqlamadingiz..."
+
+#: .\accounts\templates\accounts\user-detail.html:5
+msgid "User Detail"
+msgstr "Foydalanuvchi tafsilotlari"
+
+#: .\accounts\templates\accounts\user-detail.html:25
+msgid "Saved as contact"
+msgstr "Aloqa sifatida saqlangan"
+
+#: .\accounts\templates\accounts\user-detail.html:32
+msgid "Edit Profile"
+msgstr "Profilni tahrirlash"
+
+#: .\accounts\templates\accounts\user-detail.html:34
+msgid "Delete Account"
+msgstr "Hisobni o'chirish"
+
+#: .\accounts\templates\accounts\user-detail.html:37
+msgid "Save As A contact"
+msgstr "Aloqa sifatida saqlash"
+
+#: .\accounts\templates\accounts\user-detail.html:46
+msgid "Your Orders"
+msgstr "Sizning buyurtmalaringiz"
+
+#: .\accounts\templates\accounts\user-detail.html:49
+msgid "Id"
+msgstr "ID"
+
+#: .\accounts\templates\accounts\user-detail.html:50
+#: .\accounts\templates\accounts\user-detail.html:74
+#: .\accounts\templates\accounts\user-detail.html:112
+msgid "Title"
+msgstr "Sarlavha"
+
+#: .\accounts\templates\accounts\user-detail.html:51
+msgid "Paid"
+msgstr "To'langan"
+
+#: .\accounts\templates\accounts\user-detail.html:52
+msgid "Delivered"
+msgstr "Yetkazilgan"
+
+#: .\accounts\templates\accounts\user-detail.html:69
+msgid "Auctions that You participanted"
+msgstr "Siz ishtirok etgan auksionlar"
+
+#: .\accounts\templates\accounts\user-detail.html:73
+#: .\accounts\templates\accounts\user-detail.html:111
+msgid "Image"
+msgstr "Rasm"
+
+#: .\accounts\templates\accounts\user-detail.html:75
+#: .\accounts\templates\accounts\user-detail.html:113
+msgid "Participants"
+msgstr "Ishtirokchilar"
+
+#: .\accounts\templates\accounts\user-detail.html:76
+msgid "Current Price"
+msgstr "Hozirgi narx"
+
+#: .\accounts\templates\accounts\user-detail.html:77
+#: .\accounts\templates\accounts\user-detail.html:114
+msgid "End Time"
+msgstr "Tugash vaqti"
+
+#: .\accounts\templates\accounts\user-detail.html:78
+#: .\accounts\templates\accounts\user-detail.html:115
+msgid "Your Bid"
+msgstr "Sizning taklifingiz"
+
+#: .\accounts\templates\accounts\user-detail.html:102
+#: .\accounts\templates\accounts\user-detail.html:134
+msgid "No auctions found."
+msgstr "Auksionlar topilmadi."
+
+#: .\accounts\templates\accounts\user-detail.html:107
+msgid "Auctions that You Winned"
+msgstr "Siz yenggan auksionlar"
+
+#: .\accounts\templates\accounts\user-update.html:3
+msgid "Update User"
+msgstr "Foydalanuvchini yangilash"

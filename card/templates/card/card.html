@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans 'Your Cart' %}
+{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -11,29 +13,29 @@
 {% block content %}
 <section class="dashboard">
     <div class="all-numbers">
-        <h1 class="title">Total</h1>
+        <h1 class="title">{% trans "Total" %}</h1>
         <div class="number-box">
-            <p>Total Items</p>
+            <p>{% trans "Total Items" %}</p>
             <span>{{  all_numbers.total_items }}</span>
         </div>
         <div class="number-box">
-            <p>Total Price</p>
+            <p>{% trans "Total Price" %}</p>
             <span>${{ all_numbers.total_price }}</span>
         </div>
     </div>
     <div class="btn-group" style="margin-bottom: 2rem;">
-        <a href="{% url 'checkout' %}" class="btn">Checkout</a>
+        <a href="{% url 'checkout' %}" class="btn">{% trans "Checkout" %}</a>
     </div>
     <div class="dashboard-list">
-        <h1 class="title">Your Auctions</h1>
+        <h1 class="title">{% trans "Your Auctions" %}</h1>
         <table class="user-auctions">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Remove</th>
+                <th>{% trans "Image" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Price" %}</th>
+                <th>{% trans "Start Time" %}</th>
+                <th>{% trans "End Time" %}</th>
+                <th>{% trans "Remove" %}</th>
             </tr>
             {% for card_item in card_items %}
             <tr class="user-auction">
@@ -48,7 +50,7 @@
                 </td>
                 <td>{{ card_item.auction.start_time }}</td>
                 <td>{{ card_item.auction.end_time }}</td>
-                <td><a href="{% url 'add-to-card' card_item.auction.slug %}" class="btn">Remove</a></td>
+                <td><a href="{% url 'add-to-card' card_item.auction.slug %}" class="btn">{% trans "Remove" %}</a></td>
             </tr>
             {% endfor %}
         </table>

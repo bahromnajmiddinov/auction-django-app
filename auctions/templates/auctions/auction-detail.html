@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans "Auction Detail" %}
+{% endblock title %}
 
 {% block content %}
 <!-- detail section -->
@@ -26,14 +29,14 @@
         </div>
         <div class="detail-section-info">
             {% if auction.start_time %}
-            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>Start Time:</span> {{ auction.start_time }}</div>
+            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>{% trans "Start Time:" %}</span> {{ auction.start_time }}</div>
             {% endif %}
             {% if auction.end_time %}
-            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>End Time:</span> {{ auction.end_time }}</div>
+            <div class="additional-field" style="display: flex; justify-content: space-between;"><span>{% trans "End Time:" %}</span> {{ auction.end_time }}</div>
             {% endif %}
             <div class="auction-price">${{ auction.get_current_price }}</div>
             <div class="description auction-description">
-                <h2 class="title">Description</h2>
+                <h2 class="title">{% trans "Description" %}</h2>
                 <p class="description-text auction-description-text">
                     {{ auction.description|safe }}
                 </p>
@@ -55,20 +58,20 @@
     <div class="auction-side-column">
         <div class="auction-btns">
             <a href="{% url 'add-to-card' auction.slug %}" type="button" class="btn save-btn {% if auction.orderitem_set.exists %}disabled{% endif %}">{% if saved %}Saved{% else %}Save{% endif %}</a>
-            <button type="button" class="btn like-btn">Like</button>
-            <a href="{% url 'auction-bid' auction.slug %}" type="button" class="btn bid-btn">Bid Now</a>
+            <button type="button" class="btn like-btn">{% trans "Like" %}</button>
+            <a href="{% url 'auction-bid' auction.slug %}" type="button" class="btn bid-btn">{% trans "Bid Now" %}</a>
         </div>
         <div class="auction-contact">
-            <h2 class="title">Contact Us</h2>
+            <h2 class="title">{% trans "Contact Us" %}</h2>
             <form action="mailto:{{ auction.email }}" method="POST" enctype="text/plain" class="contact-form">
                 <input type="email" placeholder="Email" class="email" required>
-                <button type="submit" class="btn auction-btn">Contact</button>
+                <button type="submit" class="btn auction-btn">{% trans "Contact" %}</button>
             </form>
         </div>
         {% if not auction.orderitem_set.exists %}
-        <button type="button" class="btn remind-btn">Remind ME</button>
+        <button type="button" class="btn remind-btn">{% trans "Remind ME" %}</button>
         {% endif %}
-        <h2 class="title" style="margin-top: 2rem;">Agents</h2>
+        <h2 class="title" style="margin-top: 2rem;">{% trans "Agents" %}</h2>
         <div class="agents">
             {% for agent in auction.permissions.all %}
                 <div class="agent">
@@ -96,7 +99,7 @@
         </div> {% endcomment %}
     </div>
     <div class="auction-comments">
-        <h2 class="title">Comments</h2>
+        <h2 class="title">{% trans "Comments" %}</h2>
         <div class="comment-box">
             {% for comment in auction.comments.all %}
             <div class="comment">
@@ -114,7 +117,7 @@
         </div>
         <div class="comment-form">
             <input type="text" placeholder="Your comment" class="comment-input">
-            <button type="button" class="btn comment-btn">Submit</button>
+            <button type="button" class="btn comment-btn">{% trans "Submit" %}</button>
         </div> 
     </div>
 </section>

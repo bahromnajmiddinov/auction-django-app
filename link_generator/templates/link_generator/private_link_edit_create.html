@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block title %}
-
+{% trans "Private Link" %}
 {% endblock title %}
 
 {% block content %}
 <div class="private-link-form">
     <form method="POST">
         {% csrf_token %}
-        <h2 class="form-header">Private Link</h2>
+        <h2 class="form-header">{% trans "Private Link" %}</h2>
         <div class="form-body">
 
             {% for field in link_form %}
@@ -18,7 +18,7 @@
                 {{ field.errors }}
             </div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         </div>
     </form>
 </div>

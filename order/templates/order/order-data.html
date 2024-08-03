@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans "Order" %}
+{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -13,30 +17,30 @@
     <div class="payment-list">
         <div class="all-numbers">
             <div class="number-box">
-                <p>Total Price</p>
+                <p>{% trans "Total Price" %}</p>
                 <span>{{ order.total_amount }}</span>
             </div>
             <div class="number-box">
-                <p>Payment Method</p>
+                <p>{% trans "Payment Method" %}</p>
                 <span>{{ order.payment_method }}</span>
             </div>
             <div class="number-box">
-                <p>Payment Status</p>
+                <p>{% trans "Payment Status" %}</p>
                 <span>{{ order.paid }}</span>
             </div>
             <div class="number-box">
-                <p>Order ID</p>
+                <p>{% trans "Order ID" %}</p>
                 <span>{{ order.id }}</span>
             </div>
             <div class="number-box">
-                <p>Payment Confirmation</p>
-                <span>You will receive a confirmation email shortly.</span>
+                <p>{% trans "Payment Confirmation" %}</p>
+                <span>{% trans "You will receive a confirmation email shortly." %}</span>
             </div>
         </div>
     </div>
     
     <div class="address-list">
-        <h1>Shipping Address</h1>
+        <h1>{% trans "Shipping Address" %}</h1>
         <a href="" class="address-info">
             {% with address=order.address %}
             <h4>{{ address.recipient_name }}</h3>
@@ -46,12 +50,12 @@
     </div>
     
     <div class="dashboard-list">
-        <h1 class="title">Your Auctions</h1>
+        <h1 class="title">{% trans "Your Auctions" %}</h1>
         <table class="user-auctions">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
+                <th>{% trans "Image" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Price" %}</th>
             </tr>
             {% for order_item in order_items %}
             <tr class="user-auction">
@@ -71,7 +75,7 @@
 
     {% if not order.paid %}
     <div class="btn-group">
-        <a href="{% url 'payments:stripe' order.id %}" class="btn">Pay Now</a>
+        <a href="{% url 'payments:stripe' order.id %}" class="btn">{% trans "Pay Now" %}</a>
     </div>
     {% endif %}
 </section>

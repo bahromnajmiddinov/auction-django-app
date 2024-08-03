@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'Contacts' %}{% endblock title %}
 
 {% block content %}
 <!-- user detail section -->
@@ -13,16 +13,16 @@
         </div>
         <div class="user-info" style="margin-left: 20px; text-align: left;">
             <h2>{{ user_contact.first_name }} {{ user_contact.last_name }}</h2>
-            <p>Email: {{ user_contact.user.email }}</p>
+            <p>{% trans 'Email:' %} {{ user_contact.user.email }}</p>
             <div class="btn-group">
-                <a href="{% url 'user-update-contact' user_contact.user.username %}" class="btn btn-primary">Edit Contact</a>
-                <a href="{% url 'user-delete-contact' user_contact.user.username %}" class="btn">Delete Contact</a>
+                <a href="{% url 'user-update-contact' user_contact.user.username %}" class="btn btn-primary">{% trans 'Edit Contact' %}</a>
+                <a href="{% url 'user-delete-contact' user_contact.user.username %}" class="btn">{% trans 'Delete Contact' %}</a>
             </div>
         </div>
     </div>
     {% endfor %}
     {% else %}
-    <h1>You haven't saved contacts yet...</h1>
+    <h1>{% trans "You haven't saved contacts yet..." %}</h1>
     {% endif %}
 </section>
 <!-- end of user detail section -->

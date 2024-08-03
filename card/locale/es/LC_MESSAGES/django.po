@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+#: .\card\templates\card\card.html:6
+msgid "Your Cart"
+msgstr "Tu carrito"
+
+#: .\card\templates\card\card.html:16
+msgid "Total"
+msgstr "Total"
+
+#: .\card\templates\card\card.html:18
+msgid "Total Items"
+msgstr "Total de artículos"
+
+#: .\card\templates\card\card.html:22
+msgid "Total Price"
+msgstr "Precio total"
+
+#: .\card\templates\card\card.html:27
+msgid "Checkout"
+msgstr "Pagar"
+
+#: .\card\templates\card\card.html:30
+msgid "Your Auctions"
+msgstr "Tus subastas"
+
+#: .\card\templates\card\card.html:33
+msgid "Image"
+msgstr "Imagen"
+
+#: .\card\templates\card\card.html:34
+msgid "Title"
+msgstr "Título"
+
+#: .\card\templates\card\card.html:35
+msgid "Price"
+msgstr "Precio"
+
+#: .\card\templates\card\card.html:36
+msgid "Start Time"
+msgstr "Hora de inicio"
+
+#: .\card\templates\card\card.html:37
+msgid "End Time"
+msgstr "Hora de fin"
+
+#: .\card\templates\card\card.html:38 .\card\templates\card\card.html:53
+msgid "Remove"
+msgstr "Eliminar"

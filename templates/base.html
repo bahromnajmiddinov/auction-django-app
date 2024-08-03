@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,52 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
     {% block style %}{% endblock style %}
+
+    <style>
+      /* Style The Dropdown Button */
+      .dropbtn {
+        background-color: transparent;
+        color: hsl(0, 0%, 85%);
+        font-weight: 400;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #f1f1f1}
+
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+    </style>
+
 </head>
 <body>
     <!-- header section -->
@@ -30,16 +77,38 @@
           </button>
           <div id="navbar-menu" aria-labelledby="navbar-toggle">
             <ul class="navbar-links">
+              
+              <li class="navbar-link dropdown">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+
+                <button class="dropbtn">Languages</button>
+                <div class="dropdown-content">
+                  {% for language in languages %}
+                  <a href="#" {% if language.code == LANGUAGE_CODE %}class="selected"{% endif %} data-value="{{ language.code }}" onclick="submitData(this)">
+                    {{ language.name_local }}
+                  </a>
+                  {% endfor %}
+                </div>
+
+                <form id="myForm" action="{% url 'set_language' %}" method="POST" style="display: none">
+                  {% csrf_token %}
+                  <input type="hidden" name="language" id="dataInput" value="">
+                </form>
+              
+              </li>
+
               {% if not request.user.is_anonymous %}
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'user-detail' %}">Profile</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'dashboard' %}">Dashboard</a></li>       
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'user-detail' %}">{% trans "Profile" %}</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>       
               {% endif %}
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'auctions' %}">Auctions</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'card-detail' %}">Saved<span>🛒</span></a></li>
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'auctions' %}">{% trans "Auctions" %}</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'card-detail' %}">{% trans "Saved" %}<span>🛒</span></a></li>
               {% if request.user.is_anonymous %}
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'account_login' %}">Login<span>📥</span></a></li>
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'account_login' %}">{% trans "Login" %}<span>📥</span></a></li>
               {% else %}
-              <li class="navbar-item"><a class="navbar-link" href="{% url 'account_logout' %}">Logout<span>📤</span></a></li>
+              <li class="navbar-item"><a class="navbar-link" href="{% url 'account_logout' %}">{% trans "Logout" %}<span>📤</span></a></li>
               {% endif %}
             </ul>
           </div>
@@ -56,5 +125,13 @@
 
     {% block script %}{% endblock script %}
     <script src="{% static 'js/navbar.js' %}"></script>
+    <script>
+      function submitData(link) {
+        const form = document.getElementById('myForm');
+        const dataInput = document.getElementById('dataInput');
+        dataInput.value = link.dataset.value;
+        form.submit();
+      }    
+    </script>
 </body>
 </html>

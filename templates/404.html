@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}404{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/404.css' %}">
@@ -215,8 +216,8 @@
        </g>
      </svg>
    
-     <p id="errorText">O-o-oh! Something broke.</p>
-     <a id="errorLink" href="{% url 'auctions' %}">Go Back</a>
+     <p id="errorText">{% trans "O-o-oh! Something broke." %}</p>
+     <a id="errorLink" href="{% url 'auctions' %}">{% trans "Go Back" %}</a>
    </main>
 </main>
 {% endblock content %}

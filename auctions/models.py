@@ -3,6 +3,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 import uuid
 from django_ckeditor_5.fields import CKEditor5Field
@@ -13,9 +14,9 @@ from .validators import validate_video_file_extension
 
 
 AUCTION_TYPE_CHOICES = (
-    ('PB' , 'Public'),        # all users can see the auction
-    ('PR' , 'Private'),       # only invited users can see the auction 
-    ('OC', 'Only Contacts'),  # invited and owner's contacts can see the auction
+    ('PB' , _('Public')),        # all users can see the auction
+    ('PR' , _('Private')),       # only invited users can see the auction 
+    ('OC', _('Only Contacts')),  # invited and owner's contacts can see the auction
 )
 
 
@@ -44,31 +45,31 @@ def additional_field_icon_path(instance, filename):
 
 
 class Auction(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='auctions')
-    winner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True, related_name='winner')
-    main_image = models.ImageField(upload_to=auction_image_path)
-    type = models.CharField(max_length=2, choices=AUCTION_TYPE_CHOICES, default='PB')
-    title = models.CharField(max_length=60)
-    slug = models.SlugField()
-    summary = models.CharField(max_length=200)
-    description = CKEditor5Field('Text', config_name='default')
-    starter_price = models.PositiveIntegerField(default=0)
-    auction_price = models.PositiveIntegerField(default=0)
-    participants = models.ManyToManyField(CustomUser, through='ParticipantData', related_name='participanted_auctions')
-    user_watchers = models.ManyToManyField(CustomUser, through='Watchers', related_name='watched_auctions')
-    user_likes = models.ManyToManyField(CustomUser, through='Like', related_name='liked_auctions')
+    id = models.UUIDField(_('Id'), primary_key=True, default=uuid.uuid4, editable=False)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='auctions', verbose_name=_('Owner'))
+    winner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True, related_name='winner', verbose_name=_('Winner'))
+    main_image = models.ImageField(_('Main Image'), upload_to=auction_image_path)
+    type = models.CharField(_('Type'), max_length=2, choices=AUCTION_TYPE_CHOICES, default='PB')
+    title = models.CharField(_('Title'), max_length=60)
+    slug = models.SlugField(_('Slug'), )
+    summary = models.CharField(_('Summary'), max_length=200)
+    description = CKEditor5Field(_('Description'), config_name='default')
+    starter_price = models.PositiveIntegerField(_('Starter Price'), default=0)
+    auction_price = models.PositiveIntegerField(_('Auction Price'), default=0)
+    participants = models.ManyToManyField(CustomUser, through='ParticipantData', related_name='participanted_auctions', verbose_name=_('Participants'))
+    user_watchers = models.ManyToManyField(CustomUser, through='Watchers', related_name='watched_auctions', verbose_name=_('User Watchers'))
+    user_likes = models.ManyToManyField(CustomUser, through='Like', related_name='liked_auctions', verbose_name=_('User Likes'))
     
-    active = models.BooleanField(default=False)
-    start_time = models.DateTimeField(blank=True, null=True)
-    end_time = models.DateTimeField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(_('Active'), default=False)
+    start_time = models.DateTimeField(_('Start Time'), blank=True, null=True)
+    end_time = models.DateTimeField(_('End Time'), )
+    created = models.DateTimeField(_('Created'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated'), auto_now=True)
     
-    categories = models.ManyToManyField(Category, related_name='auction_categories')
-    tags = models.ManyToManyField(Tag, related_name='auction_tags')
+    categories = models.ManyToManyField(Category, related_name='auction_categories', verbose_name=_('Categories'))
+    tags = models.ManyToManyField(Tag, related_name='auction_tags', verbose_name=_('Tags'))
     
-    permissions = models.ManyToManyField(CustomUser, through='AuctionUserPermission')
+    permissions = models.ManyToManyField(CustomUser, through='AuctionUserPermission', verbose_name='Permissions')
     
     class Meta:
         ordering = ['-created', '-updated']
@@ -156,38 +157,38 @@ class ImageField(models.Model):
     '''
     Auction Additional Image Field
     '''
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    image = models.ImageField(upload_to=auction_additional_image_path)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='image_fields')
+    id = models.UUIDField(_('Id'), primary_key=True, default=uuid.uuid4, editable=False)
+    image = models.ImageField(_('Image'), upload_to=auction_additional_image_path)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='image_fields', verbose_name=_('Auction'))
     
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(_('Created'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated'), auto_now=True)
 
 
 class VideoField(models.Model):
     '''
     Auction Video Field
     '''
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    video = models.FileField(upload_to=auction_additional_video_path, validators=[validate_video_file_extension])
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='video_fields')
+    id = models.UUIDField(_('Id'), primary_key=True, default=uuid.uuid4, editable=False)
+    video = models.FileField(_('Video'), upload_to=auction_additional_video_path, validators=[validate_video_file_extension])
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='video_fields', verbose_name=_('Auction'))
     
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(_('Created'), auto_now_add=True)
+    updated = models.DateTimeField(_('Updated'), auto_now=True)
 
 
 class AdditionalField(models.Model):
     '''
     Auction Additional Field
     '''
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='additional_fields')
-    icon = models.ImageField(upload_to=additional_field_icon_path)
-    title = models.CharField(max_length=30)
-    description = CKEditor5Field('Text', config_name='default')
+    id = models.UUIDField(_('Id'), primary_key=True, default=uuid.uuid4, editable=False)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='additional_fields', verbose_name=_('Auction'))
+    icon = models.ImageField(_('Icon'), upload_to=additional_field_icon_path)
+    title = models.CharField(_('Title'), max_length=30)
+    description = CKEditor5Field(_('Description'), config_name='default')
     
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(_('Created'), auto_now_add=True)
+    updated = models.DateTimeField(_('UPdated'), auto_now=True)
 
 
 class Message(models.Model):

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}{% trans 'User Detail' %}{% endblock title %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -20,36 +20,36 @@
         {% else %}
         <h2>{{ user.first_name }} {{ user.last_name }}</h2>
         {% endif %}
-        <p>Email: {{ user.email }}</p>
+        <p>{% trans 'Email:' %} {{ user.email }}</p>
         {% if user in request.user.contacts.all %}
-        <p class="contact-status">Saved as contact</p>
+        <p class="contact-status">{% trans 'Saved as contact' %}</p>
         {% endif %}
         <div class="description">
             {{ user.description|safe }}
         </div>
         <div class="btn-group">
             {% if request.user == user %}
-            <a href="{% url 'user-update' %}" class="btn btn-primary">Edit Profile</a>
-            <a href="{% url 'user-contacts' %}" class="btn btn-primary">Contacts</a>
-            <a href="{% url 'user-delete' %}" class="btn btn-secondary">Delete Account</a>
+            <a href="{% url 'user-update' %}" class="btn btn-primary">{% trans "Edit Profile" %}</a>
+            <a href="{% url 'user-contacts' %}" class="btn btn-primary">{% trans "Contacts" %}</a>
+            <a href="{% url 'user-delete' %}" class="btn btn-secondary">{% trans "Delete Account" %}</a>
             {% endif %}
             {% if not user_contact and request.user != user %}
-            <a class="btn" href="{% url 'user-save-contact' user.username %}">Save As A contact</a>
+            <a class="btn" href="{% url 'user-save-contact' user.username %}">{% trans "Save As A contact" %}</a>
             {% elif user_contact %}
-            <a class="btn" href="{% url 'user-update-contact' user.username %}">Edit Contact</a>
+            <a class="btn" href="{% url 'user-update-contact' user.username %}">{% trans "Edit Contact" %}</a>
             {% endif %}
         </div>
     </div>
     {% if request.user == user %}
     <div class="user-data" style="margin-top: 4rem">
         <div class="orders">
-            <h2 class="title" style="margin-bottom: 1rem">Your Orders</h2>
+            <h2 class="title" style="margin-bottom: 1rem">{% trans "Your Orders" %}</h2>
             <table class="user-auctions">
                 <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Paid</th>
-                    <th>Delivered</th>
+                    <th>{% trans "Id" %}</th>
+                    <th>{% trans "Title" %}</th>
+                    <th>{% trans "Paid" %}</th>
+                    <th>{% trans "Delivered" %}</th>
                 </tr>
                 {% for order in request.user.order_set.all %}
                 <tr>
@@ -58,7 +58,7 @@
                         <a href="{% url 'order-data' order.id %}">{{ order.address.city }}</a>
                     </td>
                     <td>{{ order.paid }}</td>
-                    <td>{{ order.deleivered }}</td>
+                    <td>{{ order.delivered }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -66,16 +66,16 @@
     </div>
 
     <div class="dashboard-list">
-        <h1 class="title" style="margin-bottom: 1rem;">Auctions that You participanted</h1>
+        <h1 class="title" style="margin-bottom: 1rem;">{% trans "Auctions that You participanted" %}</h1>
         {% if request.user.participantdata_set.exists %}
         <table class="user-auctions">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Participants</th>
-                <th>Current Price</th>
-                <th>End Time</th>
-                <th>Your Bid</th>
+                <th>{% trans "Image" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Participants" %}</th>
+                <th>{% trans "Current Price" %}</th>
+                <th>{% trans "End Time" %}</th>
+                <th>{% trans "Your Bid" %}</th>
             </tr>
             {% for data in request.user.participantdata_set.all %}
             {% with auction=data.auction %}
@@ -99,20 +99,20 @@
             {% endfor %}
         </table>
         {% else %}
-        <h3>No auctions found.</h3>
+        <h3>{% trans "No auctions found." %}</h3>
         {% endif %}
     </div>
 
     <div class="dashboard-list">
-        <h1 class="title" style="margin-bottom: 1rem;">Auctions that You Winned</h1>
+        <h1 class="title" style="margin-bottom: 1rem;">{% trans "Auctions that You Winned" %}</h1>
         {% if request.user.winner.all %}
         <table class="user-auctions">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Participants</th>
-                <th>End Time</th>
-                <th>Your Bid</th>
+                <th>{% trans "Image" %}</th>
+                <th>{% trans "Title" %}</th>
+                <th>{% trans "Participants" %}</th>
+                <th>{% trans "End Time" %}</th>
+                <th>{% trans "Your Bid" %}</th>
             </tr>
             {% for auction in request.user.winner.all %}
             <tr class="user-auction">
@@ -131,7 +131,7 @@
             {% endfor %}
         </table>
         {% else %}
-        <h3>No auctions found.</h3>
+        <h3>{% trans "No auctions found." %}</h3>
         {% endif %}
     </div>
     {% endif %}

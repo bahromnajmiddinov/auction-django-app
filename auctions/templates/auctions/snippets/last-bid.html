@@ -1,5 +1,6 @@
+{% load i18n %}
 <div class="price-last">
     <p>
-        <a href="#">{{ bid.participant.first_name }}</a> invite ${{ bid.price }}
+        <a href="#">{{ bid.participant.first_name }}</a> {% trans "invite" %} ${{ bid.price }}
     </p>
 </div>

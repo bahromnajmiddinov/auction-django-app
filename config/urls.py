@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -64,6 +65,8 @@ urlpatterns = [
     path('card/', include('card.urls')),
     path('orders/', include('order.urls')),
     path('payment/', include('payments.urls', namespace='payments')),
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('rosetta/', include('rosetta.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += api_urlpatterns

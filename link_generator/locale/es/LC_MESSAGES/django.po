@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:27+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: .\link_generator\models.py:9
+msgid "Path"
+msgstr "Ruta"
+
+#: .\link_generator\models.py:10
+msgid "Limit By Time"
+msgstr "Límite por tiempo"
+
+#: .\link_generator\models.py:11
+msgid "Limit By Clicks"
+msgstr "Límite por clics"
+
+#: .\link_generator\models.py:12
+msgid "Users"
+msgstr "Usuarios"
+
+#: .\link_generator\models.py:13
+msgid "Auction"
+msgstr "Subasta"
+
+#: .\link_generator\models.py:14
+msgid "Clicks"
+msgstr "Clics"
+
+#: .\link_generator\models.py:15
+msgid "Created"
+msgstr "Creado"
+
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:4
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:11
+msgid "Private Link"
+msgstr "Enlace privado"
+
+#: .\link_generator\templates\link_generator\private_link_edit_create.html:21
+msgid "Save"
+msgstr "Guardar"
+
+#: .\link_generator\templates\link_generator\private_links.html:11
+msgid "Delete"
+msgstr "Eliminar"
+
+#: .\link_generator\templates\link_generator\private_links.html:15
+msgid "Add link"
+msgstr "Agregar enlace"

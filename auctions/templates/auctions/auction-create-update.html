@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% load static %}
 
-{% block title %}{% endblock title %}
+{% block title %}
+{% trans "Auction" %}
+{% endblock title %}
 
 {% block header %}
 {{ auction_form.media }}
@@ -14,12 +16,12 @@
     
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2 class="form-header">Create Auction</h2>
+        <h2 class="form-header">{% trans "Create Auction" %}</h2>
         <ul class="tab-headers">
-            <li class="active" data-content-id="1">Auction Form</li>
-            <li data-content-id="2">Image Fields</li>
-            <li data-content-id="3">Video Fields</li>
-            <li data-content-id="4">Additional Fields</li>
+            <li class="active" data-content-id="1">{% trans "Auction Form" %}</li>
+            <li data-content-id="2">{% trans "Image Fields" %}</li>
+            <li data-content-id="3">{% trans "Video Fields" %}</li>
+            <li data-content-id="4">{% trans "Additional Fields" %}</li>
         </ul>
 
         <div class="form-body">
@@ -31,7 +33,7 @@
                     {{ field.errors }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn">Save</button>
+                <button type="submit" class="btn">{% trans "Save" %}</button>
             </div>
 
             <div class="tab-content" id="2">
@@ -54,7 +56,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                <button type="button" class='btn' id="add-image-field">+ Add Another Field</button>
+                <button type="button" class='btn' id="add-image-field">+ {% trans "Add Another Field" %}</button>
 
                 <!-- hidden form -->
                 <div id="empty-image-form" class="hidden">
@@ -65,7 +67,7 @@
                         {{ field.errors }}
                     </div>
                     {% endfor %}
-                    <button type="button" class="btn btn-image-remove">Remove</button>
+                    <button type="button" class="btn btn-image-remove">{% trans "Remove" %}</button>
                 </div>
             </div>
 
@@ -87,7 +89,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                <button type="button" class='btn' id="add-video-field">+ Add Another Field</button>
+                <button type="button" class='btn' id="add-video-field">+ {% trans "Add Another Field" %}</button>
 
                 <!-- hidden form -->
                 <div id="empty-video-form" class="hidden">
@@ -96,7 +98,7 @@
                         {{ video_formset.empty_form.video }}
                         {{ video_formset.empty_form.video.errors }}
                     </div>
-                    <button type="button" class="btn btn-video-remove">Remove</button>
+                    <button type="button" class="btn btn-video-remove">{% trans "Remove" %}</button>
                 </div>
             </div>
 
@@ -115,7 +117,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                <button type="button" class='btn' id="add-additional-field">+ Add Another Field</button>
+                <button type="button" class='btn' id="add-additional-field">+ {% trans "Add Another Field" %}</button>
             </div>
             
             <!-- hidden form -->
@@ -127,7 +129,7 @@
                     {{ form.errors }}
                 </div>
                 {% endfor %}
-                <button type="button" class="btn btn-additional-remove">Remove</button>
+                <button type="button" class="btn btn-additional-remove">{% trans "Remove" %}</button>
             </div>
         </div>
     </form>
